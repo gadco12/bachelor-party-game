@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bachelor Party Room Splitter 🎉</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#05050f;--card:rgba(255,255,255,.05);--surface:rgba(255,255,255,.08);
+  --primary:#a855f7;--pdark:#7c3aed;--pink:#f472b6;--cyan:#22d3ee;
+  --accent:#fbbf24;--green:#34d399;--red:#f87171;
+  --text:#f1f5f9;--muted:#94a3b8;--border:rgba(255,255,255,.12);
+  --glow-purple:0 0 30px rgba(168,85,247,.5);
+  --glow-pink:0 0 30px rgba(244,114,182,.5);
+  --glow-cyan:0 0 30px rgba(34,211,238,.5);
+}
+
+body{
+  background:var(--bg);color:var(--text);min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  display:flex;align-items:center;justify-content:center;padding:16px;
+  overflow-x:hidden;
+}
+
+/* ── Animated BG ── */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse at 15% 25%,rgba(168,85,247,.15) 0%,transparent 45%),
+    radial-gradient(ellipse at 85% 75%,rgba(244,114,182,.12) 0%,transparent 45%),
+    radial-gradient(ellipse at 50% 50%,rgba(34,211,238,.06) 0%,transparent 60%);
+  animation:bgPulse 8s ease-in-out infinite alternate;
+}
+@keyframes bgPulse{
+  from{opacity:.6}to{opacity:1}
+}
+
+/* ── Floating particles ── */
+#particles{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.p{position:absolute;border-radius:50%;pointer-events:none}
+
+.screen{
+  display:none;width:100%;max-width:480px;min-height:100vh;padding:24px 20px;
+  flex-direction:column;align-items:center;justify-content:center;
+  position:relative;z-index:2;animation:fadeUp .4s cubic-bezier(.16,1,.3,1);
+}
+.screen.active{display:flex}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── Glass cards ── */
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--border);border-radius:20px;padding:22px;width:100%;margin-bottom:14px;
+  position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;inset:0;border-radius:20px;
+  background:linear-gradient(135deg,rgba(255,255,255,.05) 0%,transparent 50%);
+  pointer-events:none;
+}
+
+/* ── Typography ── */
+.mega{font-size:clamp(28px,7vw,42px);font-weight:900;text-align:center;line-height:1.1;
+  background:linear-gradient(135deg,#a855f7 0%,#f472b6 40%,#fbbf24 80%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 20px rgba(168,85,247,.4));
+}
+.heading{font-size:clamp(20px,5vw,26px);font-weight:800;text-align:center;line-height:1.2;
+  background:linear-gradient(135deg,#a855f7,#f472b6);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.subtext{color:var(--muted);font-size:14px;text-align:center;line-height:1.6}
+.label{color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;margin-bottom:10px}
+
+/* ── Buttons ── */
+.btn{
+  width:100%;padding:16px 20px;border-radius:14px;border:none;
+  font-size:16px;font-weight:800;cursor:pointer;transition:all .2s;
+  letter-spacing:.5px;position:relative;overflow:hidden;
+}
+.btn::after{
+  content:'';position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.1),transparent);
+  border-radius:14px;pointer-events:none;
+}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none!important;filter:none!important}
+.btn-purple{
+  background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;
+  box-shadow:0 4px 24px rgba(168,85,247,.5),0 0 0 1px rgba(168,85,247,.3);
+}
+.btn-purple:not(:disabled):hover{transform:translateY(-2px) scale(1.01);box-shadow:0 8px 36px rgba(168,85,247,.7),0 0 0 1px rgba(168,85,247,.5)}
+.btn-pink{
+  background:linear-gradient(135deg,#f472b6,#ec4899);color:#fff;
+  box-shadow:0 4px 24px rgba(244,114,182,.5);
+}
+.btn-pink:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(244,114,182,.7)}
+.btn-gold{
+  background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#1a1200;
+  box-shadow:0 4px 24px rgba(251,191,36,.5);font-weight:900;
+}
+.btn-gold:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(251,191,36,.7)}
+.btn-green{
+  background:linear-gradient(135deg,#34d399,#059669);color:#fff;
+  box-shadow:0 4px 24px rgba(52,211,153,.4);
+}
+.btn-green:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(52,211,153,.6)}
+.btn-ghost{
+  background:rgba(255,255,255,.07);border:1px solid var(--border);color:var(--muted);
+}
+.btn-ghost:hover{background:rgba(255,255,255,.12);color:var(--text)}
+.btn-sm{width:auto;padding:10px 18px;font-size:14px;border-radius:11px}
+.btn-danger{background:rgba(248,113,113,.15);color:var(--red);border:1px solid rgba(248,113,113,.3)}
+.btn-danger:hover{background:rgba(248,113,113,.25)}
+
+.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}.mt-24{margin-top:24px}.mt-32{margin-top:32px}
+.mb-8{margin-bottom:8px}.mb-16{margin-bottom:16px}.mb-24{margin-bottom:24px}
+
+/* ── Home screen ── */
+.choices{display:flex;flex-direction:column;gap:14px;width:100%;margin-top:4px}
+.choice{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:2px solid var(--border);border-radius:20px;padding:24px 20px;
+  cursor:pointer;transition:all .25s;text-align:left;position:relative;overflow:hidden;
+}
+.choice::before{
+  content:'';position:absolute;inset:0;opacity:0;transition:opacity .25s;
+  background:linear-gradient(135deg,rgba(168,85,247,.15),rgba(244,114,182,.1));
+}
+.choice:hover{border-color:var(--primary);transform:translateY(-3px)}
+.choice:hover::before{opacity:1}
+.choice-icon{font-size:44px;margin-bottom:10px;display:block;filter:drop-shadow(0 4px 8px rgba(0,0,0,.3))}
+.choice-title{font-size:18px;font-weight:900;margin-bottom:5px;background:linear-gradient(135deg,#fff,#c4b5fd);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.choice-desc{color:var(--muted);font-size:13px;line-height:1.5}
+.choice:first-child{border-color:rgba(168,85,247,.4)}
+.choice:last-child{border-color:rgba(251,191,36,.4)}
+
+/* ── Input ── */
+.input{
+  width:100%;padding:14px 16px;background:rgba(255,255,255,.07);
+  border:2px solid var(--border);border-radius:12px;
+  color:var(--text);font-size:16px;outline:none;transition:all .2s;
+}
+.input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(168,85,247,.2);background:rgba(255,255,255,.1)}
+.input::placeholder{color:var(--muted)}
+.input.err{border-color:var(--red);animation:shake .3s ease}
+.input-mono{font-family:'Courier New',monospace;font-size:15px;letter-spacing:2px;text-transform:uppercase}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
+/* ── Questions ── */
+.q-topbar{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:16px}
+.player-chip{
+  background:linear-gradient(135deg,rgba(168,85,247,.3),rgba(244,114,182,.2));
+  border:1px solid rgba(168,85,247,.4);border-radius:30px;
+  padding:6px 14px;font-size:13px;font-weight:700;color:#e9d5ff;
+  box-shadow:0 0 12px rgba(168,85,247,.2);
+}
+.q-num{color:var(--muted);font-size:13px;font-weight:600}
+.prog-wrap{
+  width:100%;height:5px;background:rgba(255,255,255,.08);border-radius:3px;
+  margin-bottom:20px;overflow:hidden;
+}
+.prog-bar{
+  height:100%;border-radius:3px;transition:width .5s cubic-bezier(.34,1.56,.64,1);
+  background:linear-gradient(90deg,#a855f7,#f472b6,#fbbf24);
+  background-size:200% 100%;animation:progShift 2s linear infinite;
+}
+@keyframes progShift{from{background-position:0% 0%}to{background-position:-200% 0%}}
+
+.q-card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--border);border-radius:20px;padding:28px 22px;width:100%;margin-bottom:16px;
+  box-shadow:0 0 40px rgba(0,0,0,.3);
+}
+.q-text{font-size:18px;font-weight:800;line-height:1.45;text-align:center;
+  background:linear-gradient(135deg,#fff 60%,#e9d5ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.opts{display:flex;flex-direction:column;gap:10px;width:100%}
+.opt{
+  padding:14px 18px;background:rgba(255,255,255,.05);
+  border:2px solid rgba(255,255,255,.1);border-radius:12px;
+  color:var(--text);font-size:14px;font-weight:600;cursor:pointer;text-align:left;
+  transition:all .2s;line-height:1.4;backdrop-filter:blur(8px);
+}
+.opt:hover{
+  border-color:rgba(168,85,247,.6);background:rgba(168,85,247,.12);
+  transform:translateX(4px);box-shadow:0 0 20px rgba(168,85,247,.2);
+}
+.opt.sel{
+  border-color:#a855f7;background:rgba(168,85,247,.2);color:#e9d5ff;
+  box-shadow:0 0 20px rgba(168,85,247,.3),inset 0 0 20px rgba(168,85,247,.05);
+  transform:translateX(4px);
+}
+
+/* ── Code screen ── */
+.code-box{
+  font-family:'Courier New',monospace;font-size:20px;font-weight:900;letter-spacing:3px;
+  background:rgba(168,85,247,.1);border:2px solid rgba(168,85,247,.5);border-radius:14px;
+  padding:20px;text-align:center;color:#e9d5ff;word-break:break-all;line-height:1.6;
+  box-shadow:0 0 30px rgba(168,85,247,.3),inset 0 0 30px rgba(168,85,247,.05);
+  animation:codePulse 3s ease-in-out infinite;
+}
+@keyframes codePulse{
+  0%,100%{box-shadow:0 0 30px rgba(168,85,247,.3),inset 0 0 30px rgba(168,85,247,.05)}
+  50%{box-shadow:0 0 50px rgba(168,85,247,.5),inset 0 0 40px rgba(168,85,247,.1)}
+}
+.copy-ok{color:var(--green);font-size:13px;font-weight:700;text-align:center;height:18px;transition:opacity .3s}
+.wa-btn{
+  width:100%;padding:15px 20px;border-radius:14px;border:none;background:#25D366;color:#fff;
+  font-size:16px;font-weight:800;cursor:pointer;display:flex;align-items:center;
+  justify-content:center;gap:9px;transition:all .2s;
+  box-shadow:0 4px 24px rgba(37,211,102,.4);
+}
+.wa-btn:hover{background:#20b85a;transform:translateY(-2px);box-shadow:0 8px 36px rgba(37,211,102,.6)}
+.warning-box{
+  background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);
+  border-radius:12px;padding:12px 16px;color:#fcd34d;font-size:13px;
+  font-weight:600;text-align:center;line-height:1.5;
+}
+
+/* ── Host mode ── */
+.added-player{
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.25);
+  border-radius:12px;padding:12px 14px;margin-bottom:8px;
+  animation:slideIn .3s cubic-bezier(.16,1,.3,1);
+}
+@keyframes slideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.ap-info{display:flex;flex-direction:column;gap:3px}
+.ap-name{font-weight:800;font-size:15px;color:var(--green)}
+.ap-code{font-family:'Courier New',monospace;font-size:11px;color:var(--muted);letter-spacing:1px}
+.remove-x{background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:20px;padding:2px 8px;border-radius:8px;line-height:1;transition:all .15s}
+.remove-x:hover{color:var(--red);background:rgba(248,113,113,.15)}
+.invalid-msg{color:var(--red);font-size:12px;font-weight:600;margin-top:6px;display:none}
+.player-count{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(168,85,247,.15);border:1px solid rgba(168,85,247,.3);
+  border-radius:20px;padding:4px 12px;font-size:13px;font-weight:700;color:#c4b5fd;
+  margin-bottom:10px;
+}
+.calc-pulse:not(:disabled){animation:calcGlow 2s ease-in-out infinite}
+@keyframes calcGlow{
+  0%,100%{box-shadow:0 4px 24px rgba(251,191,36,.5)}
+  50%{box-shadow:0 4px 48px rgba(251,191,36,.9),0 0 80px rgba(251,191,36,.3)}
+}
+
+/* ── Results ── */
+.rooms-grid{display:flex;flex-direction:column;gap:16px;width:100%}
+.room-card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--border);border-radius:20px;padding:20px 22px;
+  position:relative;overflow:hidden;
+  opacity:0;animation:cardIn .5s cubic-bezier(.16,1,.3,1) forwards;
+}
+.room-card:nth-child(1){animation-delay:.05s}
+.room-card:nth-child(2){animation-delay:.18s}
+.room-card:nth-child(3){animation-delay:.31s}
+.room-card:nth-child(4){animation-delay:.44s}
+@keyframes cardIn{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+.room-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.room-card:nth-child(1)::before{background:linear-gradient(90deg,#a855f7,#f472b6);box-shadow:0 0 12px rgba(168,85,247,.6)}
+.room-card:nth-child(2)::before{background:linear-gradient(90deg,#22d3ee,#3b82f6)}
+.room-card:nth-child(3)::before{background:linear-gradient(90deg,#34d399,#84cc16)}
+.room-card:nth-child(4)::before{background:linear-gradient(90deg,#fbbf24,#ef4444)}
+.room-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;gap:8px}
+.room-name{font-weight:900;font-size:16px;flex:1}
+.vip-label{
+  background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#000;
+  border-radius:6px;padding:3px 8px;font-size:9px;font-weight:900;
+  text-transform:uppercase;letter-spacing:1px;white-space:nowrap;flex-shrink:0;
+  box-shadow:0 0 12px rgba(251,191,36,.6);
+}
+.pct-badge{
+  border-radius:20px;padding:4px 11px;font-size:12px;font-weight:800;white-space:nowrap;flex-shrink:0;
+}
+.pct-great{background:rgba(52,211,153,.2);color:#6ee7b7;box-shadow:0 0 12px rgba(52,211,153,.2)}
+.pct-ok{background:rgba(251,191,36,.2);color:#fcd34d;box-shadow:0 0 12px rgba(251,191,36,.2)}
+.pct-low{background:rgba(248,113,113,.2);color:#fca5a5}
+.members{display:flex;flex-direction:column;gap:9px;margin-bottom:12px}
+.member{display:flex;align-items:center;gap:12px}
+.m-icon{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:14px;
+  background:linear-gradient(135deg,var(--primary),var(--pink));
+  box-shadow:0 0 10px rgba(168,85,247,.3);
+}
+.m-name{font-weight:700;font-size:15px}
+.tagline{color:var(--muted);font-size:12px;line-height:1.5;padding-top:10px;border-top:1px solid var(--border)}
+
+/* ── Misc ── */
+@keyframes bounceY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.bounce{animation:bounceY 2s ease-in-out infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.spinner{
+  width:52px;height:52px;border:4px solid rgba(255,255,255,.1);
+  border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;
+  margin:0 auto 20px;
+  box-shadow:0 0 20px rgba(168,85,247,.3);
+}
+
+/* ── Confetti ── */
+.confetti-piece{
+  position:fixed;pointer-events:none;z-index:999;border-radius:2px;
+  animation:confettiFall linear forwards;
+}
+@keyframes confettiFall{
+  0%{transform:translateY(-20px) rotate(0deg);opacity:1}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+
+<!-- ══ HOME ══ -->
+<div id="s-home" class="screen active">
+  <div class="bounce" style="font-size:64px;margin-bottom:16px;filter:drop-shadow(0 0 20px rgba(168,85,247,.6))">🎊</div>
+  <h1 class="mega mb-8">BACHELOR<br>PARTY ROOMS</h1>
+  <p class="subtext mb-24">Everyone plays from their own phone 📱<br>The algorithm decides your fate. No mercy.</p>
+  <div class="choices">
+    <div class="choice" onclick="show('s-name')">
+      <span class="choice-icon">🎮</span>
+      <div class="choice-title">Play & Get My Code</div>
+      <div class="choice-desc">Answer 26 questions, get a secret code, WhatsApp it to the host. Simple.</div>
+    </div>
+    <div class="choice" onclick="show('s-host')">
+      <span class="choice-icon">👑</span>
+      <div class="choice-title">Host Mode — Calculate Rooms</div>
+      <div class="choice-desc">Paste everyone's codes, press the button, witness chaos unfold.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PLAYER NAME ══ -->
+<div id="s-name" class="screen">
+  <div style="font-size:64px;margin-bottom:16px">🕵️</div>
+  <h2 class="heading mb-8">Who are you?</h2>
+  <p class="subtext mb-24">Your name appears in the final room assignments.<br>Choose wisely. Or don't.</p>
+  <div class="card">
+    <p class="label">Your name</p>
+    <input class="input" id="name-input" type="text" maxlength="20" autocomplete="off"
+      placeholder="Enter your name..." onkeydown="if(event.key==='Enter')startPlay()">
+  </div>
+  <button class="btn btn-purple" onclick="startPlay()">Let's Go! 🚀</button>
+  <button class="btn btn-ghost mt-12" onclick="show('s-home')">← Back</button>
+</div>
+
+<!-- ══ QUESTIONS ══ -->
+<div id="s-questions" class="screen">
+  <div style="width:100%">
+    <div class="q-topbar">
+      <span class="player-chip" id="q-player-chip">Player</span>
+      <span class="q-num" id="q-num">1 / 26</span>
+    </div>
+    <div class="prog-wrap"><div class="prog-bar" id="prog-bar" style="width:0%"></div></div>
+    <div class="q-card"><p class="q-text" id="q-text"></p></div>
+    <div class="opts" id="q-opts"></div>
+    <button class="btn btn-purple mt-16" id="q-next" onclick="nextQ()" disabled>Next →</button>
+  </div>
+</div>
+
+<!-- ══ MY CODE ══ -->
+<div id="s-code" class="screen">
+  <div style="font-size:64px;margin-bottom:16px">🔐</div>
+  <h2 class="heading mb-8">Your Secret Code</h2>
+  <p class="subtext mb-16">Send this to the host. They'll do the math.<br>You just show up and sleep where they say.</p>
+
+  <div class="card">
+    <p class="label">Player</p>
+    <p style="font-size:22px;font-weight:900;color:#e9d5ff;letter-spacing:.5px" id="code-name"></p>
+  </div>
+
+  <div class="card">
+    <p class="label">Your 26-character answer code</p>
+    <div class="code-box" id="code-box">—</div>
+    <div class="copy-ok mt-8" id="copy-ok" style="opacity:0">✅ Copied to clipboard!</div>
+    <button class="btn btn-ghost mt-12" onclick="copyCode()">📋 Copy Code</button>
+  </div>
+
+  <div class="warning-box mb-16">
+    ⚠️ Send your name + this code to the host via WhatsApp.<br>
+    Don't share with anyone else — they'll know your secrets 👀
+  </div>
+
+  <button class="wa-btn mb-16" onclick="shareWA()">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.09.541 4.052 1.485 5.757L.057 23.18a.75.75 0 00.916.919l5.574-1.463A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.944 9.944 0 01-5.088-1.388l-.365-.215-3.782.993.999-3.688-.237-.381A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+    </svg>
+    Share via WhatsApp
+  </button>
+
+  <button class="btn btn-ghost" onclick="show('s-home')">← Back to Home</button>
+</div>
+
+<!-- ══ HOST MODE ══ -->
+<div id="s-host" class="screen">
+  <div style="font-size:60px;margin-bottom:14px">👑</div>
+  <h2 class="heading mb-8">Host Mode</h2>
+  <p class="subtext mb-16">Collect everyone's codes, then unleash the algorithm.<br>You need at least 3 players.</p>
+
+  <div class="card">
+    <p class="label">Add a player</p>
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <input class="input" id="h-name" type="text" maxlength="20" autocomplete="off" placeholder="Player name"
+        onkeydown="if(event.key==='Enter')document.getElementById('h-code').focus()">
+      <input class="input input-mono" id="h-code" type="text" maxlength="26" autocomplete="off"
+        placeholder="26-character code"
+        oninput="this.value=this.value.toUpperCase().replace(/[^A-E]/g,'')"
+        onkeydown="if(event.key==='Enter')addPlayer()">
+      <div class="invalid-msg" id="h-invalid">❌ Code must be exactly 26 characters (letters A–E only)</div>
+    </div>
+    <button class="btn btn-green mt-12" onclick="addPlayer()">+ Add Player</button>
+  </div>
+
+  <div id="h-list-card" class="card" style="display:none">
+    <div class="player-count" id="h-count">0 players added</div>
+    <div id="h-list"></div>
+  </div>
+
+  <button class="btn btn-gold calc-pulse mt-12" id="h-calc-btn" onclick="hostCalc()" disabled>
+    🏨 Calculate Rooms!
+  </button>
+  <button class="btn btn-ghost mt-12" onclick="show('s-home')">← Back</button>
+</div>
+
+<!-- ══ LOADING ══ -->
+<div id="s-loading" class="screen">
+  <div class="spinner"></div>
+  <h2 class="heading mb-8">The Algorithm is Working</h2>
+  <p class="subtext">Running 3,000 simulations...<br>Judging your deepest secrets... 👀</p>
+</div>
+
+<!-- ══ RESULTS ══ -->
+<div id="s-results" class="screen">
+  <div style="font-size:60px;margin-bottom:14px;filter:drop-shadow(0 0 20px rgba(251,191,36,.6))">🏨</div>
+  <h1 class="mega mb-8">ROOM<br>ASSIGNMENTS</h1>
+  <p class="subtext mb-24">The algorithm has spoken.<br>No arguments. No refunds.</p>
+  <div class="rooms-grid" id="rooms-grid"></div>
+  <button class="btn btn-ghost mt-24" onclick="backToHost()">← Back to Host Mode</button>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════
+// QUESTIONS  (26 total — 21 serious + 5 completely unhinged)
+// ══════════════════════════════════════════════════
+const QS = [
+  // ── THE SERIOUS ONES (sort of) ──
+  {id:'sleep', text:'⏰ For how long do you want to sleep tonight?',
+   opts:[{l:'3 hours – sleep is for the weak 💀',v:3},
+         {l:'7 hours – I\'m a reasonable human',v:7},
+         {l:'8 hours – beauty sleep is non-negotiable 😴',v:8}]},
+
+  {id:'music', text:'🎵 Which music do you prefer?',
+   opts:[{l:'EDM 🎧',v:'EDM'},{l:'Hip Hop 🎤',v:'HIPHOP'},
+         {l:'Techno ⚡',v:'TECHNO'},{l:'Mizrahit 🎻',v:'MIZRAHIT'}]},
+
+  {id:'shower', text:'🚿💩 Are you OK taking a shower while your friend is taking a poop right next to you?',
+   opts:[{l:'We\'re brothers, no problem 👍',v:'yes'},
+         {l:'ABSOLUTELY NOT. That\'s a crime against humanity 🤢',v:'no'}]},
+
+  {id:'monkey', text:'🐒 Do you plan to... choke the monkey during this trip?',
+   opts:[{l:'No comment 😶',v:'silent'},
+         {l:'Absolutely not! I have dignity',v:'no'},
+         {l:'The night is long and I make no promises 🌙',v:'maybe'}]},
+
+  {id:'drugs', text:'💊 Do you consume recreational substances?',
+   opts:[{l:'I\'m clean, never touched anything 😇',v:'never'},
+         {l:'Only on special occasions like... this 🎊',v:'sometimes'},
+         {l:'We\'re at a bachelor party. Next question. 🚀',v:'yes'}]},
+
+  {id:'gay', text:'🏳️‍🌈 Are you supportive of gay people?',
+   opts:[{l:'Love is love! A million percent ❤️',v:'yes'},
+         {l:'Not really my thing...',v:'no'},
+         {l:'I am one 🌈',v:'am_one'}]},
+
+  {id:'creature', text:'🐍 Do you plan to bring any living creature into the room with you?',
+   opts:[{l:'No, I\'m completely normal 😇',v:'no'},
+         {l:'Maybe a small harmless pet... 🐹',v:'maybe'},
+         {l:'Yes. It\'s large. Don\'t ask. 🐊',v:'yes'}]},
+
+  {id:'anime', text:'🗾 Do you watch anime?',
+   opts:[{l:'No. I have a life and friends.',v:'no'},
+         {l:'Casually, a few good series',v:'casual'},
+         {l:'NARUTO UZUMAKI IS ETERNAL 🍥',v:'hardcore'}]},
+
+  {id:'beauty', text:'💋 Who is the most beautiful woman alive?',
+   opts:[{l:'Sydney Sweeney 🥵',v:'sydney'},
+         {l:'Megan Fox 🔥',v:'megan'},
+         {l:'Adi Himelbluy ✨',v:'adi'}]},
+
+  {id:'eyal', text:'🎤 Do you think Eyal Golan is innocent?',
+   opts:[{l:'100% innocent, leave the man alone!',v:'innocent'},
+         {l:'Guilty as charged, case closed',v:'guilty'},
+         {l:'Who even is Eyal Golan?',v:'who'}]},
+
+  {id:'bibi', text:'🗳️ Do you vote for BIBI?',
+   opts:[{l:'Bibi is the eternal king!',v:'yes'},
+         {l:'Never in a million years',v:'no'},
+         {l:'I don\'t vote (I\'m the problem)',v:'abstain'}]},
+
+  {id:'cher', text:'❤️ Do you believe in life after love?',
+   opts:[{l:'I can feel something inside me say YES 🎵',v:'yes'},
+         {l:'No. Love is a lie and it ruins everything.',v:'no'},
+         {l:'What is love? Baby don\'t hurt me 🎶',v:'what'}]},
+
+  {id:'ibiza', text:'🏝️ Do we need to come back to Ibiza next year?',
+   opts:[{l:'IBIZA FOREVER, someone book it NOW ✈️',v:'yes'},
+         {l:'Once was more than enough for me',v:'no'},
+         {l:'Only if Gad pays for literally everything 💸',v:'if_gad'}]},
+
+  {id:'kinds', text:'🌍 Which "kinds" do you love the most?',
+   opts:[{l:'Latin 💃',v:'latin'},{l:'European 🇪🇺',v:'european'},
+         {l:'Arabs 🌙',v:'arab'},{l:'Africans 🌍',v:'african'},
+         {l:'Asians 🌸',v:'asian'}]},
+
+  {id:'avg', text:'📊 Are you above the average?',
+   opts:[{l:'Way above average and everyone knows it 😏',v:'above'},
+         {l:'Pretty average, and I\'m at peace with that',v:'average'},
+         {l:'Below average but somehow still confident',v:'below'}]},
+
+  {id:'gad_king', text:'👑 Do you think that Gad is your king?',
+   opts:[{l:'He is my king and I kneel before him 🙇',v:'king'},
+         {l:'He is my GOD and I pray to him daily 🛐',v:'god'},
+         {l:'ALL HAIL KING GAD! 👑',v:'hail'}]},
+
+  {id:'falafel', text:'🧆 Does Gad look like the falafel owner from the neighborhood?',
+   opts:[{l:'They could be IDENTICAL TWINS 😂',v:'yes'},
+         {l:'Not at all, totally different people',v:'no'},
+         {l:'Only when he\'s sweating and holding tongs',v:'sometimes'}]},
+
+  {id:'mind', text:'🤯 Do you love to lose your mind?',
+   opts:[{l:'I LIVE for the chaos and destruction 🌪️',v:'yes'},
+         {l:'Only occasionally, when the vibe is right',v:'sometimes'},
+         {l:'I need my mind. It\'s literally all I have.',v:'no'}]},
+
+  {id:'gad_music', text:'🎶 Do you LOVE when Gad arrives at 3am with a speaker blasting and wakes the entire floor?',
+   opts:[{l:'YES! LOUDER! I WAS WAITING FOR THIS! 🔊',v:'yes'},
+         {l:'I will throw that speaker off the balcony 😤',v:'no'},
+         {l:'Depends on the song. Gal Atari? Fine. Techno? No.',v:'depends'}]},
+
+  {id:'last', text:'🌅 Do you think this trip is the last good thing you will ever do in your life?',
+   opts:[{l:'Yes. It\'s downhill from here. I\'ve accepted it. 📉',v:'yes'},
+         {l:'No! Life is full of amazing things to come! 🚀',v:'no'},
+         {l:'It\'s not the last — it\'s just the greatest 🌟',v:'beginning'}]},
+
+  {id:'luffy', text:'🏴‍☠️ Do you acknowledge that Gad is the living incarnation of Monkey D. Luffy?',
+   opts:[{l:'He IS Luffy, reborn as an Israeli 🌊',v:'yes'},
+         {l:'Obviously. The resemblance is almost illegal.',v:'obviously'},
+         {l:'I\'ve made peace with this undeniable truth',v:'peace'}]},
+
+  // ── THE COMPLETELY UNHINGED ONES ──
+  {id:'pineapple', text:'🍍 Does pineapple belong on pizza?',
+   opts:[{l:'YES and I will die on this hill 🍕',v:'yes'},
+         {l:'No. It\'s a crime. People go to jail for less.',v:'no'},
+         {l:'I\'ve never had it and I\'m scared to find out',v:'dunno'}]},
+
+  {id:'zombie', text:'🧟 Be honest. Could you survive a zombie apocalypse?',
+   opts:[{l:'I\'d be the LAST human standing 💪',v:'survivor'},
+         {l:'I\'d be bitten within the first 20 minutes',v:'dead'},
+         {l:'I wouldn\'t even try. Just join them.',v:'join'}]},
+
+  {id:'crying', text:'😢 Have you ever cried during a movie and then denied it to everyone?',
+   opts:[{l:'Never cried in my life. I don\'t have emotions.',v:'never'},
+         {l:'Okay... maybe once. During Lion King. That\'s it.',v:'once'},
+         {l:'I sob at every Pixar movie and I\'m proud of it',v:'always'}]},
+
+  {id:'duck', text:'🦆 Would you rather fight 100 duck-sized horses or 1 horse-sized duck?',
+   opts:[{l:'100 tiny horses. I\'d stomp them all. Easy.',v:'horses'},
+         {l:'One giant duck. At least it\'s one problem.',v:'duck'},
+         {l:'I would attempt to negotiate with both parties.',v:'negotiate'}]},
+
+  {id:'toilet', text:'🚽 Do you always put the toilet seat DOWN after using it?',
+   opts:[{l:'Always. I\'m a gentleman and a scholar.',v:'always'},
+         {l:'Never. Gravity is everyone\'s problem equally.',v:'never'},
+         {l:'I don\'t sit so this question doesn\'t apply to me.',v:'standing'}]},
+];
+
+const CODE_LEN = QS.length; // 26
+
+// ══════════════════════════════════════════════════
+// ENCODE / DECODE  (A=0, B=1, C=2, D=3, E=4)
+// ══════════════════════════════════════════════════
+function encode(idxMap) {
+  return QS.map(q => String.fromCharCode(65 + Math.min(idxMap[q.id] ?? 0, q.opts.length - 1))).join('');
+}
+function decode(code) {
+  const vals = {};
+  QS.forEach((q, i) => {
+    const idx = Math.min(Math.max(code.charCodeAt(i) - 65, 0), q.opts.length - 1);
+    vals[q.id] = q.opts[idx].v;
+  });
+  return vals;
+}
+function validCode(c) { return c.length === CODE_LEN && /^[A-E]+$/.test(c); }
+
+// ══════════════════════════════════════════════════
+// COMPATIBILITY (max ~135 per pair)
+// ══════════════════════════════════════════════════
+const MAX_PAIR = 135;
+
+function pairScore(x, y) {
+  let s = 0;
+  // Sleep (15) – CRITICAL
+  const d = Math.abs(x.sleep - y.sleep);
+  s += d===0?15:d===1?7:0;
+  // Music (8)
+  s += x.music===y.music?8:0;
+  // Shower/poop (12)
+  s += x.shower===y.shower?12:0;
+  // Monkey (5)
+  if(x.monkey===y.monkey) s+=5;
+  else if(x.monkey!=='no'&&y.monkey!=='no') s+=2;
+  // Drugs (10)
+  s += x.drugs===y.drugs?10:0;
+  // Gay (4)
+  if(x.gay===y.gay) s+=4;
+  else if((x.gay==='yes'&&y.gay==='am_one')||(x.gay==='am_one'&&y.gay==='yes')) s+=3;
+  // Creature (12)
+  if(x.creature==='no'&&y.creature==='no') s+=12;
+  else if(x.creature===y.creature) s+=6;
+  // Anime (4)
+  s += x.anime===y.anime?4:0;
+  // Beauty (3)
+  s += x.beauty===y.beauty?3:0;
+  // Eyal (3)
+  s += x.eyal===y.eyal?3:0;
+  // Bibi (4)
+  s += x.bibi===y.bibi?4:0;
+  // Cher (3)
+  s += x.cher===y.cher?3:0;
+  // Ibiza (5)
+  s += x.ibiza===y.ibiza?5:0;
+  // Kinds (3)
+  s += x.kinds===y.kinds?3:0;
+  // Above avg (3)
+  s += x.avg===y.avg?3:0;
+  // Gad king (5) – all options positive
+  s += 5;
+  // Falafel (2)
+  s += x.falafel===y.falafel?2:0;
+  // Lose mind (4)
+  s += x.mind===y.mind?4:0;
+  // Gad music (10) – CRITICAL conflict source
+  if(x.gad_music==='yes'&&y.gad_music==='yes') s+=10;
+  else if(x.gad_music==='no'&&y.gad_music==='no') s+=10;
+  else if(x.gad_music==='depends'&&y.gad_music==='depends') s+=7;
+  else if((x.gad_music==='yes'&&y.gad_music==='no')||(x.gad_music==='no'&&y.gad_music==='yes')) s-=5;
+  else s+=3;
+  // Last good thing (2)
+  s += x.last===y.last?2:0;
+  // Luffy (3)
+  s += 3;
+  // Pineapple (3)
+  s += x.pineapple===y.pineapple?3:0;
+  // Zombie (2)
+  s += x.zombie===y.zombie?2:0;
+  // Crying (3)
+  s += x.crying===y.crying?3:0;
+  // Duck (2)
+  s += x.duck===y.duck?2:0;
+  // Toilet (3)
+  s += x.toilet===y.toilet?3:0;
+
+  return Math.max(0, s);
+}
+
+function groupScore(grp, mat) {
+  let t=0;
+  for(let i=0;i<grp.length;i++) for(let j=i+1;j<grp.length;j++) t+=mat[grp[i]][grp[j]];
+  return t;
+}
+
+function getGroupSizes(n) {
+  const threes=Math.floor(n/3), rem=n%3;
+  if(rem===0) return Array(threes).fill(3);
+  if(rem===1) return threes>0?[...Array(threes-1).fill(3),2,2]:[1];
+  return [...Array(threes).fill(3),2];
+}
+
+function assignRooms(players) {
+  const n=players.length;
+  const mat=Array.from({length:n},(_,i)=>Array.from({length:n},(_,j)=>i===j?0:pairScore(players[i].vals,players[j].vals)));
+  const sizes=getGroupSizes(n);
+  let best=-Infinity,bestG=null;
+  for(let it=0;it<3000;it++){
+    const ord=[...Array(n).keys()].sort(()=>Math.random()-.5);
+    const gs=[];let start=0;
+    for(const sz of sizes){gs.push(ord.slice(start,start+sz));start+=sz;}
+    const sc=gs.reduce((t,g)=>t+groupScore(g,mat),0);
+    if(sc>best){best=sc;bestG=gs.map(g=>[...g]);}
+  }
+  return bestG.map(g=>g.map(i=>players[i]));
+}
+
+// ══════════════════════════════════════════════════
+// TAGLINES
+// ══════════════════════════════════════════════════
+const ROOM_NAMES=['The Penthouse 🏰','The Loft 🌆','The Jungle Suite 🌴','The Cave 🦇','Suite 5 🏠','Suite 6 🏠'];
+
+function roomTagline(rp) {
+  const vs=rp.map(p=>p.vals), tags=[];
+  const avg=vs.reduce((t,v)=>t+v.sleep,0)/vs.length;
+  tags.push(avg<=4?'🦇 Sleep Haters United':avg>=7.5?'😴 The Beauty Sleep Council':'⚖️ The Balanced Sleepers');
+  const mv={};vs.forEach(v=>mv[v.music]=(mv[v.music]||0)+1);
+  const top=Object.entries(mv).sort((a,b)=>b[1]-a[1])[0][0];
+  const ml={EDM:'🎧 EDM Degenerates',HIPHOP:'🎤 Hip Hop Heads',TECHNO:'⚡ Techno Warriors',MIZRAHIT:'🎻 Mizrahit Forever'};
+  tags.push(ml[top]||top);
+  if(vs.every(v=>v.gad_music==='yes')) tags.push("🔊 Gad's Night Crew");
+  else if(vs.every(v=>v.gad_music==='no')) tags.push('🤫 Silent Hours Coalition');
+  if(vs.every(v=>v.pineapple==='yes')) tags.push('🍍 Pineapple Pizza Enjoyers');
+  if(vs.every(v=>v.zombie==='dead')) tags.push('🧟 First to Die in Apocalypse');
+  return tags.slice(0,2).join(' · ');
+}
+
+// ══════════════════════════════════════════════════
+// BACKGROUND PARTICLES
+// ══════════════════════════════════════════════════
+(function(){
+  const container=document.getElementById('particles');
+  const colors=['rgba(168,85,247,','rgba(244,114,182,','rgba(251,191,36,','rgba(34,211,238,'];
+  for(let i=0;i<20;i++){
+    const el=document.createElement('div');
+    el.className='p';
+    const size=Math.random()*5+2;
+    const color=colors[Math.floor(Math.random()*colors.length)];
+    const opacity=Math.random()*.4+.1;
+    const dur=Math.random()*15+8;
+    const delay=-Math.random()*20;
+    el.style.cssText=`
+      left:${Math.random()*100}%;top:${Math.random()*100}%;
+      width:${size}px;height:${size}px;
+      background:${color}${opacity});
+      box-shadow:0 0 ${size*3}px ${color}0.6);
+      animation:floatP ${dur}s ${delay}s linear infinite;
+    `;
+    container.appendChild(el);
+  }
+  const style=document.createElement('style');
+  style.textContent=`@keyframes floatP{
+    0%{transform:translateY(100vh) scale(0);opacity:0}
+    10%{opacity:1}90%{opacity:1}
+    100%{transform:translateY(-20px) scale(1);opacity:0}
+  }`;
+  document.head.appendChild(style);
+})();
+
+// ══════════════════════════════════════════════════
+// CONFETTI
+// ══════════════════════════════════════════════════
+function fireConfetti() {
+  const colors=['#a855f7','#f472b6','#fbbf24','#34d399','#22d3ee','#ef4444'];
+  for(let i=0;i<60;i++){
+    const el=document.createElement('div');
+    el.className='confetti-piece';
+    const size=Math.random()*10+4;
+    el.style.cssText=`
+      left:${Math.random()*100}vw;top:-20px;
+      width:${size}px;height:${size}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      border-radius:${Math.random()>.5?'50%':'2px'};
+      animation-duration:${Math.random()*2+1.5}s;
+      animation-delay:${Math.random()*.8}s;
+    `;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),4000);
+  }
+}
+
+// ══════════════════════════════════════════════════
+// PLAY FLOW
+// ══════════════════════════════════════════════════
+let myName='', curQIdx=0, curIdxMap={};
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function startPlay(){
+  const inp=document.getElementById('name-input');
+  myName=inp.value.trim();
+  if(!myName){inp.classList.add('err');setTimeout(()=>inp.classList.remove('err'),600);inp.focus();return;}
+  curQIdx=0;curIdxMap={};
+  document.getElementById('q-player-chip').textContent=myName;
+  renderQ(0);
+  show('s-questions');
+}
+
+function renderQ(idx){
+  const q=QS[idx]; curQIdx=idx;
+  const isLast=idx===QS.length-1;
+  document.getElementById('q-num').textContent=`${idx+1} / ${QS.length}`;
+  document.getElementById('prog-bar').style.width=`${(idx/QS.length)*100}%`;
+  document.getElementById('q-text').textContent=q.text;
+  document.getElementById('q-opts').innerHTML=q.opts.map((o,i)=>
+    `<button class="opt${curIdxMap[q.id]===i?' sel':''}" onclick="pickOpt(this,${i})">${o.l}</button>`
+  ).join('');
+  const btn=document.getElementById('q-next');
+  btn.disabled=curIdxMap[q.id]===undefined;
+  btn.textContent=isLast?'Finish! 🎉':'Next →';
+}
+
+function pickOpt(btn,idx){
+  curIdxMap[QS[curQIdx].id]=idx;
+  document.querySelectorAll('.opt').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  document.getElementById('q-next').disabled=false;
+}
+
+function nextQ(){
+  if(curIdxMap[QS[curQIdx].id]===undefined) return;
+  if(curQIdx<QS.length-1){renderQ(curQIdx+1);}
+  else{showCode();}
+}
+
+function showCode(){
+  const code=encode(curIdxMap);
+  const fmt=code.match(/.{1,7}/g).join(' – ');
+  document.getElementById('code-name').textContent=myName;
+  document.getElementById('code-box').textContent=fmt;
+  show('s-code');
+  fireConfetti();
+}
+
+async function copyCode(){
+  const raw=document.getElementById('code-box').textContent.replace(/ – /g,'');
+  const txt=`${myName}: ${raw}`;
+  try{await navigator.clipboard.writeText(txt);}
+  catch(e){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();}
+  const ok=document.getElementById('copy-ok');
+  ok.style.opacity='1';setTimeout(()=>ok.style.opacity='0',2500);
+}
+
+function shareWA(){
+  const raw=document.getElementById('code-box').textContent.replace(/ – /g,'');
+  const msg=`🎉 Bachelor Party Room Game!\nMy name: *${myName}*\nMy code: \`${raw}\`\n\nSend this to the host 👑`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+// ══════════════════════════════════════════════════
+// HOST FLOW
+// ══════════════════════════════════════════════════
+let hostPlayers=[];
+
+function addPlayer(){
+  const nEl=document.getElementById('h-name');
+  const cEl=document.getElementById('h-code');
+  const inv=document.getElementById('h-invalid');
+  const name=nEl.value.trim();
+  const code=cEl.value.trim().toUpperCase();
+  inv.style.display='none';
+  if(!name){nEl.classList.add('err');setTimeout(()=>nEl.classList.remove('err'),600);nEl.focus();return;}
+  if(!validCode(code)){
+    cEl.classList.add('err');setTimeout(()=>cEl.classList.remove('err'),600);
+    inv.style.display='block';cEl.focus();return;
+  }
+  hostPlayers.push({name,code});
+  nEl.value='';cEl.value='';nEl.focus();
+  renderHostList();
+}
+
+function removePlayer(i){hostPlayers.splice(i,1);renderHostList();}
+
+function renderHostList(){
+  const card=document.getElementById('h-list-card');
+  const list=document.getElementById('h-list');
+  const cnt=document.getElementById('h-count');
+  const btn=document.getElementById('h-calc-btn');
+  const n=hostPlayers.length;
+  cnt.textContent=`${n} player${n!==1?'s':''} added`;
+  card.style.display=n?'block':'none';
+  list.innerHTML=hostPlayers.map((p,i)=>`
+    <div class="added-player">
+      <div class="ap-info">
+        <span class="ap-name">✅ ${p.name}</span>
+        <span class="ap-code">${p.code.match(/.{1,7}/g).join(' – ')}</span>
+      </div>
+      <button class="remove-x" onclick="removePlayer(${i})">×</button>
+    </div>`).join('');
+  btn.disabled=n<3;
+}
+
+function hostCalc(){
+  show('s-loading');
+  setTimeout(()=>{
+    const players=hostPlayers.map(p=>({name:p.name,vals:decode(p.code)}));
+    const rooms=assignRooms(players);
+    const n=players.length;
+    const mat=Array.from({length:n},(_,i)=>Array.from({length:n},(_,j)=>i===j?0:pairScore(players[i].vals,players[j].vals)));
+
+    const scored=rooms.map(room=>{
+      let t=0,pairs=0;
+      const idxs=room.map(r=>players.indexOf(r));
+      for(let i=0;i<idxs.length;i++)for(let j=i+1;j<idxs.length;j++){t+=mat[idxs[i]][idxs[j]];pairs++;}
+      return{room,pct:pairs?Math.round((t/(pairs*MAX_PAIR))*100):0};
+    }).sort((a,b)=>b.pct-a.pct);
+
+    const MA=['🎯','🌟','💎','🔮'];
+    document.getElementById('rooms-grid').innerHTML=scored.map(({room,pct},ri)=>{
+      const bc=pct>=70?'pct-great':pct>=45?'pct-ok':'pct-low';
+      const members=room.map((p,j)=>`
+        <div class="member">
+          <div class="m-icon">${MA[j]||'😎'}</div>
+          <span class="m-name">${p.name}</span>
+        </div>`).join('');
+      return `
+        <div class="room-card">
+          <div class="room-head">
+            <span class="room-name">${ROOM_NAMES[ri]||`Room ${ri+1}`}</span>
+            <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
+              ${ri===0?'<span class="vip-label">BEST MATCH</span>':''}
+              <span class="pct-badge ${bc}">${pct}% match</span>
+            </div>
+          </div>
+          <div class="members">${members}</div>
+          <div class="tagline">${roomTagline(room)}</div>
+        </div>`;
+    }).join('');
+
+    show('s-results');
+    setTimeout(fireConfetti,300);
+  },2200);
+}
+
+function backToHost(){show('s-host');}
+</script>
+</body>
+</html>
