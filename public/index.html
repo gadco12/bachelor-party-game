@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Bachelor Party Room Splitter 🎉</title>
+<title>חלוקת חדרים לרווקים 🎉</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -12,13 +12,13 @@
   --border:rgba(255,255,255,.12);
 }
 body{
-  background:var(--bg);color:var(--text);min-height:100vh;
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--text);min-height:100vh;direction:rtl;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
   display:flex;align-items:center;justify-content:center;padding:16px;overflow-x:hidden;
 }
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(ellipse at 15% 25%,rgba(168,85,247,.18) 0%,transparent 45%),
-    radial-gradient(ellipse at 85% 75%,rgba(244,114,182,.14) 0%,transparent 45%),
+  background:radial-gradient(ellipse at 85% 25%,rgba(168,85,247,.18) 0%,transparent 45%),
+    radial-gradient(ellipse at 15% 75%,rgba(244,114,182,.14) 0%,transparent 45%),
     radial-gradient(ellipse at 50% 50%,rgba(34,211,238,.07) 0%,transparent 60%);
   animation:bgPulse 8s ease-in-out infinite alternate;}
 @keyframes bgPulse{from{opacity:.6}to{opacity:1}}
@@ -28,12 +28,10 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   position:relative;z-index:2;animation:fadeUp .35s cubic-bezier(.16,1,.3,1);}
 .screen.active{display:flex}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-/* Cards */
 .card{background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border:1px solid var(--border);border-radius:18px;padding:20px;width:100%;margin-bottom:12px;position:relative;overflow:hidden;}
 .card::before{content:'';position:absolute;inset:0;border-radius:18px;
-  background:linear-gradient(135deg,rgba(255,255,255,.05),transparent 50%);pointer-events:none;}
-/* Typography */
+  background:linear-gradient(225deg,rgba(255,255,255,.05),transparent 50%);pointer-events:none;}
 .mega{font-size:clamp(26px,8vw,40px);font-weight:900;text-align:center;line-height:1.1;
   background:linear-gradient(135deg,#a855f7,#f472b6 40%,#fbbf24);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
@@ -41,40 +39,38 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .heading{font-size:clamp(17px,5vw,22px);font-weight:800;text-align:center;
   background:linear-gradient(135deg,#a855f7,#f472b6);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.sub{color:var(--muted);font-size:14px;text-align:center;line-height:1.6}
-.lbl{color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;margin-bottom:9px}
-/* Buttons */
+.sub{color:var(--muted);font-size:14px;text-align:center;line-height:1.7}
+.lbl{color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:9px}
 .btn{width:100%;padding:15px 18px;border-radius:13px;border:none;font-size:15px;
-  font-weight:800;cursor:pointer;transition:all .2s;letter-spacing:.4px;}
+  font-weight:800;cursor:pointer;transition:all .2s;font-family:inherit;}
 .btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important}
 .btn-purple{background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;box-shadow:0 4px 22px rgba(168,85,247,.5);}
 .btn-purple:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(168,85,247,.7)}
 .btn-gold{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#1a1200;font-weight:900;box-shadow:0 4px 22px rgba(251,191,36,.5);}
 .btn-gold:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(251,191,36,.7)}
-.btn-ghost{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted);}
+.btn-ghost{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted);font-family:inherit;}
 .btn-ghost:hover{background:rgba(255,255,255,.11);color:var(--text)}
-.btn-red{background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);color:var(--red);}
-.btn-red:hover{background:rgba(248,113,113,.25)}
-/* Spacing */
-.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}.mt24{margin-top:24px}
+.btn-red{background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.25);color:var(--red);font-family:inherit;}
+.btn-red:hover{background:rgba(248,113,113,.22)}
+.btn-sm{width:auto;padding:6px 12px;font-size:12px;border-radius:8px;font-weight:700}
+.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}
 .mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}.mb20{margin-bottom:20px}
-/* Input */
 .inp{width:100%;padding:13px 15px;background:rgba(255,255,255,.07);border:2px solid var(--border);
-  border-radius:11px;color:var(--text);font-size:16px;outline:none;transition:all .2s;}
+  border-radius:11px;color:var(--text);font-size:16px;outline:none;transition:all .2s;
+  font-family:inherit;text-align:right;direction:rtl;}
 .inp:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(168,85,247,.2);background:rgba(255,255,255,.1)}
 .inp::placeholder{color:var(--muted)}
 .inp.err{border-color:var(--red);animation:shake .3s}
-@keyframes shake{0%,100%{transform:translateX(0)}25%,75%{transform:translateX(-6px)}50%{transform:translateX(6px)}}
-/* Select */
-.sel{width:auto;min-width:140px;padding:9px 32px 9px 11px;background:rgba(20,5,40,.95);
-  border:1.5px solid var(--border);border-radius:9px;color:var(--text);font-size:13px;font-weight:600;
-  outline:none;cursor:pointer;-webkit-appearance:none;appearance:none;flex-shrink:0;
+@keyframes shake{0%,100%{transform:translateX(0)}25%,75%{transform:translateX(6px)}50%{transform:translateX(-6px)}}
+.sel{padding:9px 11px 9px 28px;background:rgba(20,5,40,.95);border:1.5px solid var(--border);
+  border-radius:9px;color:var(--text);font-size:13px;font-weight:600;outline:none;cursor:pointer;
+  -webkit-appearance:none;appearance:none;font-family:inherit;direction:rtl;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 10px center;}
+  background-repeat:no-repeat;background-position:left 8px center;}
 .sel:focus{border-color:var(--primary)}
 .sel option{background:#1a0530;color:#f1f5f9}
 /* Progress */
-.prog-wrap{width:100%;height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-bottom:18px;overflow:hidden;}
+.prog-wrap{width:100%;height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-bottom:18px;overflow:hidden;direction:ltr;}
 .prog-bar{height:100%;border-radius:2px;transition:width .5s cubic-bezier(.34,1.56,.64,1);
   background:linear-gradient(90deg,#a855f7,#f472b6,#fbbf24);background-size:200%;animation:pshift 2s linear infinite;}
 @keyframes pshift{from{background-position:0%}to{background-position:-200%}}
@@ -82,19 +78,19 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .q-top{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:14px}
 .chip{background:linear-gradient(135deg,rgba(168,85,247,.3),rgba(244,114,182,.2));
   border:1px solid rgba(168,85,247,.4);border-radius:30px;padding:5px 13px;font-size:12px;font-weight:700;color:#e9d5ff;}
-.qnum{color:var(--muted);font-size:13px;font-weight:600}
+.qnum{color:var(--muted);font-size:13px;font-weight:600;direction:ltr;display:inline-block;}
 .q-card{background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--border);
   border-radius:18px;padding:24px 20px;width:100%;margin-bottom:14px;}
-.q-text{font-size:16px;font-weight:800;line-height:1.45;text-align:center;
+.q-text{font-size:16px;font-weight:800;line-height:1.55;text-align:center;
   background:linear-gradient(135deg,#fff 60%,#e9d5ff);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .opts{display:flex;flex-direction:column;gap:9px;width:100%}
 .opt{padding:13px 16px;background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.1);
-  border-radius:11px;color:var(--text);font-size:14px;font-weight:600;cursor:pointer;text-align:left;
-  transition:all .18s;line-height:1.4;}
-.opt:hover{border-color:rgba(168,85,247,.5);background:rgba(168,85,247,.1);transform:translateX(3px)}
+  border-radius:11px;color:var(--text);font-size:14px;font-weight:600;cursor:pointer;text-align:right;
+  transition:all .18s;line-height:1.5;font-family:inherit;width:100%;}
+.opt:hover{border-color:rgba(168,85,247,.5);background:rgba(168,85,247,.1)}
 .opt.sel{border-color:#a855f7;background:rgba(168,85,247,.18);color:#e9d5ff;
-  box-shadow:0 0 18px rgba(168,85,247,.25);transform:translateX(3px);}
+  box-shadow:0 0 18px rgba(168,85,247,.25);}
 /* Waiting */
 .pulse-ring{width:70px;height:70px;border-radius:50%;border:3px solid rgba(168,85,247,.4);
   margin:0 auto 18px;display:flex;align-items:center;justify-content:center;
@@ -109,13 +105,17 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .prow{display:flex;align-items:center;justify-content:space-between;
   padding:9px 13px;border-radius:9px;margin-bottom:5px;background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.07);animation:si .3s cubic-bezier(.16,1,.3,1);}
-@keyframes si{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+@keyframes si{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}
 .prow.done{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25)}
-.pname{font-weight:700;font-size:14px}
+.pname{font-weight:700;font-size:14px;flex:1}
+.prow-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .dot-done{background:var(--green);box-shadow:0 0 7px rgba(52,211,153,.8)}
 .dot-wait{background:var(--muted);animation:dp 1.5s ease-in-out infinite}
 @keyframes dp{0%,100%{opacity:1}50%{opacity:.3}}
+.del-btn{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);color:rgba(248,113,113,.7);
+  border-radius:6px;padding:3px 8px;font-size:12px;cursor:pointer;transition:all .15s;line-height:1;}
+.del-btn:hover{background:rgba(248,113,113,.25);color:var(--red)}
 /* Results */
 .rrooms{display:flex;flex-direction:column;gap:14px;width:100%}
 .rcard{background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--border);
@@ -140,14 +140,14 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .micon{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;
   justify-content:center;font-size:13px;background:linear-gradient(135deg,var(--primary),var(--pink));}
 .mname{font-weight:700;font-size:14px}
-.you-tag{font-size:10px;color:var(--accent);font-weight:900;margin-left:5px;
+.you-tag{font-size:10px;color:var(--accent);font-weight:900;margin-right:5px;
   background:rgba(251,191,36,.15);border-radius:3px;padding:1px 5px;}
 .tagline{color:var(--muted);font-size:11px;line-height:1.5;padding-top:9px;border-top:1px solid var(--border)}
 /* Edit */
 .erow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
 .erow:last-child{border-bottom:none}
 .ename{font-weight:700;font-size:14px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-/* Host badge */
+/* Host */
 .host-notice{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);
   border-radius:12px;padding:12px 15px;width:100%;text-align:center;margin-bottom:14px;}
 /* Misc */
@@ -162,566 +162,541 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   padding:11px 14px;color:var(--red);font-size:13px;text-align:center;font-weight:600}
 .wa-btn{width:100%;padding:14px 18px;border-radius:13px;border:none;background:#25D366;color:#fff;
   font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;
-  justify-content:center;gap:8px;transition:all .2s;box-shadow:0 4px 22px rgba(37,211,102,.4);}
+  justify-content:center;gap:8px;transition:all .2s;box-shadow:0 4px 22px rgba(37,211,102,.4);font-family:inherit;}
 .wa-btn:hover{background:#1ebe5d;transform:translateY(-2px)}
 .confetti-piece{position:fixed;pointer-events:none;z-index:999;border-radius:2px;animation:cfll linear forwards}
 @keyframes cfll{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
-.host-link{position:fixed;bottom:16px;right:16px;z-index:10;font-size:12px;color:rgba(255,255,255,.2);
-  cursor:pointer;text-decoration:none;padding:6px 10px;border-radius:8px;transition:all .2s;}
+.host-link{position:fixed;bottom:16px;left:16px;z-index:10;font-size:12px;color:rgba(255,255,255,.2);
+  cursor:pointer;padding:6px 10px;border-radius:8px;transition:all .2s;}
 .host-link:hover{color:rgba(255,255,255,.6);background:rgba(255,255,255,.05)}
 </style>
 </head>
 <body>
 <div id="particles"></div>
 
-<!-- ══ HOME — everyone sees this ══ -->
+<!-- ══ בית ══ -->
 <div id="s-home" class="screen active">
   <div class="bounce" style="font-size:60px;margin-bottom:14px">🎊</div>
-  <h1 class="mega mb8">BACHELOR<br>PARTY ROOMS</h1>
-  <p class="sub mb20">Answer the questions. The algorithm assigns your room.<br>No mercy. No refunds.</p>
+  <h1 class="mega mb8">חלוקת<br>חדרים לרווקים</h1>
+  <p class="sub mb20">ענה על השאלות. האלגוריתם יחליט על החדר שלך.<br>אין רחמים. אין החזרות.</p>
   <div class="card">
-    <p class="lbl">Enter your nickname</p>
-    <input class="inp" id="home-name" type="text" maxlength="20" placeholder="Your name..."
+    <p class="lbl">הכנס כינוי</p>
+    <input class="inp" id="home-name" type="text" maxlength="20" placeholder="השם שלך..."
       onkeydown="if(event.key==='Enter')startPlaying()">
   </div>
   <div id="home-err" class="err-box mb12" style="display:none"></div>
-  <button class="btn btn-purple" onclick="startPlaying()">Start Playing 🚀</button>
+  <button class="btn btn-purple" onclick="startPlaying()">בוא נשחק 🚀</button>
 </div>
 
-<!-- ══ QUESTIONS ══ -->
+<!-- ══ שאלות ══ -->
 <div id="s-questions" class="screen">
   <div style="width:100%">
     <div class="q-top">
-      <span class="chip" id="q-chip">Player</span>
-      <span class="qnum" id="q-num">1 / 30</span>
+      <span class="chip" id="q-chip">שחקן</span>
+      <span class="qnum" id="q-num">1 / 34</span>
     </div>
     <div class="prog-wrap"><div class="prog-bar" id="prog-bar" style="width:0%"></div></div>
     <div class="q-card"><p class="q-text" id="q-text"></p></div>
     <div class="opts" id="q-opts"></div>
-    <button class="btn btn-purple mt16" id="q-next" onclick="nextQ()" disabled>Next →</button>
+    <button class="btn btn-purple mt16" id="q-next" onclick="nextQ()" disabled>הבא ←</button>
   </div>
 </div>
 
-<!-- ══ WAITING — after answers submitted ══ -->
+<!-- ══ ממתין ══ -->
 <div id="s-waiting" class="screen">
   <div class="pulse-ring"><span style="font-size:28px">⏳</span></div>
-  <h2 class="heading mb8">Locked In! 🎉</h2>
-  <p class="sub mb20">Waiting for everyone else to finish...<br>The host will reveal the rooms when ready.</p>
+  <h2 class="heading mb8">נעול! 🎉</h2>
+  <p class="sub mb20">ממתין לכולם לסיים...<br>המארח יחשוף את החדרים כשהוא מוכן.</p>
   <div class="card" style="text-align:center">
-    <p class="lbl">Players done</p>
+    <p class="lbl">שחקנים שסיימו</p>
     <div class="big-num" id="wait-count">0</div>
   </div>
   <div class="card mt12">
-    <p class="lbl">Who's done</p>
+    <p class="lbl">מי סיים</p>
     <div id="wait-plist"></div>
   </div>
 </div>
 
-<!-- ══ LOADING ══ -->
+<!-- ══ טוען ══ -->
 <div id="s-loading" class="screen">
   <div class="spinner"></div>
-  <h2 class="heading mb8">Computing Destiny...</h2>
-  <p class="sub">Running 3,000 simulations.<br>Judging your deepest secrets. 👀</p>
+  <h2 class="heading mb8">מחשב גורלות...</h2>
+  <p class="sub">מריץ 3,000 סימולציות.<br>שופט את הסודות הכמוסים שלך. 👀</p>
 </div>
 
-<!-- ══ RESULTS — everyone sees this ══ -->
+<!-- ══ תוצאות ══ -->
 <div id="s-results" class="screen">
   <div style="font-size:56px;margin-bottom:12px;filter:drop-shadow(0 0 18px rgba(251,191,36,.6))">🏨</div>
-  <h1 class="mega mb8">ROOM<br>ASSIGNMENTS</h1>
-  <p class="sub mb20">The algorithm has spoken. No arguments.</p>
+  <h1 class="mega mb8">חלוקת<br>החדרים</h1>
+  <p class="sub mb20">האלגוריתם דיבר. אין ויכוחים.</p>
   <div class="rrooms" id="rrooms"></div>
   <button class="btn btn-ghost mt20" id="edit-btn" onclick="showEditScreen()" style="display:none">
-    ✏️ Edit Room Assignments
+    ✏️ ערוך חלוקת חדרים
   </button>
-  <button class="btn btn-ghost mt8" id="reset-btn" onclick="resetGame()" style="display:none">
-    🔄 Reset Game
+  <button class="btn btn-red mt8" id="reset-btn" onclick="resetGame()" style="display:none">
+    🔄 אפס משחק
   </button>
-  <button class="btn btn-ghost mt8" onclick="location.reload()">← Back to Home</button>
+  <button class="btn btn-ghost mt8" onclick="location.reload()">→ חזור לדף הבית</button>
 </div>
 
-<!-- ══ EDIT — host only ══ -->
+<!-- ══ עריכה ══ -->
 <div id="s-edit" class="screen">
-  <h2 class="heading mb8">Edit Assignments ✏️</h2>
-  <p class="sub mb16">Drag any player to a different room.</p>
+  <h2 class="heading mb8">עריכת חלוקה ✏️</h2>
+  <p class="sub mb16">העבר שחקנים בין חדרים לפי הצורך.</p>
   <div class="card" style="padding:14px 16px">
     <div id="edit-list"></div>
   </div>
-  <button class="btn btn-gold mt12" onclick="saveEdits()">💾 Save & Update</button>
-  <button class="btn btn-ghost mt8" onclick="goToResults()">← Cancel</button>
+  <button class="btn btn-gold mt12" onclick="saveEdits()">💾 שמור ועדכן</button>
+  <button class="btn btn-ghost mt8" onclick="goToResults()">→ ביטול</button>
 </div>
 
-<!-- ══ HOST LOGIN ══ -->
+<!-- ══ כניסת מארח ══ -->
 <div id="s-host-login" class="screen">
   <div style="font-size:52px;margin-bottom:12px">👑</div>
-  <h2 class="heading mb8">Host Login</h2>
-  <p class="sub mb20">Enter the host passkey to access controls</p>
+  <h2 class="heading mb8">כניסת מארח</h2>
+  <p class="sub mb20">הכנס סיסמה כדי לגשת לפאנל המארח</p>
   <div class="card">
-    <p class="lbl">Passkey</p>
-    <input class="inp" id="host-key-inp" type="password" placeholder="Enter passkey..."
+    <p class="lbl">סיסמה</p>
+    <input class="inp" id="host-key-inp" type="password" placeholder="הכנס סיסמה..."
       onkeydown="if(event.key==='Enter')verifyHost()">
   </div>
   <div id="host-key-err" class="err-box mb12" style="display:none"></div>
-  <button class="btn btn-gold" onclick="verifyHost()">Unlock 🔓</button>
-  <button class="btn btn-ghost mt8" onclick="showScreen('s-home')">← Back</button>
+  <button class="btn btn-gold" onclick="verifyHost()">פתח 🔓</button>
+  <button class="btn btn-ghost mt8" onclick="showScreen('s-home')">→ חזור</button>
 </div>
 
-<!-- ══ HOST PANEL ══ -->
+<!-- ══ פאנל מארח ══ -->
 <div id="s-host" class="screen">
   <div class="host-notice">
     <span style="font-size:20px">👑</span>
-    <span style="font-size:13px;font-weight:800;color:#fcd34d;margin-left:6px">HOST PANEL</span>
+    <span style="font-size:13px;font-weight:800;color:#fcd34d;margin-right:6px">פאנל מארח</span>
   </div>
   <div class="card">
-    <p class="lbl" id="host-pcount">Players (0)</p>
-    <div id="host-plist"><p class="sub">No players yet...</p></div>
+    <p class="lbl" id="host-pcount">שחקנים (0)</p>
+    <div id="host-plist"><p class="sub">אין שחקנים עדיין...</p></div>
   </div>
   <button class="btn btn-gold glow-pulse mt12" id="host-calc-btn" onclick="hostCalculate()" disabled>
-    🏨 Calculate Rooms!
+    🏨 חשב חדרים!
   </button>
-  <p class="sub mt8" style="font-size:12px">Enabled when 3+ players have answered</p>
-  <div class="card mt16">
-    <div class="wa-btn" onclick="shareGameWA()" style="border-radius:10px">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.09.541 4.052 1.485 5.757L.057 23.18a.75.75 0 00.916.919l5.574-1.463A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.944 9.944 0 01-5.088-1.388l-.365-.215-3.782.993.999-3.688-.237-.381A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-      Share Game Link
-    </div>
-  </div>
-  <div id="host-results-area" style="display:none;width:100%">
-    <div class="card mt4">
-      <div class="rrooms" id="host-rrooms"></div>
-    </div>
-    <button class="btn btn-ghost mt8" onclick="showEditScreen()">✏️ Edit Room Assignments</button>
-    <button class="btn btn-red mt8" onclick="resetGame()">🔄 Reset Game</button>
+  <p class="sub mt8" style="font-size:12px">זמין כאשר 3+ שחקנים ענו על השאלות</p>
+  <button class="wa-btn mt12" onclick="shareGameWA()">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.09.541 4.052 1.485 5.757L.057 23.18a.75.75 0 00.916.919l5.574-1.463A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.944 9.944 0 01-5.088-1.388l-.365-.215-3.782.993.999-3.688-.237-.381A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    שתף קישור למשחק
+  </button>
+  <div id="host-results-area" style="display:none;width:100%;margin-top:16px">
+    <div class="rrooms" id="host-rrooms"></div>
+    <button class="btn btn-ghost mt12" onclick="showEditScreen()">✏️ ערוך חלוקת חדרים</button>
+    <button class="btn btn-red mt8" onclick="resetGame()">🔄 אפס משחק</button>
   </div>
 </div>
 
-<!-- tiny host link -->
-<a class="host-link" onclick="showScreen('s-host-login')">👑 host</a>
+<!-- קישור מארח קטן -->
+<span class="host-link" onclick="showScreen('s-host-login')">👑 מארח</span>
 
 <script>
-// ══════════════════════════════════════════════════
-// QUESTIONS (30 total)
-// ══════════════════════════════════════════════════
 const QS = [
-  // ── ROOM COMPATIBILITY ──
-  {id:'sleep', q:'⏰ How long do you want to sleep tonight?',
-   o:[{l:'3 hours — sleep is for the weak 💀',v:3},{l:'7 hours — I\'m a reasonable human',v:7},{l:'8 hours — beauty sleep is non-negotiable 😴',v:8}]},
+  {id:'sleep', q:'⏰ כמה שעות אתה רוצה לישון הלילה?',
+   o:[{l:'3 שעות — שינה היא בזבוז זמן 💀',v:3},{l:'7 שעות — אני אדם סביר',v:7},{l:'8 שעות — שינת יופי היא הכרחית 😴',v:8}]},
 
-  {id:'music', q:'🎵 Which music do you prefer?',
-   o:[{l:'EDM 🎧',v:'EDM'},{l:'Hip Hop 🎤',v:'HIPHOP'},{l:'Techno ⚡',v:'TECHNO'},{l:'Mizrahit 🎻',v:'MIZRAHIT'}]},
+  {id:'music', q:'🎵 איזה מוזיקה אתה מעדיף?',
+   o:[{l:'אדם 🎧',v:'EDM'},{l:'היפ הופ 🎤',v:'HIPHOP'},{l:'טכנו ⚡',v:'TECHNO'},{l:'מזרחית 🎻',v:'MIZRAHIT'}]},
 
-  {id:'sleepCond', q:'🛏️ What do you need to fall asleep?',
-   o:[{l:'Total silence and complete darkness 🌑',v:'silence'},{l:'White noise / fan is fine',v:'noise'},{l:'TV on in the background? No problem.',v:'tv'},{l:'I can sleep through a concert 🎸',v:'anything'}]},
+  {id:'sleepCond', q:'🛏️ מה אתה צריך כדי להירדם?',
+   o:[{l:'שקט מוחלט וחושך מוחלט 🌑',v:'silence'},{l:'רעש לבן / מאוורר זה בסדר',v:'noise'},{l:'טלוויזיה ברקע? אין בעיה.',v:'tv'},{l:'אני ישן דרך קונצרטים 🎸',v:'anything'}]},
 
-  {id:'shower', q:'🚿💩 Can you shower while your roommate takes a dump right next to you?',
-   o:[{l:'We\'re brothers. Zero problem. 👍',v:'yes'},{l:'ABSOLUTELY NOT. That is a crime. 🤢',v:'no'}]},
+  {id:'shower', q:'🚿💩 אתה יכול להתקלח בזמן שהחברותא עושה את הצרכים לידך?',
+   o:[{l:'אנחנו אחים. אפס בעיה. 👍',v:'yes'},{l:'בשום פנים ואופן. זה פשע. 🤢',v:'no'}]},
 
-  {id:'snoring', q:'😴 Your roommate snores like a dying chainsaw. You...',
-   o:[{l:'Earplugs in, survive the night',v:'earplugs'},{l:'Kick them until they roll over',v:'kick'},{l:'I sleep through earthquakes. This is nothing.',v:'sleepthrough'},{l:'Record it and post it. They deserve this. 📱',v:'record'}]},
+  {id:'snoring', q:'😴 החברותא נוחר כמו מסור מת. אתה...',
+   o:[{l:'אטמי אוזניים ומסיים את הלילה',v:'earplugs'},{l:'בועט בו עד שהוא מתהפך',v:'kick'},{l:'אני ישן דרך רעידות אדמה. זה כלום.',v:'sleepthrough'},{l:'מצלם ומעלה. הוא מגיע לזה. 📱',v:'record'}]},
 
-  {id:'wait45', q:'⏱️ Ready to go out. Your roommate needs 45 more minutes. You...',
-   o:[{l:'Wait patiently. No rush.',v:'patient'},{l:'Go start pre-drinks without them',v:'go_alone'},{l:'Guilt trip them the entire 45 minutes 😤',v:'complain'},{l:'Pull the fire alarm. Speeds things up. 🚨',v:'fire_alarm'}]},
+  {id:'wait45', q:'⏱️ אתה מוכן לצאת. החברותא צריך עוד 45 דקות. אתה...',
+   o:[{l:'ממתין בסבלנות. אין לחץ.',v:'patient'},{l:'הולך להתחיל לשתות בלעדיו',v:'go_alone'},{l:'גורם לו להרגיש רע עם עצמו כל 45 הדקות 😤',v:'complain'},{l:'מפעיל את אזעקת האש. מאיץ. 🚨',v:'fire_alarm'}]},
 
-  {id:'gadMusic', q:'🎶 Gad shows up at 3am with a speaker blasting. Do you love this?',
-   o:[{l:'YES. LOUDER. I WAS WAITING FOR THIS. 🔊',v:'yes'},{l:'I will throw that speaker off the balcony.',v:'no'},{l:'Depends on the song. Gal Atari? Fine. Techno? No.',v:'depends'}]},
+  {id:'gadMusic', q:'🎶 גד מגיע ב-3 לפנות בוקר עם רמקול בלאסט. אתה אוהב את זה?',
+   o:[{l:'כן. יותר חזק. חיכיתי לזה. 🔊',v:'yes'},{l:'אני אזרוק את הרמקול מהמרפסת.',v:'no'},{l:'תלוי בשיר. גל עטרי? בסדר. טכנו? לא.',v:'depends'}]},
 
-  {id:'drugs', q:'💊 Do you consume recreational substances?',
-   o:[{l:'Never touched anything. I\'m clean. 😇',v:'never'},{l:'Only on special occasions... like this 🎊',v:'sometimes'},{l:'We\'re at a bachelor party. Next question. 🚀',v:'yes'}]},
+  {id:'drugs', q:'💊 האם אתה צורך חומרים?',
+   o:[{l:'מעולם לא. אני נקי. 😇',v:'never'},{l:'רק במקרים מיוחדים... כמו עכשיו 🎊',v:'sometimes'},{l:'אנחנו במסיבת רווקים. שאלה הבאה. 🚀',v:'yes'}]},
 
-  {id:'creature', q:'🐍 Do you plan to bring any living creature into the hotel room?',
-   o:[{l:'No, I\'m completely normal. 😇',v:'no'},{l:'Maybe something small and harmless... 🐹',v:'maybe'},{l:'Yes. It\'s large. Don\'t ask. 🐊',v:'yes'}]},
+  {id:'creature', q:'🐍 האם אתה מתכנן להכניס יצור חי לחדר המלון?',
+   o:[{l:'לא. אני נורמלי לגמרי. 😇',v:'no'},{l:'אולי משהו קטן ולא מזיק... 🐹',v:'maybe'},{l:'כן. הוא גדול. אל תשאל. 🐊',v:'yes'}]},
 
-  {id:'towel', q:'🛁 There are 2 towels for 3 people. You...',
-   o:[{l:'Call reception immediately.',v:'reception'},{l:'Share. Bonding experience.',v:'share'},{l:'Take both. Survival of the fittest. 💪',v:'take_both'},{l:'Air dry and own it. Freedom. 🦅',v:'airdry'}]},
+  {id:'towel', q:'🛁 יש 2 מגבות ל-3 אנשים. אתה...',
+   o:[{l:'מתקשר לפרונט דסק מיד.',v:'reception'},{l:'משתף. זה חוויה של קרבה.',v:'share'},{l:'לוקח את שניהם. כוחות הישרדות. 💪',v:'take_both'},{l:'מתייבש מהאוויר ולא מתנצל. חופש. 🦅',v:'airdry'}]},
 
-  {id:'money', q:'💰 You find 500 shekel under the hotel mattress. You...',
-   o:[{l:'Hand it to reception. (Liar.)',v:'reception'},{l:'Split it with the roommates.',v:'split'},{l:'Keep it. God wanted me to have this.',v:'keep'},{l:'Bar tab. Obviously.',v:'bar'}]},
+  {id:'money', q:'💰 מצאת 500 ש"ח מתחת למזרן. אתה...',
+   o:[{l:'מוסר לפרונט דסק. (שקרן.)',v:'reception'},{l:'מחלק שווה עם החברותא.',v:'split'},{l:'שומר. אלוהים רצה שיהיה לי את זה.',v:'keep'},{l:'ישר לחשבון הבר. ברור.',v:'bar'}]},
 
-  // ── KINKY / AMERICAN PIE ──
-  {id:'bodyCount', q:'🔢 Honest answer — what\'s your body count?',
-   o:[{l:'1–5. Quality over quantity. 😌',v:'low'},{l:'5–15. I\'ve lived a little.',v:'medium'},{l:'15–30. Golden years.',v:'high'},{l:'I\'ve lost count. Don\'t judge me. 👑',v:'lost'}]},
+  {id:'bodyCount', q:'🔢 תשובה כנה — כמה?',
+   o:[{l:'1-5. איכות על כמות. 😌',v:'low'},{l:'5-15. חייתי קצת.',v:'medium'},{l:'15-30. שנות הזהב.',v:'high'},{l:'אבדתי חשבון. אל תשפוט. 👑',v:'lost'}]},
 
-  {id:'vanilla', q:'🍦 On a scale of vanilla to completely unhinged — where are you?',
-   o:[{l:'Pure vanilla. I have a reputation.',v:'vanilla'},{l:'Vanilla with sprinkles on special occasions',v:'sprinkles'},{l:'Rocky road. Some chapters stay private.',v:'rocky'},{l:'Actively unhinged and at peace with it. 💀',v:'unhinged'}]},
+  {id:'vanilla', q:'🍦 על סקאלה מווניל לחסר עכבות לגמרי — איפה אתה?',
+   o:[{l:'ווניל טהור. יש לי מוניטין.',v:'vanilla'},{l:'ווניל עם תוספות לאירועים מיוחדים',v:'sprinkles'},{l:'רוקי רואד. כמה פרקים נשארים פרטיים.',v:'rocky'},{l:'חסר עכבות לחלוטין ובשלום עם זה. 💀',v:'unhinged'}]},
 
-  {id:'lights', q:'💡 Lights on or off?',
-   o:[{l:'ON. I want to see everything. 👀',v:'on'},{l:'Off. Mystery is part of it.',v:'off'},{l:'Depends on the situation and who\'s involved.',v:'depends'},{l:'Whatever. I just want it to happen.',v:'whatever'}]},
+  {id:'lights', q:'💡 אורות דלוקים או כבויים?',
+   o:[{l:'דלוקים. אני רוצה לראות הכל. 👀',v:'on'},{l:'כבויים. המסתורין הוא חלק מזה.',v:'off'},{l:'תלוי במצב ובמי מעורב.',v:'depends'},{l:'מה שיהיה. רק שיקרה.',v:'whatever'}]},
 
-  {id:'fakedIt', q:'🎭 Have you ever... faked it?',
-   o:[{l:'NEVER. 100% authentic always.',v:'never'},{l:'Once, by accident. Long story.',v:'once'},{l:'More often than I\'d like to admit.',v:'often'},{l:'Every. Single. Time. It\'s easier. 🏆',v:'always'}]},
+  {id:'fakedIt', q:'🎭 האם אי פעם... עשית את זה בצורה מזויפת?',
+   o:[{l:'מעולם לא. 100% אותנטי תמיד.',v:'never'},{l:'פעם אחת, בטעות. סיפור ארוך.',v:'once'},{l:'יותר פעמים ממה שהייתי רוצה להודות.',v:'often'},{l:'כל. פעם. זה יותר קל. 🏆',v:'always'}]},
 
-  {id:'hotelHookup', q:'🌙 Would you hook up with someone while your roommate is "sleeping"?',
-   o:[{l:'Never. That\'s disrespectful.',v:'never'},{l:'If they\'re actually asleep... maybe.',v:'if_asleep'},{l:'The roommate can watch or leave. Their choice.',v:'watch_or_leave'},{l:'This is literally my plan for this trip. 📋',v:'planned'}]},
+  {id:'hotelHookup', q:"🌙 האם תעשה את זה עם מישהי בזמן שהחברותא 'ישן'?",
+   o:[{l:'לא. זה חוסר כבוד.',v:'never'},{l:'אם הוא ישן באמת... אולי.',v:'if_asleep'},{l:'החברותא יכול לצפות או לעזוב. הבחירה שלו.',v:'watch_or_leave'},{l:'זה בדיוק התוכנית שלי לטיול הזה. 📋',v:'planned'}]},
 
-  {id:'drunkEgo', q:'🕺 What\'s your drunk alter ego?',
-   o:[{l:'The philosopher — I suddenly understand the universe',v:'philosopher'},{l:'The emotional one — I love everyone so much 🥺',v:'emotional'},{l:'The dancer — I will clear the entire dancefloor',v:'dancer'},{l:'The one who needs a full-time babysitter 🍼',v:'babysitter'}]},
+  {id:'drunkEgo', q:'🕺 מה האלטר אגו שלך כשאתה שיכור?',
+   o:[{l:'הפילוסוף — פתאום מבין את היקום',v:'philosopher'},{l:'הרגשני — אני אוהב את כולם כל כך 🥺',v:'emotional'},{l:'הרקדן — אני מפנה את כל רחבת הריקודים',v:'dancer'},{l:'זה שצריך מטפל צמוד 🍼',v:'babysitter'}]},
 
-  {id:'sexTalk', q:'🗣️ Do you talk during sex?',
-   o:[{l:'Total silence. Focus.',v:'silent'},{l:'A little. Keeps things interesting.',v:'alittle'},{l:'Full commentary. Feedback is important.',v:'alot'},{l:'I don\'t have enough data to answer this. 😔',v:'nodata'}]},
+  {id:'sexTalk', q:'🗣️ האם אתה מדבר במהלך הפעילות?',
+   o:[{l:'שקט מוחלט. פוקוס.',v:'silent'},{l:'קצת. זה מעניין.',v:'alittle'},{l:'פירוש מלא. פידבק חשוב.',v:'alot'},{l:'אין לי מספיק נתונים לענות. 😔',v:'nodata'}]},
 
-  {id:'morning', q:'🌅 Morning wood is...',
-   o:[{l:'Natural and I fully respect the process',v:'respectful'},{l:'Extremely embarrassing if there\'s company',v:'embarrassing'},{l:'My daily alarm clock. Consistent.',v:'alarm'},{l:'Not a problem I have. Moving on.',v:'none'}]},
+  {id:'morning', q:'🌅 זקפת בוקר זה...',
+   o:[{l:'טבעי ואני מכבד את התהליך',v:'respectful'},{l:'מביך מאוד אם יש חברה',v:'embarrassing'},{l:'השעון המעורר שלי. עקבי.',v:'alarm'},{l:'לא בעיה שיש לי. ממשיך הלאה.',v:'none'}]},
 
-  {id:'monkey', q:'🐒 Do you plan to... choke the monkey during this trip?',
-   o:[{l:'No comment. 😶',v:'silent'},{l:'Absolutely not. I have dignity.',v:'no'},{l:'The night is long and I make no promises 🌙',v:'maybe'}]},
+  {id:'monkey', q:'🐒 האם אתה מתכנן... לחנוק את הקוף בטיול הזה?',
+   o:[{l:'בלי תגובה. 😶',v:'silent'},{l:'בשום פנים ואופן. יש לי כבוד עצמי.',v:'no'},{l:'הלילה ארוך ואני לא מבטיח כלום 🌙',v:'maybe'}]},
 
-  {id:'gayKiss', q:'💋 Would you kiss a guy if someone paid you 100,000 shekel?',
-   o:[{l:'In a heartbeat. That\'s a down payment on an apartment.',v:'yes'},{l:'No amount of money. Hard no.',v:'no'},{l:'Depends on who. Some guys are cute.',v:'depends'},{l:'I would do it for free if he\'s rich enough.',v:'free'}]},
+  {id:'gayKiss', q:'💋 האם היית מנשק בחור תמורת 100,000 שקל?',
+   o:[{l:'ברגע. זה מקדמה על דירה.',v:'yes'},{l:'אין סכום כסף. לא.',v:'no'},{l:'תלוי במי. יש בחורים חתיכים.',v:'depends'},{l:'הייתי עושה בחינם אם הוא עשיר מספיק.',v:'free'}]},
 
-  {id:'stripClub', q:'💃 Strip club — what\'s your vibe?',
-   o:[{l:'Enthusiastic participant. I have cash ready.',v:'enthusiastic'},{l:'I\'ll come but I\'m uncomfortable and it shows.',v:'uncomfortable'},{l:'I go for the vibe, not the show.',v:'vibe'},{l:'I am the entertainment. I don\'t pay to watch.',v:'entertainment'}]},
+  {id:'stripClub', q:'💃 קאבארה — מה הוייב שלך?',
+   o:[{l:'משתתף נלהב. יש לי מזומן מוכן.',v:'enthusiastic'},{l:'אבוא אבל אני לא נוח ורואים את זה.',v:'uncomfortable'},{l:'אני בא לאווירה, לא לתצוגה.',v:'vibe'},{l:'אני הבידור. אני לא משלם לראות.',v:'entertainment'}]},
 
-  // ── FRIEND GROUP / CULTURE ──
-  {id:'gaySupport', q:'🏳️‍🌈 Your best friend comes out as gay. You...',
-   o:[{l:'Already knew. Took you long enough. 😄',v:'knew'},{l:'Hug them and say I love you no matter what.',v:'support'},{l:'Support them 100%, ask zero questions.',v:'quiet_support'},{l:'Throw them a coming-out party immediately.',v:'party'}]},
+  {id:'gaySupport', q:'🏳️‍🌈 החבר הכי טוב שלך מגלה שהוא גיי. אתה...',
+   o:[{l:'כבר ידעתי. לקח לך זמן. 😄',v:'knew'},{l:'מחבק ואומר שאני אוהב אותו תמיד.',v:'support'},{l:'תומך 100% ולא שואל שאלות.',v:'quiet_support'},{l:'זורק לו מסיבת קאמינג אאוט מיד.',v:'party'}]},
 
-  {id:'beautifulWoman', q:'💃 Does a beautiful woman completely destroy your judgment and decision-making?',
-   o:[{l:'No. I am a rational human being.',v:'no'},{l:'Only in the first 5 minutes. Then I recover.',v:'sometimes'},{l:'Yes. I have no control and I accept this.',v:'yes'},{l:'I become a completely different person. Someone worse.',v:'other_person'}]},
+  {id:'beautifulWoman', q:'💃 אישה יפה לגמרי הורסת לך את שיקול הדעת?',
+   o:[{l:'לא. אני יצור רציונלי.',v:'no'},{l:'רק ב-5 הדקות הראשונות. אז מתאושש.',v:'sometimes'},{l:'כן. אין לי שליטה ואני מקבל את זה.',v:'yes'},{l:'אני הופך לאדם אחר לגמרי. אחד יותר גרוע.',v:'other_person'}]},
 
-  {id:'lifeAfterLove', q:'💔 Do you believe in life after love? (Cher)',
-   o:[{l:'Yes. You rebuild. You grow. You move on.',v:'yes'},{l:'No. Each heartbreak removes a piece of your soul.',v:'no'},{l:'Cher knows things we don\'t. I trust the process.',v:'trust_cher'},{l:'I\'m still in the process of finding out. 🥲',v:'finding_out'}]},
+  {id:'lifeAfterLove', q:'💔 האם אתה מאמין בחיים אחרי אהבה? (שר)',
+   o:[{l:'כן. בונים מחדש. גדלים. ממשיכים.',v:'yes'},{l:'לא. כל שבר לב לוקח חלק מהנשמה.',v:'no'},{l:'שר יודעת דברים שאנחנו לא. אני סומך.',v:'trust_cher'},{l:'אני עדיין בתהליך לגלות. 🥲',v:'finding_out'}]},
 
-  {id:'aboveAverage', q:'📊 Do you think you\'re above average... in bed?',
-   o:[{l:'I\'m objectively exceptional. Not debatable.',v:'exceptional'},{l:'Above average, yes. I put in the work.',v:'above'},{l:'Average and at peace with that.',v:'average'},{l:'Below average but extremely enthusiastic.',v:'enthusiastic'}]},
+  {id:'aboveAverage', q:'📊 האם אתה חושב שאתה מעל הממוצע... במיטה?',
+   o:[{l:'אני יוצא דופן אובייקטיבית. לא לדיון.',v:'exceptional'},{l:'מעל הממוצע, כן. אני עובד על זה.',v:'above'},{l:'ממוצע ובשלום עם זה.',v:'average'},{l:'מתחת לממוצע אבל עם הרבה נלהבות.',v:'enthusiastic'}]},
 
-  // ── RIDDLES ──
-  {id:'riddle1', q:'🧩 RIDDLE: The more you take, the more you leave behind. What am I?',
-   o:[{l:'Footsteps 👣',v:'footsteps'},{l:'Regrets (too real)',v:'regrets'},{l:'Beer (also too real)',v:'beer'},{l:'Gad\'s dignity',v:'dignity'}]},
+  {id:'riddle1', q:'🧩 חידה: ככל שאתה לוקח יותר, אתה משאיר יותר אחריך. מה אני?',
+   o:[{l:'צעדים 👣',v:'footsteps'},{l:'חרטות (כואב מדי)',v:'regrets'},{l:'בירה (גם כואב)',v:'beer'},{l:'הכבוד של גד',v:'dignity'}]},
 
-  {id:'riddle2', q:'🗺️ RIDDLE: I have cities but no houses, mountains but no trees, water but no fish. What am I?',
-   o:[{l:'A map',v:'map'},{l:'Gad\'s life plan',v:'life_plan'},{l:'Israel in 2026',v:'israel'},{l:'My ex\'s heart',v:'exheart'}]},
+  {id:'riddle2', q:'🗺️ חידה: יש לי ערים אבל אין בתים, הרים אבל אין עצים, מים אבל אין דגים. מה אני?',
+   o:[{l:'מפה',v:'map'},{l:'התוכנית לחיים של גד',v:'life_plan'},{l:'ישראל ב-2026',v:'israel'},{l:'הלב של האקס שלי',v:'exheart'}]},
 
-  // ── GAD SPECIFIC ──
-  {id:'gadPlaylist', q:'🔒 Locked in the hotel room with Gad\'s playlist on loop for 3 hours. You...',
-   o:[{l:'Accept it. I am at peace.',v:'accept'},{l:'Escape through the window. 4th floor? Worth it.',v:'escape'},{l:'Start dancing. If you can\'t beat him, join him. 🕺',v:'dance'},{l:'Openly beg for death.',v:'death'}]},
+  {id:'gadPlaylist', q:"🔒 נעול בחדר עם הפלייליסט של גד על לופ 3 שעות. אתה...",
+   o:[{l:'מקבל. אני בשלום.',v:'accept'},{l:'בורח דרך החלון. קומה 4? שווה את זה.',v:'escape'},{l:"מתחיל לרקוד. אם לא יכול לנצח, מצטרף. 🕺",v:'dance'},{l:'מתחנן בפה גלוי למות.',v:'death'}]},
 
-  {id:'gadKing', q:'👑 Do you think Gad is your king?',
-   o:[{l:'He is my king and I kneel before him 🙇',v:'king'},{l:'He is my absolute GOD and I pray daily 🛐',v:'god'},{l:'ALL HAIL KING GAD! 👑',v:'hail'}]},
+  {id:'gadKing', q:'👑 האם אתה חושב שגד הוא המלך שלך?',
+   o:[{l:'הוא המלך שלי ואני כורע ברך 🙇',v:'king'},{l:'הוא האלוהים שלי ואני מתפלל יום יום 🛐',v:'god'},{l:'יחי המלך גד! 👑',v:'hail'}]},
 
-  {id:'falafel', q:'🧆 Does Gad look like the falafel guy from the neighborhood?',
-   o:[{l:'They could be IDENTICAL TWINS 😂',v:'yes'},{l:'Not at all, completely different people',v:'no'},{l:'Only when he\'s sweating and holding tongs 🌡️',v:'sometimes'}]},
+  {id:'falafel', q:'🧆 האם גד נראה כמו בעל הפלאפל מהשכונה?',
+   o:[{l:'הם יכולים להיות תאומים זהים 😂',v:'yes'},{l:'לא בכלל, אנשים שונים לחלוטין',v:'no'},{l:'רק כשהוא מזיע ומחזיק מלקחיים 🌡️',v:'sometimes'}]},
 
-  {id:'eyal', q:'🎤 Do you think Eyal Golan is innocent?',
-   o:[{l:'100% innocent. Leave the man alone!',v:'innocent'},{l:'Guilty as charged.',v:'guilty'},{l:'Who even is Eyal Golan?',v:'who'}]},
+  {id:'eyal', q:'🎤 האם אתה חושב שאייל גולן חף מפשע?',
+   o:[{l:'100% חף מפשע. תעזבו את האיש!',v:'innocent'},{l:'אשם כהוכחה. תיק סגור.',v:'guilty'},{l:'מי זה בכלל אייל גולן?',v:'who'}]},
 
-  {id:'ibiza', q:'🏝️ Do we NEED to come back to Ibiza next year?',
-   o:[{l:'IBIZA FOREVER. Book it right now. ✈️',v:'yes'},{l:'Once was enough. I\'ve healed.',v:'no'},{l:'Only if Gad pays for literally everything 💸',v:'if_gad'}]},
+  {id:'ibiza', q:'🏝️ האם אנחנו חייבים לחזור לאיביזה בשנה הבאה?',
+   o:[{l:'איביזה לנצח. הזמינו עכשיו. ✈️',v:'yes'},{l:'פעם הספיקה. החלמתי.',v:'no'},{l:'רק אם גד משלם על הכל 💸',v:'if_gad'}]},
 
-  {id:'luffy', q:'🏴‍☠️ Do you acknowledge that Gad is the living incarnation of Monkey D. Luffy?',
-   o:[{l:'He IS Luffy, reborn as an Israeli 🌊',v:'yes'},{l:'Obviously. The resemblance is almost illegal.',v:'obviously'},{l:'I have made peace with this undeniable truth.',v:'peace'}]},
+  {id:'luffy', q:'🏴‍☠️ האם אתה מכיר בכך שגד הוא הגלגול החי של מאנקי די. לופי?',
+   o:[{l:'הוא לופי, נולד מחדש כישראלי 🌊',v:'yes'},{l:'ברור. הדמיון כמעט בלתי חוקי.',v:'obviously'},{l:'השלמתי עם האמת הבלתי ניתנת לערעור הזו.',v:'peace'}]},
 ];
 
-// ══════════════════════════════════════════════════
-// STATE
-// ══════════════════════════════════════════════════
-let myName = '', myPlayerId = null, isHostUnlocked = false;
-let curQIdx = 0, curAnswers = {};
-let eventSource = null, currentResults = null;
+let myName='', myPlayerId=null, isHostUnlocked=false, hostKey='';
+let curQIdx=0, curAnswers={};
+let eventSource=null, currentResults=null;
+let knownPlayerIds=new Set();
 
-// ══════════════════════════════════════════════════
-// PARTICLES
-// ══════════════════════════════════════════════════
-(function () {
-  const c = document.getElementById('particles');
-  const s = document.createElement('style');
-  s.textContent = '@keyframes fp{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-20px) scale(1);opacity:0}}';
+// ── Particles ──
+(function(){
+  const c=document.getElementById('particles');
+  const s=document.createElement('style');
+  s.textContent='@keyframes fp{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-20px) scale(1);opacity:0}}';
   document.head.appendChild(s);
-  const cols = ['rgba(168,85,247,', 'rgba(244,114,182,', 'rgba(251,191,36,', 'rgba(34,211,238,'];
-  for (let i = 0; i < 18; i++) {
-    const el = document.createElement('div');
-    const sz = Math.random() * 5 + 2, col = cols[Math.floor(Math.random() * cols.length)], op = Math.random() * .4 + .1;
-    el.style.cssText = `position:absolute;border-radius:50%;left:${Math.random() * 100}%;top:${Math.random() * 100}%;width:${sz}px;height:${sz}px;background:${col}${op});box-shadow:0 0 ${sz * 3}px ${col}0.6);animation:fp ${Math.random() * 15 + 8}s ${-Math.random() * 20}s linear infinite`;
+  const cols=['rgba(168,85,247,','rgba(244,114,182,','rgba(251,191,36,','rgba(34,211,238,'];
+  for(let i=0;i<18;i++){
+    const el=document.createElement('div');
+    const sz=Math.random()*5+2,col=cols[Math.floor(Math.random()*cols.length)],op=Math.random()*.4+.1;
+    el.style.cssText=`position:absolute;border-radius:50%;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:${col}${op});box-shadow:0 0 ${sz*3}px ${col}0.6);animation:fp ${Math.random()*15+8}s ${-Math.random()*20}s linear infinite`;
     c.appendChild(el);
   }
 })();
 
-function confetti() {
-  const cols = ['#a855f7', '#f472b6', '#fbbf24', '#34d399', '#22d3ee', '#ef4444'];
-  for (let i = 0; i < 80; i++) {
-    const el = document.createElement('div'); el.className = 'confetti-piece';
-    const sz = Math.random() * 10 + 4;
-    el.style.cssText = `left:${Math.random() * 100}vw;top:-20px;width:${sz}px;height:${sz}px;background:${cols[Math.floor(Math.random() * cols.length)]};border-radius:${Math.random() > .5 ? '50%' : '2px'};animation-duration:${Math.random() * 2 + 1.5}s;animation-delay:${Math.random() * .8}s`;
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 4000);
+function confetti(){
+  const cols=['#a855f7','#f472b6','#fbbf24','#34d399','#22d3ee','#ef4444'];
+  for(let i=0;i<80;i++){
+    const el=document.createElement('div');el.className='confetti-piece';
+    const sz=Math.random()*10+4;
+    el.style.cssText=`left:${Math.random()*100}vw;top:-20px;width:${sz}px;height:${sz}px;background:${cols[Math.floor(Math.random()*cols.length)]};border-radius:${Math.random()>.5?'50%':'2px'};animation-duration:${Math.random()*2+1.5}s;animation-delay:${Math.random()*.8}s`;
+    document.body.appendChild(el);setTimeout(()=>el.remove(),4000);
   }
 }
 
-// ══════════════════════════════════════════════════
-// SCREENS
-// ══════════════════════════════════════════════════
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
 
-function shake(id) {
-  const el = document.getElementById(id);
-  el.classList.add('err'); setTimeout(() => el.classList.remove('err'), 600);
+function shake(id){
+  const el=document.getElementById(id);
+  el.classList.add('err');setTimeout(()=>el.classList.remove('err'),600);
 }
 
-// ══════════════════════════════════════════════════
-// API
-// ══════════════════════════════════════════════════
-async function api(method, path, body) {
-  const r = await fetch(path, { method, headers: { 'Content-Type': 'application/json' }, body: body ? JSON.stringify(body) : undefined });
-  const data = await r.json();
-  if (!r.ok) throw new Error(data.error || 'Something went wrong');
+async function api(method,path,body){
+  const r=await fetch(path,{method,headers:{'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});
+  const data=await r.json();
+  if(!r.ok) throw new Error(data.error||'שגיאה לא צפויה');
   return data;
 }
 
-// ══════════════════════════════════════════════════
-// SSE
-// ══════════════════════════════════════════════════
-function connectSSE() {
-  if (eventSource) eventSource.close();
-  eventSource = new EventSource('/api/events');
-  eventSource.onmessage = e => handleUpdate(JSON.parse(e.data));
+// ── SSE ──
+function connectSSE(){
+  if(eventSource) eventSource.close();
+  eventSource=new EventSource('/api/events');
+  eventSource.onmessage=e=>handleUpdate(JSON.parse(e.data));
 }
 
-function handleUpdate(g) {
-  const done = g.players.filter(p => p.done).length;
-  const total = g.players.length;
-
-  // Waiting screen
-  if (document.getElementById('s-waiting').classList.contains('active')) {
-    document.getElementById('wait-count').textContent = `${done} / ${total}`;
-    renderPList('wait-plist', g.players);
+function handleUpdate(g){
+  // זיהוי מחיקת שחקן
+  if(myPlayerId){
+    const stillIn=g.players.some(p=>p.id===myPlayerId);
+    const wasIn=knownPlayerIds.has(myPlayerId);
+    if(wasIn&&!stillIn){
+      myPlayerId=null;myName='';curAnswers={};curQIdx=0;
+      alert('המארח הסיר אותך מהמשחק.\nתוכל להצטרף מחדש עם כינוי חדש.');
+      showScreen('s-home');
+      return;
+    }
   }
+  g.players.forEach(p=>knownPlayerIds.add(p.id));
 
-  // Host panel
-  if (document.getElementById('s-host').classList.contains('active')) {
+  const done=g.players.filter(p=>p.done).length;
+  const total=g.players.length;
+
+  if(document.getElementById('s-waiting').classList.contains('active')){
+    document.getElementById('wait-count').textContent=`${done} / ${total}`;
+    renderPList('wait-plist',g.players,false);
+  }
+  if(document.getElementById('s-host').classList.contains('active')){
     renderHostPanel(g);
   }
-
-  // Results arrived via SSE
-  if (g.status === 'done' && g.results) {
-    if (!document.getElementById('s-results').classList.contains('active') &&
-        !document.getElementById('s-edit').classList.contains('active') &&
-        !document.getElementById('s-host').classList.contains('active')) {
+  if(g.status==='done'&&g.results){
+    currentResults=g.results;
+    if(!document.getElementById('s-results').classList.contains('active')&&
+       !document.getElementById('s-edit').classList.contains('active')&&
+       !document.getElementById('s-host').classList.contains('active')){
       showResults(g.results);
     }
-    // Update host panel results
-    if (document.getElementById('s-host').classList.contains('active')) {
-      currentResults = g.results;
-      document.getElementById('host-results-area').style.display = 'block';
-      renderRooms('host-rrooms', g.results, false);
+    if(document.getElementById('s-host').classList.contains('active')){
+      document.getElementById('host-results-area').style.display='block';
+      renderRooms('host-rrooms',g.results,false);
     }
   }
 }
 
-function renderPList(id, players) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  if (!players.length) { el.innerHTML = '<p class="sub">No players yet...</p>'; return; }
-  el.innerHTML = players.map(p => `
-    <div class="prow ${p.done ? 'done' : ''}">
-      <span class="pname">${p.name}${p.id === myPlayerId ? ' (you)' : ''}</span>
-      <div class="dot ${p.done ? 'dot-done' : 'dot-wait'}"></div>
+function renderPList(id,players,showDelete){
+  const el=document.getElementById(id);
+  if(!el) return;
+  if(!players.length){el.innerHTML='<p class="sub">אין שחקנים עדיין...</p>';return;}
+  el.innerHTML=players.map(p=>`
+    <div class="prow ${p.done?'done':''}">
+      <span class="pname">${p.name}${p.id===myPlayerId?' (אתה)':''}</span>
+      <div class="prow-right">
+        ${showDelete?`<button class="del-btn" onclick="deletePlayer('${p.id}','${p.name}')">🗑️ הסר</button>`:''}
+        <div class="dot ${p.done?'dot-done':'dot-wait'}"></div>
+      </div>
     </div>`).join('');
 }
 
-function renderHostPanel(g) {
-  const done = g.players.filter(p => p.done).length;
-  document.getElementById('host-pcount').textContent = `Players (${g.players.length}) — ${done} answered`;
-  renderPList('host-plist', g.players);
-  document.getElementById('host-calc-btn').disabled = done < 3;
+function renderHostPanel(g){
+  const done=g.players.filter(p=>p.done).length;
+  document.getElementById('host-pcount').textContent=`שחקנים (${g.players.length}) — ${done} ענו`;
+  renderPList('host-plist',g.players,true);
+  document.getElementById('host-calc-btn').disabled=done<3;
 }
 
-// ══════════════════════════════════════════════════
-// START PLAYING
-// ══════════════════════════════════════════════════
-async function startPlaying() {
-  const name = document.getElementById('home-name').value.trim();
-  const errEl = document.getElementById('home-err');
-  errEl.style.display = 'none';
-  if (!name) { shake('home-name'); return; }
-  try {
-    const { playerId } = await api('POST', '/api/join', { name });
-    myName = name; myPlayerId = playerId;
+// ── התחלה ──
+async function startPlaying(){
+  const name=document.getElementById('home-name').value.trim();
+  const errEl=document.getElementById('home-err');
+  errEl.style.display='none';
+  if(!name){shake('home-name');return;}
+  try{
+    const {playerId}=await api('POST','/api/join',{name});
+    myName=name;myPlayerId=playerId;
+    knownPlayerIds.add(playerId);
     connectSSE();
-    document.getElementById('q-chip').textContent = name;
+    document.getElementById('q-chip').textContent=name;
     renderQ(0);
     showScreen('s-questions');
-  } catch (e) {
-    errEl.textContent = e.message; errEl.style.display = 'block';
-  }
+  }catch(e){errEl.textContent=e.message;errEl.style.display='block';}
 }
 
-// ══════════════════════════════════════════════════
-// QUESTIONS
-// ══════════════════════════════════════════════════
-function renderQ(idx) {
-  const q = QS[idx]; curQIdx = idx;
-  document.getElementById('q-num').textContent = `${idx + 1} / ${QS.length}`;
-  document.getElementById('prog-bar').style.width = `${(idx / QS.length) * 100}%`;
-  document.getElementById('q-text').textContent = q.q;
-  document.getElementById('q-opts').innerHTML = q.o.map(o =>
-    `<button class="opt${curAnswers[q.id] === o.v ? ' sel' : ''}" onclick="pickOpt(this,'${String(o.v).replace(/\\/g, '\\\\').replace(/'/g, "\\'")}')">${o.l}</button>`
+// ── שאלות ──
+function renderQ(idx){
+  const q=QS[idx];curQIdx=idx;
+  document.getElementById('q-num').textContent=`${idx+1} / ${QS.length}`;
+  document.getElementById('prog-bar').style.width=`${(idx/QS.length)*100}%`;
+  document.getElementById('q-text').textContent=q.q;
+  document.getElementById('q-opts').innerHTML=q.o.map(o=>
+    `<button class="opt${curAnswers[q.id]===o.v?' sel':''}" onclick="pickOpt(this,'${String(o.v).replace(/\\/g,'\\\\').replace(/'/g,"\\'")}')">${o.l}</button>`
   ).join('');
-  const btn = document.getElementById('q-next');
-  btn.disabled = curAnswers[q.id] === undefined;
-  btn.textContent = idx === QS.length - 1 ? 'Submit Answers! 🎉' : 'Next →';
+  const btn=document.getElementById('q-next');
+  btn.disabled=curAnswers[q.id]===undefined;
+  btn.textContent=idx===QS.length-1?'שלח תשובות! 🎉':'הבא ←';
 }
 
-function pickOpt(btn, val) {
-  const q = QS[curQIdx];
-  curAnswers[q.id] = q.id === 'sleep' ? parseInt(val) : val;
-  document.querySelectorAll('.opt').forEach(b => b.classList.remove('sel'));
+function pickOpt(btn,val){
+  const q=QS[curQIdx];
+  curAnswers[q.id]=q.id==='sleep'?parseInt(val):val;
+  document.querySelectorAll('.opt').forEach(b=>b.classList.remove('sel'));
   btn.classList.add('sel');
-  document.getElementById('q-next').disabled = false;
+  document.getElementById('q-next').disabled=false;
 }
 
-async function nextQ() {
-  if (curAnswers[QS[curQIdx].id] === undefined) return;
-  if (curQIdx < QS.length - 1) { renderQ(curQIdx + 1); }
-  else {
-    try {
-      await api('POST', `/api/answers/${myPlayerId}`, { answers: curAnswers });
-      const g = await api('GET', '/api/state');
-      const done = g.players.filter(p => p.done).length;
-      document.getElementById('wait-count').textContent = `${done} / ${g.players.length}`;
-      renderPList('wait-plist', g.players);
+async function nextQ(){
+  if(curAnswers[QS[curQIdx].id]===undefined) return;
+  if(curQIdx<QS.length-1){renderQ(curQIdx+1);}
+  else{
+    try{
+      await api('POST',`/api/answers/${myPlayerId}`,{answers:curAnswers});
+      const g=await api('GET','/api/state');
+      const done=g.players.filter(p=>p.done).length;
+      document.getElementById('wait-count').textContent=`${done} / ${g.players.length}`;
+      renderPList('wait-plist',g.players,false);
       showScreen('s-waiting');
       confetti();
-    } catch (e) { alert('Error: ' + e.message); }
+    }catch(e){alert('שגיאה: '+e.message);}
   }
 }
 
-// ══════════════════════════════════════════════════
-// RESULTS
-// ══════════════════════════════════════════════════
-const ICONS = ['🎯', '🌟', '💎', '🔮', '🏆', '⚡'];
+// ── תוצאות ──
+const ICONS=['🎯','🌟','💎','🔮','🏆','⚡'];
 
-function renderRooms(containerId, rooms, showYou = true) {
-  document.getElementById(containerId).innerHTML = rooms.map((room, ri) => {
-    const bc = room.pct >= 70 ? 'pct-hi' : room.pct >= 45 ? 'pct-mid' : 'pct-lo';
-    const members = room.members.map((name, j) => `
+function renderRooms(cid,rooms,showYou){
+  document.getElementById(cid).innerHTML=rooms.map((room,ri)=>{
+    const bc=room.pct>=70?'pct-hi':room.pct>=45?'pct-mid':'pct-lo';
+    const members=room.members.map((name,j)=>`
       <div class="mrow">
-        <div class="micon">${ICONS[j] || '😎'}</div>
-        <span class="mname">${name}${showYou && name === myName ? '<span class="you-tag">YOU</span>' : ''}</span>
+        <div class="micon">${ICONS[j]||'😎'}</div>
+        <span class="mname">${name}${showYou&&name===myName?'<span class="you-tag">אתה</span>':''}</span>
       </div>`).join('');
     return `<div class="rcard">
-      <div class="rhead"><span class="rname">${room.name}</span><span class="pct ${bc}">${room.pct}% match</span></div>
+      <div class="rhead"><span class="rname">${room.name}</span><span class="pct ${bc}">${room.pct}% התאמה</span></div>
       <div class="mlist">${members}</div>
-      <div class="tagline">${room.tagline || ''}</div>
+      <div class="tagline">${room.tagline||''}</div>
     </div>`;
   }).join('');
 }
 
-function showResults(rooms) {
-  currentResults = rooms;
-  renderRooms('rrooms', rooms, true);
-  document.getElementById('edit-btn').style.display = isHostUnlocked ? 'block' : 'none';
-  document.getElementById('reset-btn').style.display = isHostUnlocked ? 'block' : 'none';
+function showResults(rooms){
+  currentResults=rooms;
+  renderRooms('rrooms',rooms,true);
+  document.getElementById('edit-btn').style.display=isHostUnlocked?'block':'none';
+  document.getElementById('reset-btn').style.display=isHostUnlocked?'block':'none';
   showScreen('s-results');
-  setTimeout(confetti, 200);
+  setTimeout(confetti,200);
 }
 
-function goToResults() {
-  if (currentResults) showResults(currentResults);
+function goToResults(){
+  if(currentResults) showResults(currentResults);
   else showScreen('s-waiting');
 }
 
-// ══════════════════════════════════════════════════
-// EDIT
-// ══════════════════════════════════════════════════
-function showEditScreen() {
-  if (!currentResults) return;
-  const allPlayers = [];
-  currentResults.forEach((room, ri) => room.members.forEach(name => allPlayers.push({ name, ri })));
-  const roomNames = currentResults.map(r => r.name);
-  document.getElementById('edit-list').innerHTML = allPlayers.map((p, i) => `
+// ── עריכה ──
+function showEditScreen(){
+  if(!currentResults) return;
+  const allPlayers=[];
+  currentResults.forEach((room,ri)=>room.members.forEach(name=>allPlayers.push({name,ri})));
+  const roomNames=currentResults.map(r=>r.name);
+  document.getElementById('edit-list').innerHTML=allPlayers.map((p,i)=>`
     <div class="erow">
-      <span class="ename">${p.name}${p.name === myName ? ' 👑' : ''}</span>
+      <span class="ename">${p.name}${p.name===myName?' 👑':''}</span>
       <select class="sel" id="esel-${i}">
-        ${roomNames.map((rn, ri) => `<option value="${ri}"${ri === p.ri ? ' selected' : ''}>${rn}</option>`).join('')}
+        ${roomNames.map((rn,ri)=>`<option value="${ri}"${ri===p.ri?' selected':''}>${rn}</option>`).join('')}
       </select>
     </div>`).join('');
-  document.getElementById('edit-list').dataset.players = JSON.stringify(allPlayers);
+  document.getElementById('edit-list').dataset.players=JSON.stringify(allPlayers);
   showScreen('s-edit');
 }
 
-async function saveEdits() {
-  const allPlayers = JSON.parse(document.getElementById('edit-list').dataset.players);
-  const newRooms = currentResults.map((r, ri) => ({ name: r.name, tagline: r.tagline || '', members: [], pct: r.pct }));
-  allPlayers.forEach((p, i) => { newRooms[parseInt(document.getElementById(`esel-${i}`).value)].members.push(p.name); });
-  const filled = newRooms.filter(r => r.members.length > 0);
-  try {
-    await api('PUT', '/api/admin/results', { key: hostKey, results: filled });
-    currentResults = filled;
+async function saveEdits(){
+  const allPlayers=JSON.parse(document.getElementById('edit-list').dataset.players);
+  const newRooms=currentResults.map((r,ri)=>({name:r.name,tagline:r.tagline||'',members:[],pct:r.pct}));
+  allPlayers.forEach((p,i)=>{newRooms[parseInt(document.getElementById(`esel-${i}`).value)].members.push(p.name);});
+  const filled=newRooms.filter(r=>r.members.length>0);
+  try{
+    await api('PUT','/api/admin/results',{key:hostKey,results:filled});
+    currentResults=filled;
     showResults(filled);
     confetti();
-  } catch (e) { alert('Save failed: ' + e.message); }
+  }catch(e){alert('שמירה נכשלה: '+e.message);}
 }
 
-// ══════════════════════════════════════════════════
-// HOST
-// ══════════════════════════════════════════════════
-let hostKey = '';
-
-async function verifyHost() {
-  const key = document.getElementById('host-key-inp').value.trim();
-  const errEl = document.getElementById('host-key-err');
-  errEl.style.display = 'none';
-  try {
-    await api('POST', '/api/admin/verify', { key });
-    hostKey = key;
-    isHostUnlocked = true;
-    // Connect SSE if not already
-    if (!eventSource) connectSSE();
-    // Load current state
-    const g = await api('GET', '/api/state');
+// ── מחיקת שחקן ──
+async function deletePlayer(id,name){
+  if(!confirm(`למחוק את "${name}" מהמשחק?\nהשחקן יוכל להצטרף מחדש.`)) return;
+  try{
+    await api('DELETE',`/api/admin/player/${id}`,{key:hostKey});
+    const g=await api('GET','/api/state');
     renderHostPanel(g);
-    if (g.status === 'done' && g.results) {
-      currentResults = g.results;
-      document.getElementById('host-results-area').style.display = 'block';
-      renderRooms('host-rrooms', g.results, false);
+  }catch(e){alert('שגיאה: '+e.message);}
+}
+
+// ── מארח ──
+async function verifyHost(){
+  const key=document.getElementById('host-key-inp').value.trim();
+  const errEl=document.getElementById('host-key-err');
+  errEl.style.display='none';
+  try{
+    await api('POST','/api/admin/verify',{key});
+    hostKey=key;isHostUnlocked=true;
+    if(!eventSource) connectSSE();
+    const g=await api('GET','/api/state');
+    renderHostPanel(g);
+    if(g.status==='done'&&g.results){
+      currentResults=g.results;
+      document.getElementById('host-results-area').style.display='block';
+      renderRooms('host-rrooms',g.results,false);
     }
     showScreen('s-host');
-  } catch (e) {
-    errEl.textContent = e.message; errEl.style.display = 'block';
-  }
+  }catch(e){errEl.textContent=e.message;errEl.style.display='block';}
 }
 
-async function hostCalculate() {
+async function hostCalculate(){
   showScreen('s-loading');
-  try {
-    await api('POST', '/api/admin/calculate', { key: hostKey });
-    const g = await api('GET', '/api/state');
-    currentResults = g.results;
-    // Show results in host panel
+  try{
+    await api('POST','/api/admin/calculate',{key:hostKey});
+    const g=await api('GET','/api/state');
+    currentResults=g.results;
     renderHostPanel(g);
-    document.getElementById('host-results-area').style.display = 'block';
-    renderRooms('host-rrooms', g.results, false);
+    document.getElementById('host-results-area').style.display='block';
+    renderRooms('host-rrooms',g.results,false);
     showScreen('s-host');
     confetti();
-  } catch (e) { alert(e.message); showScreen('s-host'); }
+  }catch(e){alert(e.message);showScreen('s-host');}
 }
 
-async function resetGame() {
-  if (!confirm('Reset the entire game? This removes all players and answers.')) return;
-  try {
-    await api('POST', '/api/admin/reset', { key: hostKey });
-    currentResults = null;
-    document.getElementById('host-results-area').style.display = 'none';
-    document.getElementById('host-rrooms').innerHTML = '';
-    const g = await api('GET', '/api/state');
+async function resetGame(){
+  if(!confirm('לאפס את המשחק כולו?\nפעולה זו מוחקת את כל השחקנים והתשובות.')) return;
+  try{
+    await api('POST','/api/admin/reset',{key:hostKey});
+    currentResults=null;
+    document.getElementById('host-results-area').style.display='none';
+    document.getElementById('host-rrooms').innerHTML='';
+    const g=await api('GET','/api/state');
     renderHostPanel(g);
-    if (document.getElementById('s-results').classList.contains('active')) showScreen('s-waiting');
-    alert('Game reset! All players have been cleared.');
-  } catch (e) { alert(e.message); }
+    if(document.getElementById('s-results').classList.contains('active')) showScreen('s-waiting');
+    alert('המשחק אופס! כל השחקנים נמחקו.');
+  }catch(e){alert(e.message);}
 }
 
-function shareGameWA() {
-  const url = `${location.origin}${location.pathname}`;
-  const msg = `🎉 *Bachelor Party Room Splitter!*\n\nOpen the link, enter your nickname and answer the questions — the algorithm will assign your room! 🔥\n\n👉 ${url}`;
-  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+function shareGameWA(){
+  const url=`${location.origin}${location.pathname}`;
+  const msg=`🎉 *חלוקת חדרים לרווקים!*\n\nפתח את הקישור, הכנס כינוי וענה על השאלות — האלגוריתם יחליט על החדר שלך! 🔥\n\n👉 ${url}`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
-// Host via URL param ?host=1
-(function () {
-  const params = new URLSearchParams(location.search);
-  if (params.get('host') === '1') showScreen('s-host-login');
+(function(){
+  const params=new URLSearchParams(location.search);
+  if(params.get('host')==='1') showScreen('s-host-login');
 })();
 </script>
 </body>

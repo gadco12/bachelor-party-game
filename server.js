@@ -7,7 +7,6 @@ const HOST_KEY = process.env.HOST_KEY || 'GAD2025';
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ── Single global game ──
 let game = freshGame();
 let sseClients = [];
 
@@ -19,119 +18,118 @@ function genId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
 }
 
-// ── Compatibility scoring ──
 function pairScore(x, y) {
   let s = 0;
 
-  // Sleep duration (15) — most critical for roommates
+  // שינה (15)
   const d = Math.abs((x.sleep || 7) - (y.sleep || 7));
   s += d === 0 ? 15 : d === 1 ? 7 : 0;
 
-  // Music (8)
+  // מוזיקה (8)
   s += x.music === y.music ? 8 : 0;
 
-  // Sleep conditions (10)
+  // תנאי שינה (10)
   s += x.sleepCond === y.sleepCond ? 10 : 0;
 
-  // Shower/poop (12)
+  // מקלחת/שירותים (12)
   s += x.shower === y.shower ? 12 : 0;
 
-  // Snoring (8)
+  // נחירות (8)
   s += x.snoring === y.snoring ? 8 : 0;
 
-  // Wait 45 min (5)
+  // המתנה 45 דקות (5)
   s += x.wait45 === y.wait45 ? 5 : 0;
 
-  // Gad music at night (10)
+  // מוזיקה של גד בלילה (10)
   if (x.gadMusic === 'yes' && y.gadMusic === 'yes') s += 10;
   else if (x.gadMusic === 'no' && y.gadMusic === 'no') s += 10;
   else if (x.gadMusic === 'depends' && y.gadMusic === 'depends') s += 7;
   else if ((x.gadMusic === 'yes' && y.gadMusic === 'no') || (x.gadMusic === 'no' && y.gadMusic === 'yes')) s -= 5;
   else s += 3;
 
-  // Drugs (10)
+  // סמים (10)
   s += x.drugs === y.drugs ? 10 : 0;
 
-  // Living creature (12)
+  // יצור חי (12)
   if (x.creature === 'no' && y.creature === 'no') s += 12;
   else if (x.creature === y.creature) s += 6;
 
-  // Towel (4)
+  // מגבות (4)
   s += x.towel === y.towel ? 4 : 0;
 
-  // 500 shekel (4)
+  // כסף (4)
   s += x.money === y.money ? 4 : 0;
 
-  // Body count proximity (5)
+  // מספר גופות - קרבה (5)
   const co = ['low', 'medium', 'high', 'lost'];
   const ci = co.indexOf(x.bodyCount), cj = co.indexOf(y.bodyCount);
   if (ci >= 0 && cj >= 0) s += Math.abs(ci - cj) <= 1 ? 5 : 0;
 
-  // Vanilla → unhinged proximity (6)
+  // ווניל עד חסר עכבות - קרבה (6)
   const vo = ['vanilla', 'sprinkles', 'rocky', 'unhinged'];
   const vi = vo.indexOf(x.vanilla), vj = vo.indexOf(y.vanilla);
   if (vi >= 0 && vj >= 0) s += Math.abs(vi - vj) <= 1 ? 6 : 0;
 
-  // Hotel hookup (5)
+  // הוק-אפ במלון (5)
   s += x.hotelHookup === y.hotelHookup ? 5 : 0;
 
-  // Drunk alter ego (4)
+  // אלטר אגו שיכור (4)
   s += x.drunkEgo === y.drunkEgo ? 4 : 0;
 
-  // Faked it (3)
+  // זייף (3)
   s += x.fakedIt === y.fakedIt ? 3 : 0;
 
-  // Morning (3)
+  // בוקר (3)
   s += x.morning === y.morning ? 3 : 0;
 
-  // Monkey (4)
+  // קוף (4)
   if (x.monkey === y.monkey) s += 4;
   else if (x.monkey !== 'no' && y.monkey !== 'no') s += 2;
 
-  // Lights on/off (6)
+  // אורות (6)
   s += x.lights === y.lights ? 6 : 0;
 
-  // Gay kiss for money (4)
+  // נשיקה לבחור (4)
   s += x.gayKiss === y.gayKiss ? 4 : 0;
 
-  // Strip club vibe (5)
+  // קאבארה (5)
   s += x.stripClub === y.stripClub ? 5 : 0;
 
-  // Talk during sex (4)
+  // דיבור (4)
   s += x.sexTalk === y.sexTalk ? 4 : 0;
 
-  // Gay friend support (3)
+  // תמיכה בגיי (3)
   s += x.gaySupport === y.gaySupport ? 3 : 0;
 
-  // Beautiful woman judgment (4)
+  // אישה יפה (4)
   s += x.beautifulWoman === y.beautifulWoman ? 4 : 0;
 
-  // Life after love (3)
+  // חיים אחרי אהבה (3)
   s += x.lifeAfterLove === y.lifeAfterLove ? 3 : 0;
 
-  // Above average (3)
+  // מעל הממוצע (3)
   s += x.aboveAverage === y.aboveAverage ? 3 : 0;
 
-  // Riddles (3 each)
+  // חידות (3 כל אחת)
   s += x.riddle1 === y.riddle1 ? 3 : 0;
   s += x.riddle2 === y.riddle2 ? 3 : 0;
 
-  // Gad playlist (4)
+  // פלייליסט גד (4)
   s += x.gadPlaylist === y.gadPlaylist ? 4 : 0;
 
-  // Gad king (5) — always
+  // גד מלך (5) — תמיד
   s += 5;
 
-  // Falafel (2)
+  // פלאפל (2)
   s += x.falafel === y.falafel ? 2 : 0;
 
-  // Luffy (3) — always
+  // לופי (3) — תמיד
   s += 3;
 
-  // Eyal Golan (3)
+  // אייל גולן (3)
   s += x.eyal === y.eyal ? 3 : 0;
 
-  // Ibiza (4)
+  // איביזה (4)
   s += x.ibiza === y.ibiza ? 4 : 0;
 
   return Math.max(0, s);
@@ -154,20 +152,20 @@ function getGroupSizes(n) {
   return [...Array(threes).fill(3), 2];
 }
 
-const ROOM_NAMES = ['The Penthouse 🏰', 'The Loft 🌆', 'The Jungle Suite 🌴', 'The Cave 🦇', 'Suite 5 🏠', 'Suite 6 🏠'];
+const ROOM_NAMES = ['הפנטהאוס 🏰', 'הלופט 🌆', 'חדר הג\'ונגל 🌴', 'המערה 🦇', 'סוויטה 5 🏠', 'סוויטה 6 🏠'];
 
 function getRoomTagline(players) {
   const as = players.map(p => p.answers);
   const tags = [];
   const avg = as.reduce((t, a) => t + (a.sleep || 7), 0) / as.length;
-  tags.push(avg <= 4 ? '🦇 The Sleep Resisters' : avg >= 7.5 ? '😴 The Beauty Sleep Council' : '⚖️ The Balanced Sleepers');
+  tags.push(avg <= 4 ? '🦇 מתנגדי השינה' : avg >= 7.5 ? '😴 מועצת שינת היופי' : '⚖️ הישנים המאוזנים');
   const mv = {};
   as.forEach(a => mv[a.music] = (mv[a.music] || 0) + 1);
   const top = Object.entries(mv).sort((a, b) => b[1] - a[1])[0]?.[0];
-  const ml = { EDM: '🎧 EDM Degenerates', HIPHOP: '🎤 Hip Hop Heads', TECHNO: '⚡ Techno Warriors', MIZRAHIT: '🎻 Mizrahit Forever' };
+  const ml = { EDM: '🎧 מכורי האדם', HIPHOP: '🎤 ראשי ההיפ הופ', TECHNO: '⚡ לוחמי הטכנו', MIZRAHIT: '🎻 מזרחית לנצח' };
   if (top) tags.push(ml[top] || top);
-  if (as.every(a => a.vanilla === 'unhinged')) tags.push('💀 The Unhinged Room');
-  if (as.every(a => a.gadMusic === 'yes')) tags.push("🔊 Gad's Night Crew");
+  if (as.every(a => a.vanilla === 'unhinged')) tags.push('💀 חדר חסרי העכבות');
+  if (as.every(a => a.gadMusic === 'yes')) tags.push('🔊 צוות הלילה של גד');
   return tags.slice(0, 2).join(' · ');
 }
 
@@ -191,11 +189,10 @@ function runCalculation(players) {
     for (let i = 0; i < g.length; i++)
       for (let j = i + 1; j < g.length; j++) { total += mat[g[i]][g[j]]; pairs++; }
     const pct = pairs ? Math.round((total / (pairs * MAX_PAIR)) * 100) : 0;
-    return { name: ROOM_NAMES[ri] || `Room ${ri + 1}`, members: rp.map(p => p.name), pct, tagline: getRoomTagline(rp) };
+    return { name: ROOM_NAMES[ri] || `חדר ${ri + 1}`, members: rp.map(p => p.name), pct, tagline: getRoomTagline(rp) };
   }).sort((a, b) => b.pct - a.pct);
 }
 
-// ── SSE broadcast ──
 function publicGame() {
   return {
     status: game.status,
@@ -209,33 +206,39 @@ function broadcast() {
   sseClients.forEach(res => { try { res.write(data); } catch (e) { } });
 }
 
-// ── API ──
+function checkKey(req, res) {
+  if (req.body?.key !== HOST_KEY && req.query?.key !== HOST_KEY) {
+    res.status(403).json({ error: 'סיסמה שגויה' });
+    return false;
+  }
+  return true;
+}
 
-// Join game
+// הצטרפות למשחק
 app.post('/api/join', (req, res) => {
   const { name } = req.body;
-  if (!name) return res.status(400).json({ error: 'Nickname required' });
+  if (!name) return res.status(400).json({ error: 'נדרש כינוי' });
   const taken = Object.values(game.players).some(p => p.name.toLowerCase() === name.toLowerCase());
-  if (taken) return res.status(400).json({ error: 'That nickname is taken!' });
+  if (taken) return res.status(400).json({ error: 'הכינוי הזה כבר תפוס!' });
   const id = genId();
   game.players[id] = { name, answers: null, joinedAt: Date.now() };
   broadcast();
   res.json({ playerId: id });
 });
 
-// Submit answers
+// שליחת תשובות
 app.post('/api/answers/:id', (req, res) => {
   const p = game.players[req.params.id];
-  if (!p) return res.status(404).json({ error: 'Player not found' });
+  if (!p) return res.status(404).json({ error: 'שחקן לא נמצא' });
   p.answers = req.body.answers;
   broadcast();
   res.json({ ok: true });
 });
 
-// Get game state
+// מצב המשחק
 app.get('/api/state', (req, res) => res.json(publicGame()));
 
-// SSE stream
+// SSE
 app.get('/api/events', (req, res) => {
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Cache-Control', 'no-cache');
@@ -247,43 +250,42 @@ app.get('/api/events', (req, res) => {
   req.on('close', () => { clearInterval(ka); sseClients = sseClients.filter(c => c !== res); });
 });
 
-// ── Admin (host only) ──
-
-function checkKey(req, res) {
-  if (req.body?.key !== HOST_KEY && req.query?.key !== HOST_KEY) {
-    res.status(403).json({ error: 'Wrong passkey' });
-    return false;
-  }
-  return true;
-}
-
-// Verify passkey
+// אימות סיסמת מארח
 app.post('/api/admin/verify', (req, res) => {
-  if (req.body.key !== HOST_KEY) return res.status(403).json({ error: 'Wrong passkey' });
+  if (req.body.key !== HOST_KEY) return res.status(403).json({ error: 'סיסמה שגויה' });
   res.json({ ok: true });
 });
 
-// Calculate rooms
+// חישוב חדרים
 app.post('/api/admin/calculate', (req, res) => {
   if (!checkKey(req, res)) return;
   const done = Object.values(game.players).filter(p => p.answers);
-  if (done.length < 3) return res.status(400).json({ error: 'Need at least 3 players with answers' });
+  if (done.length < 3) return res.status(400).json({ error: 'נדרשים לפחות 3 שחקנים עם תשובות' });
   game.results = runCalculation(done);
   game.status = 'done';
   broadcast();
   res.json({ ok: true });
 });
 
-// Edit results
+// עריכת תוצאות
 app.put('/api/admin/results', (req, res) => {
   if (!checkKey(req, res)) return;
-  if (!req.body.results) return res.status(400).json({ error: 'Results required' });
+  if (!req.body.results) return res.status(400).json({ error: 'נדרשות תוצאות' });
   game.results = req.body.results;
   broadcast();
   res.json({ ok: true });
 });
 
-// Reset game
+// מחיקת שחקן
+app.delete('/api/admin/player/:id', (req, res) => {
+  if (!checkKey(req, res)) return;
+  if (!game.players[req.params.id]) return res.status(404).json({ error: 'שחקן לא נמצא' });
+  delete game.players[req.params.id];
+  broadcast();
+  res.json({ ok: true });
+});
+
+// איפוס משחק
 app.post('/api/admin/reset', (req, res) => {
   if (!checkKey(req, res)) return;
   game = freshGame();
