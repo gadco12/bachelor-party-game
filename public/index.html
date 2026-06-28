@@ -218,25 +218,26 @@ body::before{
   <button class="btn btn-ghost mt-12" onclick="showScreen('s-home')">← Back</button>
 </div>
 
-<!-- ══ HOST WAITING ROOM ══ -->
-<div id="s-host-wait" class="screen">
-  <h2 class="heading mb-16">Share with your friends 👇</h2>
+<!-- ══ HOST SHARE (created room, share link, then play) ══ -->
+<div id="s-host-share" class="screen">
+  <h2 class="heading mb-8">Step 1: Share with friends 👇</h2>
+  <p class="subtext mb-16">Send them the link — they just tap it, enter their name, and play</p>
   <button class="wa-btn mb-12" onclick="shareRoomWA()">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.09.541 4.052 1.485 5.757L.057 23.18a.75.75 0 00.916.919l5.574-1.463A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.944 9.944 0 01-5.088-1.388l-.365-.215-3.782.993.999-3.688-.237-.381A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
     Share via WhatsApp 🎉
   </button>
   <div class="card" style="text-align:center;margin-bottom:14px">
-    <p class="label">Or share this code manually</p>
+    <p class="label">Or share the code manually</p>
     <div class="room-code-big" id="host-code">----</div>
   </div>
-  <div class="card">
-    <p class="label" id="host-player-label">Players (0)</p>
-    <div id="host-player-list"><p class="subtext">Waiting for players to join...</p></div>
+  <div class="card" style="margin-bottom:20px">
+    <p class="label" id="host-share-player-label">Players joined (0)</p>
+    <div id="host-share-player-list"><p class="subtext">Waiting for friends to join...</p></div>
   </div>
-  <button class="btn btn-gold calc-pulse mt-12" id="calc-btn" onclick="calculateRooms()" disabled>
-    🏨 Calculate Rooms!
-  </button>
-  <p class="subtext mt-8" style="font-size:12px">Need at least 3 players with completed answers</p>
+  <div style="background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);border-radius:16px;padding:18px;width:100%;text-align:center;margin-bottom:14px">
+    <p style="font-size:13px;color:#c4b5fd;font-weight:600;margin-bottom:12px">Step 2: You also need to answer the questions!</p>
+    <button class="btn btn-gold" onclick="hostStartAnswering()">Answer Your Questions 🎯</button>
+  </div>
 </div>
 
 <!-- ══ JOIN BY LINK (name only — auto when ?room=CODE in URL) ══ -->
@@ -294,7 +295,7 @@ body::before{
 <div id="s-waiting" class="screen">
   <div class="pulse-ring"><span style="font-size:32px">⏳</span></div>
   <h2 class="heading mb-8">Answers Locked In! 🎉</h2>
-  <p class="subtext mb-24">Waiting for the host to reveal the rooms...</p>
+  <p class="subtext mb-24" id="wait-subtitle">Waiting for the host to reveal the rooms...</p>
   <div class="card" style="text-align:center">
     <p class="label">Players done</p>
     <div class="live-count" id="wait-count">0 / ?</div>
@@ -306,6 +307,12 @@ body::before{
   <div class="card mt-16">
     <p class="label">Who's done</p>
     <div id="wait-player-list"></div>
+  </div>
+  <div id="host-reshare" style="display:none;width:100%;margin-top:12px">
+    <button class="wa-btn" onclick="shareRoomWA()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.09.541 4.052 1.485 5.757L.057 23.18a.75.75 0 00.916.919l5.574-1.463A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.944 9.944 0 01-5.088-1.388l-.365-.215-3.782.993.999-3.688-.237-.381A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      Resend invite link
+    </button>
   </div>
 </div>
 
@@ -456,18 +463,24 @@ function connectSSE(code){
 function handleRoomUpdate(room){
   const done=room.players.filter(p=>p.done).length;
   const total=room.players.length;
-  if(document.getElementById('s-host-wait').classList.contains('active')){
-    renderPlayerList('host-player-list',room.players,'host-player-label');
-    document.getElementById('calc-btn').disabled=done<3;
+
+  // Update live player count on host share screen
+  if(document.getElementById('s-host-share').classList.contains('active')){
+    renderPlayerList('host-share-player-list',room.players,'host-share-player-label');
   }
+
+  // Update waiting screen
   if(document.getElementById('s-waiting').classList.contains('active')){
     document.getElementById('wait-count').textContent=`${done} / ${total}`;
     renderPlayerList('wait-player-list',room.players);
     if(isHost){
       document.getElementById('host-calc-area').style.display='block';
+      document.getElementById('host-reshare').style.display='block';
+      document.getElementById('wait-subtitle').textContent="You're the host 👑 — wait for everyone, then calculate";
       document.getElementById('wait-calc-btn').disabled=done<3;
     }
   }
+
   if(room.status==='done'&&room.results) showResults(room.results);
 }
 
@@ -483,7 +496,7 @@ function renderPlayerList(id,players,labelId){
     </div>`).join('');
 }
 
-// Create room
+// Create room — host joins as player, then answers questions like everyone else
 async function createRoom(){
   const name=document.getElementById('host-name').value.trim();
   const errEl=document.getElementById('create-error');
@@ -496,8 +509,15 @@ async function createRoom(){
     document.getElementById('host-code').textContent=code;
     history.pushState(null,'',`?room=${code}`);
     connectSSE(code);
-    showScreen('s-host-wait');
+    showScreen('s-host-share');
   }catch(e){errEl.textContent=e.message;errEl.style.display='block';}
+}
+
+// Host clicks "Answer Your Questions" after sharing the link
+function hostStartAnswering(){
+  document.getElementById('q-player-chip').textContent=myName+' 👑';
+  renderQ(0);
+  showScreen('s-questions');
 }
 
 function shareRoomWA(){
