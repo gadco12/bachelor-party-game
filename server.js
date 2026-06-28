@@ -65,9 +65,9 @@ function pairScore(x, y) {
   const ci = co.indexOf(x.bodyCount), cj = co.indexOf(y.bodyCount);
   if (ci >= 0 && cj >= 0) s += Math.abs(ci - cj) <= 1 ? 5 : 0;
 
-  // ווניל עד חסר עכבות - קרבה (6)
-  const vo = ['vanilla', 'sprinkles', 'rocky', 'unhinged'];
-  const vi = vo.indexOf(x.vanilla), vj = vo.indexOf(y.vanilla);
+  // סוטה עד אגדה - קרבה (6)
+  const vo = ['classic', 'adventurous', 'initiator', 'legend'];
+  const vi = vo.indexOf(x.kinky), vj = vo.indexOf(y.kinky);
   if (vi >= 0 && vj >= 0) s += Math.abs(vi - vj) <= 1 ? 6 : 0;
 
   // הוק-אפ במלון (5)
@@ -109,6 +109,9 @@ function pairScore(x, y) {
 
   // מעל הממוצע (3)
   s += x.aboveAverage === y.aboveAverage ? 3 : 0;
+
+  // ביבי (5)
+  s += x.bibi === y.bibi ? 5 : 0;
 
   // חידות (3 כל אחת)
   s += x.riddle1 === y.riddle1 ? 3 : 0;
