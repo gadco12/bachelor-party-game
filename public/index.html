@@ -116,6 +116,21 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .del-btn{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);color:rgba(248,113,113,.7);
   border-radius:6px;padding:3px 8px;font-size:12px;cursor:pointer;transition:all .15s;line-height:1;}
 .del-btn:hover{background:rgba(248,113,113,.25);color:var(--red)}
+.ans-btn{background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25);color:rgba(167,139,250,.8);
+  border-radius:6px;padding:3px 8px;font-size:12px;cursor:pointer;transition:all .15s;line-height:1;}
+.ans-btn:hover{background:rgba(99,102,241,.25);color:#a78bfa}
+/* Modal תשובות */
+#ans-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;
+  align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto;}
+#ans-modal.open{display:flex;}
+#ans-box{background:#1e1b2e;border:1px solid rgba(255,255,255,.12);border-radius:18px;
+  width:100%;max-width:480px;padding:20px;margin:auto;position:relative;}
+.ans-title{font-size:18px;font-weight:900;margin-bottom:14px;text-align:center}
+.ans-row{display:flex;justify-content:space-between;align-items:flex-start;
+  padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06);gap:8px;font-size:13px;}
+.ans-row:last-child{border-bottom:none}
+.ans-q{color:var(--muted);flex:1;text-align:right}
+.ans-v{color:var(--text);font-weight:700;text-align:left;flex-shrink:0;max-width:55%}
 /* Results */
 .rrooms{display:flex;flex-direction:column;gap:14px;width:100%}
 .rcard{background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--border);
@@ -296,6 +311,15 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 
 <!-- קישור מארח קטן -->
 <span class="host-link" onclick="showScreen('s-host-login')">👑 מארח</span>
+
+<!-- Modal תשובות שחקן -->
+<div id="ans-modal" onclick="if(event.target===this)closeAnsModal()">
+  <div id="ans-box">
+    <div class="ans-title" id="ans-modal-title"></div>
+    <div id="ans-modal-body"></div>
+    <button class="btn mt12" style="width:100%;padding:10px" onclick="closeAnsModal()">סגור</button>
+  </div>
+</div>
 
 <script>
 const QS = [
@@ -519,10 +543,33 @@ function renderPList(id,players,showDelete){
     <div class="prow ${p.done?'done':''}">
       <span class="pname">${p.name}${p.id===myPlayerId?' (אתה)':''}</span>
       <div class="prow-right">
+        ${showDelete&&p.done?`<button class="ans-btn" onclick="showPlayerAnswers('${p.id}','${p.name}')">👁 תשובות</button>`:''}
         ${showDelete?`<button class="del-btn" onclick="deletePlayer('${p.id}','${p.name}')">🗑️ הסר</button>`:''}
         <div class="dot ${p.done?'dot-done':'dot-wait'}"></div>
       </div>
     </div>`).join('');
+}
+
+async function showPlayerAnswers(pid,pname){
+  try{
+    const data=await api('GET',`/api/admin/answers?key=${encodeURIComponent(hostKey)}`);
+    const player=data.players.find(p=>p.id===pid);
+    if(!player||!player.answers){alert('אין תשובות עדיין לשחקן זה');return;}
+    const ans=player.answers;
+    document.getElementById('ans-modal-title').textContent=`תשובות של ${pname}`;
+    document.getElementById('ans-modal-body').innerHTML=QS.map(q=>{
+      const val=ans[q.id];
+      if(val===undefined||val===null) return '';
+      const opt=q.o.find(o=>o.v===val);
+      const label=opt?opt.l:val;
+      return `<div class="ans-row"><span class="ans-q">${q.q.replace(/^[\S]+\s/,'')}</span><span class="ans-v">${label}</span></div>`;
+    }).join('');
+    document.getElementById('ans-modal').classList.add('open');
+  }catch(e){alert('שגיאה: '+e.message);}
+}
+
+function closeAnsModal(){
+  document.getElementById('ans-modal').classList.remove('open');
 }
 
 function renderHostPanel(g){

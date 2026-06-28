@@ -265,6 +265,15 @@ app.post('/api/admin/verify', (req, res) => {
   res.json({ ok: true });
 });
 
+// תשובות שחקנים (read-only, מארח בלבד)
+app.get('/api/admin/answers', (req, res) => {
+  if (!checkKey(req, res)) return;
+  const players = Object.entries(game.players).map(([id, p]) => ({
+    id, name: p.name, answers: p.answers || null
+  }));
+  res.json({ players });
+});
+
 // חישוב חדרים
 app.post('/api/admin/calculate', (req, res) => {
   if (!checkKey(req, res)) return;
