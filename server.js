@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 function freshGame() {
-  return { players: {}, status: 'waiting', results: null };
+  return { players: {}, status: 'waiting', results: null, acceptingNew: false };
 }
 
 function loadGame() {
@@ -221,6 +221,7 @@ function publicGame() {
   return {
     status: game.status,
     results: game.results,
+    acceptingNew: game.acceptingNew || false,
     players: Object.entries(game.players).map(([id, p]) => ({ id, name: p.name, done: !!p.answers }))
   };
 }
@@ -279,6 +280,15 @@ app.get('/api/events', (req, res) => {
 // אימות סיסמת מארח
 app.post('/api/admin/verify', (req, res) => {
   if (req.body.key !== HOST_KEY) return res.status(403).json({ error: 'סיסמה שגויה' });
+  res.json({ ok: true });
+});
+
+// פתיחה למצטרפים חדשים
+app.post('/api/admin/open', (req, res) => {
+  if (!checkKey(req, res)) return;
+  game.acceptingNew = true;
+  saveGame();
+  broadcast();
   res.json({ ok: true });
 });
 

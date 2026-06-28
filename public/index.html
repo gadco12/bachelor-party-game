@@ -305,6 +305,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   <div id="host-results-area" style="display:none;width:100%;margin-top:16px">
     <div class="rrooms" id="host-rrooms"></div>
     <button class="btn btn-ghost mt12" onclick="showEditScreen()">✏️ ערוך חלוקת חדרים</button>
+    <button class="btn mt8" style="background:rgba(99,102,241,.2);border:1px solid rgba(99,102,241,.4);color:#a78bfa" onclick="openForNew()">🚪 פתח למצטרפים חדשים</button>
     <button class="btn btn-red mt8" onclick="resetGame()">🔄 אפס משחק</button>
   </div>
 </div>
@@ -523,12 +524,19 @@ function handleUpdate(g){
   }
   if(g.status==='done'&&g.results){
     currentResults=g.results;
-    if(!document.getElementById('s-results').classList.contains('active')&&
-       !document.getElementById('s-edit').classList.contains('active')&&
-       !document.getElementById('s-host').classList.contains('active')){
-      showResults(g.results);
+    const onResults=document.getElementById('s-results').classList.contains('active');
+    const onEdit=document.getElementById('s-edit').classList.contains('active');
+    const onHost=document.getElementById('s-host').classList.contains('active');
+    const onWaiting=document.getElementById('s-waiting').classList.contains('active');
+    if(!onResults&&!onEdit&&!onHost){
+      if(!myPlayerId&&g.acceptingNew){
+        renderNamesGrid(g.players.map(p=>p.name));
+        showScreen('s-home');
+      } else if(onWaiting||(!myPlayerId&&!g.acceptingNew)){
+        showResults(g.results);
+      }
     }
-    if(document.getElementById('s-host').classList.contains('active')){
+    if(onHost){
       document.getElementById('host-results-area').style.display='block';
       renderRooms('host-rrooms',g.results,false);
     }
@@ -640,11 +648,16 @@ async function nextQ(){
     try{
       await api('POST',`/api/answers/${myPlayerId}`,{answers:curAnswers});
       const g=await api('GET','/api/state');
-      const done=g.players.filter(p=>p.done).length;
-      document.getElementById('wait-count').textContent=`${done} / ${g.players.length}`;
-      renderPList('wait-plist',g.players,false);
-      showScreen('s-waiting');
       confetti();
+      if(g.status==='done'&&g.results){
+        currentResults=g.results;
+        showResults(g.results);
+      } else {
+        const done=g.players.filter(p=>p.done).length;
+        document.getElementById('wait-count').textContent=`${done} / ${g.players.length}`;
+        renderPList('wait-plist',g.players,false);
+        showScreen('s-waiting');
+      }
     }catch(e){alert('שגיאה: '+e.message);}
   }
 }
@@ -756,6 +769,13 @@ async function hostCalculate(){
   }catch(e){alert(e.message);showScreen('s-host');}
 }
 
+async function openForNew(){
+  try{
+    await api('POST','/api/admin/open',{key:hostKey});
+    alert('המשחק פתוח! שחקנים חדשים יכולים עכשיו להצטרף ולענות.');
+  }catch(e){alert('שגיאה: '+e.message);}
+}
+
 async function resetGame(){
   if(!confirm('לאפס את המשחק כולו?\nפעולה זו מוחקת את כל השחקנים והתשובות.')) return;
   try{
@@ -779,7 +799,12 @@ function shareGameWA(){
 (function(){
   connectSSE();
   api('GET','/api/state').then(g=>{
-    renderNamesGrid(g.players.map(p=>p.name));
+    if(g.status==='done'&&g.results&&!g.acceptingNew){
+      currentResults=g.results;
+      showResults(g.results);
+    } else {
+      renderNamesGrid(g.players.map(p=>p.name));
+    }
   }).catch(()=>renderNamesGrid([]));
   const params=new URLSearchParams(location.search);
   if(params.get('host')==='1') showScreen('s-host-login');
