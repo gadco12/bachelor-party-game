@@ -308,6 +308,7 @@ app.put('/api/admin/results', (req, res) => {
   if (!checkKey(req, res)) return;
   if (!req.body.results) return res.status(400).json({ error: 'נדרשות תוצאות' });
   game.results = req.body.results;
+  game.status = 'done';
   saveGame();
   broadcast();
   res.json({ ok: true });
