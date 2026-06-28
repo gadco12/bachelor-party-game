@@ -232,6 +232,17 @@ app.post('/api/rooms/:code/calculate', (req,res)=>{
   res.json({ok:true});
 });
 
+// Edit results (host only)
+app.put('/api/rooms/:code/results', (req,res)=>{
+  const code=req.params.code.toUpperCase();
+  const room=rooms[code];
+  if(!room) return res.status(404).json({error:'Room not found'});
+  if(!req.body.results) return res.status(400).json({error:'Results required'});
+  room.results=req.body.results;
+  broadcast(code);
+  res.json({ok:true});
+});
+
 // Get room
 app.get('/api/rooms/:code', (req,res)=>{
   const room=rooms[req.params.code.toUpperCase()];

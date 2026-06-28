@@ -7,9 +7,8 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#05050f;--card:rgba(255,255,255,.06);--surface:rgba(255,255,255,.09);
-  --primary:#a855f7;--pdark:#7c3aed;--pink:#f472b6;--cyan:#22d3ee;
-  --accent:#fbbf24;--green:#34d399;--red:#f87171;
+  --bg:#05050f;--card:rgba(255,255,255,.06);--primary:#a855f7;--pink:#f472b6;
+  --cyan:#22d3ee;--accent:#fbbf24;--green:#34d399;--red:#f87171;
   --text:#f1f5f9;--muted:#94a3b8;--border:rgba(255,255,255,.12);
 }
 body{
@@ -26,7 +25,6 @@ body::before{
 }
 @keyframes bgPulse{from{opacity:.6}to{opacity:1}}
 #particles{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
-.p{position:absolute;border-radius:50%}
 .screen{
   display:none;width:100%;max-width:480px;min-height:100vh;padding:24px 20px;
   flex-direction:column;align-items:center;justify-content:center;
@@ -41,7 +39,7 @@ body::before{
 }
 .card::before{content:'';position:absolute;inset:0;border-radius:20px;
   background:linear-gradient(135deg,rgba(255,255,255,.05) 0%,transparent 50%);pointer-events:none;}
-.mega{font-size:clamp(26px,7vw,40px);font-weight:900;text-align:center;line-height:1.1;
+.mega{font-size:clamp(28px,8vw,42px);font-weight:900;text-align:center;line-height:1.1;
   background:linear-gradient(135deg,#a855f7 0%,#f472b6 40%,#fbbf24 80%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   filter:drop-shadow(0 0 20px rgba(168,85,247,.4));}
@@ -52,49 +50,32 @@ body::before{
 .label{color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;margin-bottom:10px}
 .btn{width:100%;padding:16px 20px;border-radius:14px;border:none;font-size:16px;
   font-weight:800;cursor:pointer;transition:all .2s;letter-spacing:.5px;position:relative;overflow:hidden;}
-.btn::after{content:'';position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.1),transparent);border-radius:14px;pointer-events:none;}
-.btn:disabled{opacity:.35;cursor:not-allowed;transform:none!important;filter:none!important}
-.btn-purple{background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;box-shadow:0 4px 24px rgba(168,85,247,.5),0 0 0 1px rgba(168,85,247,.3);}
-.btn-purple:not(:disabled):hover{transform:translateY(-2px) scale(1.01);box-shadow:0 8px 36px rgba(168,85,247,.7)}
-.btn-gold{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#1a1200;box-shadow:0 4px 24px rgba(251,191,36,.5);font-weight:900;}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none!important}
+.btn-purple{background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;box-shadow:0 4px 24px rgba(168,85,247,.5);}
+.btn-purple:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(168,85,247,.7)}
+.btn-gold{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#1a1200;font-weight:900;box-shadow:0 4px 24px rgba(251,191,36,.5);}
 .btn-gold:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(251,191,36,.7)}
 .btn-green{background:linear-gradient(135deg,#34d399,#059669);color:#fff;box-shadow:0 4px 24px rgba(52,211,153,.4);}
 .btn-green:not(:disabled):hover{transform:translateY(-2px)}
 .btn-ghost{background:rgba(255,255,255,.07);border:1px solid var(--border);color:var(--muted);}
 .btn-ghost:hover{background:rgba(255,255,255,.12);color:var(--text)}
-.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}.mt-24{margin-top:24px}.mt-32{margin-top:32px}
+.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}.mt-24{margin-top:24px}
 .mb-8{margin-bottom:8px}.mb-16{margin-bottom:16px}.mb-24{margin-bottom:24px}
 .input{width:100%;padding:14px 16px;background:rgba(255,255,255,.07);border:2px solid var(--border);
   border-radius:12px;color:var(--text);font-size:16px;outline:none;transition:all .2s;}
 .input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(168,85,247,.2);background:rgba(255,255,255,.1)}
 .input::placeholder{color:var(--muted)}
 .input.err{border-color:var(--red);animation:shake .3s ease}
+.select{width:100%;padding:10px 36px 10px 12px;background:rgba(30,10,60,.9);border:2px solid var(--border);
+  border-radius:10px;color:var(--text);font-size:13px;font-weight:600;outline:none;cursor:pointer;
+  -webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;}
+.select:focus{border-color:var(--primary)}
+.select option{background:#1a0530;color:#f1f5f9}
 @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
-/* Home */
-.choices{display:flex;flex-direction:column;gap:14px;width:100%;margin-top:4px}
-.choice{background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border:2px solid var(--border);border-radius:20px;padding:22px 20px;
-  cursor:pointer;transition:all .25s;text-align:left;position:relative;overflow:hidden;}
-.choice::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .25s;
-  background:linear-gradient(135deg,rgba(168,85,247,.15),rgba(244,114,182,.1));}
-.choice:hover{border-color:var(--primary);transform:translateY(-3px)}
-.choice:hover::before{opacity:1}
-.choice-icon{font-size:44px;margin-bottom:10px;display:block}
-.choice-title{font-size:18px;font-weight:900;margin-bottom:4px;
-  background:linear-gradient(135deg,#fff,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.choice-desc{color:var(--muted);font-size:13px;line-height:1.5}
-/* Room code display */
-.room-code-big{
-  font-family:'Courier New',monospace;font-size:52px;font-weight:900;letter-spacing:12px;
-  background:linear-gradient(135deg,#a855f7,#f472b6);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  text-align:center;filter:drop-shadow(0 0 20px rgba(168,85,247,.6));
-  animation:codePulse 3s ease-in-out infinite;
-}
-@keyframes codePulse{0%,100%{filter:drop-shadow(0 0 20px rgba(168,85,247,.6))}50%{filter:drop-shadow(0 0 40px rgba(168,85,247,.9))}}
-.share-hint{background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);
-  border-radius:12px;padding:12px 16px;color:#c4b5fd;font-size:13px;text-align:center;line-height:1.6}
-/* Player list */
+
+/* Players */
 .player-row{
   display:flex;align-items:center;justify-content:space-between;
   padding:10px 14px;border-radius:10px;margin-bottom:6px;background:rgba(255,255,255,.04);
@@ -106,31 +87,42 @@ body::before{
 .status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .dot-done{background:var(--green);box-shadow:0 0 8px rgba(52,211,153,.8)}
 .dot-wait{background:var(--muted)}
-.dot-answering{background:var(--accent);animation:dotPulse 1.5s ease-in-out infinite}
-@keyframes dotPulse{0%,100%{opacity:1}50%{opacity:.3}}
-/* Questions */
-.q-topbar{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:16px}
-.player-chip{background:linear-gradient(135deg,rgba(168,85,247,.3),rgba(244,114,182,.2));
-  border:1px solid rgba(168,85,247,.4);border-radius:30px;
-  padding:6px 14px;font-size:13px;font-weight:700;color:#e9d5ff;box-shadow:0 0 12px rgba(168,85,247,.2);}
-.q-num{color:var(--muted);font-size:13px;font-weight:600}
+
+/* Room code */
+.room-code-big{
+  font-family:'Courier New',monospace;font-size:52px;font-weight:900;letter-spacing:12px;
+  background:linear-gradient(135deg,#a855f7,#f472b6);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  text-align:center;filter:drop-shadow(0 0 20px rgba(168,85,247,.6));
+  animation:codePulse 3s ease-in-out infinite;
+}
+@keyframes codePulse{0%,100%{filter:drop-shadow(0 0 20px rgba(168,85,247,.6))}50%{filter:drop-shadow(0 0 40px rgba(168,85,247,.9))}}
+
+/* Progress */
 .prog-wrap{width:100%;height:5px;background:rgba(255,255,255,.08);border-radius:3px;margin-bottom:20px;overflow:hidden;}
 .prog-bar{height:100%;border-radius:3px;transition:width .5s cubic-bezier(.34,1.56,.64,1);
   background:linear-gradient(90deg,#a855f7,#f472b6,#fbbf24);background-size:200% 100%;animation:progShift 2s linear infinite;}
 @keyframes progShift{from{background-position:0%}to{background-position:-200%}}
+
+/* Q screen */
+.q-topbar{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:16px}
+.player-chip{background:linear-gradient(135deg,rgba(168,85,247,.3),rgba(244,114,182,.2));
+  border:1px solid rgba(168,85,247,.4);border-radius:30px;
+  padding:6px 14px;font-size:13px;font-weight:700;color:#e9d5ff;}
+.q-num{color:var(--muted);font-size:13px;font-weight:600}
 .q-card{background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border:1px solid var(--border);border-radius:20px;padding:28px 22px;width:100%;margin-bottom:16px;
-  box-shadow:0 0 40px rgba(0,0,0,.3);}
+  border:1px solid var(--border);border-radius:20px;padding:28px 22px;width:100%;margin-bottom:16px;}
 .q-text{font-size:17px;font-weight:800;line-height:1.45;text-align:center;
   background:linear-gradient(135deg,#fff 60%,#e9d5ff);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .opts{display:flex;flex-direction:column;gap:10px;width:100%}
 .opt{padding:14px 18px;background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.1);
   border-radius:12px;color:var(--text);font-size:14px;font-weight:600;cursor:pointer;text-align:left;
-  transition:all .2s;line-height:1.4;backdrop-filter:blur(8px);}
+  transition:all .2s;line-height:1.4;}
 .opt:hover{border-color:rgba(168,85,247,.6);background:rgba(168,85,247,.12);transform:translateX(4px)}
 .opt.sel{border-color:#a855f7;background:rgba(168,85,247,.2);color:#e9d5ff;
   box-shadow:0 0 20px rgba(168,85,247,.3);transform:translateX(4px);}
+
 /* Waiting */
 .live-count{font-size:48px;font-weight:900;text-align:center;
   background:linear-gradient(135deg,var(--primary),var(--pink));
@@ -141,6 +133,7 @@ body::before{
 .pulse-ring::before{content:'';position:absolute;inset:-8px;border-radius:50%;
   border:2px solid rgba(168,85,247,.2);animation:ringPulse 2s ease-in-out infinite .5s;}
 @keyframes ringPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.05);opacity:.7}}
+
 /* Results */
 .rooms-grid{display:flex;flex-direction:column;gap:16px;width:100%}
 .room-card{background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
@@ -156,9 +149,6 @@ body::before{
 .room-card:nth-child(4)::before{background:linear-gradient(90deg,#fbbf24,#ef4444)}
 .room-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;gap:8px}
 .room-name{font-weight:900;font-size:16px;flex:1}
-.vip-label{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#000;
-  border-radius:6px;padding:3px 8px;font-size:9px;font-weight:900;
-  text-transform:uppercase;letter-spacing:1px;white-space:nowrap;flex-shrink:0;box-shadow:0 0 12px rgba(251,191,36,.6);}
 .pct-badge{border-radius:20px;padding:4px 11px;font-size:12px;font-weight:800;white-space:nowrap;flex-shrink:0}
 .pct-great{background:rgba(52,211,153,.2);color:#6ee7b7}
 .pct-ok{background:rgba(251,191,36,.2);color:#fcd34d}
@@ -168,75 +158,77 @@ body::before{
 .m-icon{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;
   justify-content:center;font-size:14px;background:linear-gradient(135deg,var(--primary),var(--pink));}
 .m-name{font-weight:700;font-size:15px}
+.m-you{font-size:10px;color:var(--accent);font-weight:900;margin-left:6px;
+  background:rgba(251,191,36,.15);border-radius:4px;padding:1px 5px;}
 .tagline{color:var(--muted);font-size:12px;line-height:1.5;padding-top:10px;border-top:1px solid var(--border)}
+
+/* Edit */
+.edit-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.edit-row:last-child{border-bottom:none}
+.edit-name{font-weight:700;font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Misc */
+.spinner{width:52px;height:52px;border:4px solid rgba(255,255,255,.1);border-top-color:var(--primary);
+  border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 20px;}
+@keyframes spin{to{transform:rotate(360deg)}}
 .calc-pulse:not(:disabled){animation:calcGlow 2s ease-in-out infinite}
 @keyframes calcGlow{0%,100%{box-shadow:0 4px 24px rgba(251,191,36,.5)}50%{box-shadow:0 4px 48px rgba(251,191,36,.9),0 0 80px rgba(251,191,36,.3)}}
 @keyframes bounceY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 .bounce{animation:bounceY 2s ease-in-out infinite}
-.spinner{width:52px;height:52px;border:4px solid rgba(255,255,255,.1);border-top-color:var(--primary);
-  border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 20px;box-shadow:0 0 20px rgba(168,85,247,.3);}
-@keyframes spin{to{transform:rotate(360deg)}}
-.confetti-piece{position:fixed;pointer-events:none;z-index:999;border-radius:2px;animation:confettiFall linear forwards}
-@keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
 .error-box{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);border-radius:12px;
   padding:12px 16px;color:var(--red);font-size:14px;text-align:center;font-weight:600}
 .wa-btn{width:100%;padding:15px 20px;border-radius:14px;border:none;background:#25D366;color:#fff;
   font-size:16px;font-weight:800;cursor:pointer;display:flex;align-items:center;
   justify-content:center;gap:9px;transition:all .2s;box-shadow:0 4px 24px rgba(37,211,102,.4);}
 .wa-btn:hover{background:#1ebe5d;transform:translateY(-2px)}
+.confetti-piece{position:fixed;pointer-events:none;z-index:999;border-radius:2px;animation:confettiFall linear forwards}
+@keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
 </style>
 </head>
 <body>
 <div id="particles"></div>
 
-<!-- HOME -->
+<!-- ══ HOME ══ -->
 <div id="s-home" class="screen active">
   <div class="bounce" style="font-size:64px;margin-bottom:16px">🎊</div>
   <h1 class="mega mb-8">BACHELOR<br>PARTY ROOMS</h1>
   <p class="subtext mb-24">Answer 25 questions. The algorithm decides your fate.<br>No mercy. No refunds.</p>
-  <div class="choices">
-    <div class="choice" onclick="show('s-create')">
-      <span class="choice-icon">👑</span>
-      <div class="choice-title">Create a Room</div>
-      <div class="choice-desc">Start the game, get a room code, share it with your friends</div>
-    </div>
-    <div class="choice" onclick="checkUrlRoom()">
-      <span class="choice-icon">🎮</span>
-      <div class="choice-title">Join a Room</div>
-      <div class="choice-desc">Got a code from the host? Jump in and answer the questions</div>
-    </div>
+  <div class="card" style="text-align:center;cursor:pointer;margin-bottom:12px" onclick="showScreen('s-host-setup')">
+    <span style="font-size:48px">👑</span>
+    <div style="font-size:18px;font-weight:900;margin:8px 0 4px;background:linear-gradient(135deg,#fbbf24,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">I'm the Host</div>
+    <div class="subtext">Create the game and share a link with everyone</div>
   </div>
+  <button class="btn btn-ghost" onclick="showScreen('s-join-code')" style="font-size:14px">
+    Got a code? Join manually →
+  </button>
 </div>
 
-<!-- CREATE ROOM -->
-<div id="s-create" class="screen">
+<!-- ══ HOST SETUP ══ -->
+<div id="s-host-setup" class="screen">
   <div style="font-size:56px;margin-bottom:14px">👑</div>
-  <h2 class="heading mb-8">Create a Room</h2>
-  <p class="subtext mb-24">You'll be the host. Share the code with your friends.</p>
+  <h2 class="heading mb-8">Start the Game</h2>
+  <p class="subtext mb-24">Enter your name to create the room</p>
   <div class="card">
-    <p class="label">Your name (host)</p>
+    <p class="label">Your name</p>
     <input class="input" id="host-name" type="text" maxlength="20" placeholder="Your name..."
       onkeydown="if(event.key==='Enter')createRoom()">
   </div>
   <div id="create-error" class="error-box mb-16" style="display:none"></div>
   <button class="btn btn-gold" onclick="createRoom()">Create Room 🚀</button>
-  <button class="btn btn-ghost mt-12" onclick="show('s-home')">← Back</button>
+  <button class="btn btn-ghost mt-12" onclick="showScreen('s-home')">← Back</button>
 </div>
 
-<!-- HOST WAITING ROOM -->
+<!-- ══ HOST WAITING ROOM ══ -->
 <div id="s-host-wait" class="screen">
-  <p class="subtext mb-8">Share this code with your friends</p>
-  <div class="card" style="text-align:center">
-    <p class="label">Room Code</p>
-    <div class="room-code-big" id="host-code">----</div>
-    <div class="share-hint mt-12">
-      📱 Everyone opens <strong>this website</strong> → Join Room → types this code
-    </div>
-  </div>
-  <button class="wa-btn mb-16" onclick="shareRoomWA()" id="wa-room-btn">
+  <h2 class="heading mb-16">Share with your friends 👇</h2>
+  <button class="wa-btn mb-12" onclick="shareRoomWA()">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.09.541 4.052 1.485 5.757L.057 23.18a.75.75 0 00.916.919l5.574-1.463A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.944 9.944 0 01-5.088-1.388l-.365-.215-3.782.993.999-3.688-.237-.381A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-    Share Room via WhatsApp
+    Share via WhatsApp 🎉
   </button>
+  <div class="card" style="text-align:center;margin-bottom:14px">
+    <p class="label">Or share this code manually</p>
+    <div class="room-code-big" id="host-code">----</div>
+  </div>
   <div class="card">
     <p class="label" id="host-player-label">Players (0)</p>
     <div id="host-player-list"><p class="subtext">Waiting for players to join...</p></div>
@@ -244,32 +236,47 @@ body::before{
   <button class="btn btn-gold calc-pulse mt-12" id="calc-btn" onclick="calculateRooms()" disabled>
     🏨 Calculate Rooms!
   </button>
+  <p class="subtext mt-8" style="font-size:12px">Need at least 3 players with completed answers</p>
 </div>
 
-<!-- JOIN ROOM -->
-<div id="s-join" class="screen">
+<!-- ══ JOIN BY LINK (name only — auto when ?room=CODE in URL) ══ -->
+<div id="s-join-name" class="screen">
   <div style="font-size:56px;margin-bottom:14px">🎮</div>
-  <h2 class="heading mb-8">Join the Game</h2>
-  <p class="subtext mb-24">Enter the code from your host and your name</p>
+  <h2 class="heading mb-8">You're In!</h2>
+  <p class="subtext mb-4">Room: <span id="join-room-display" style="color:#c4b5fd;font-weight:700;font-size:16px"></span></p>
+  <p class="subtext mb-24">Just enter your name and let's go</p>
+  <div class="card">
+    <p class="label">Your name</p>
+    <input class="input" id="join-name-auto" type="text" maxlength="20" placeholder="Your name..."
+      onkeydown="if(event.key==='Enter')joinByLink()">
+  </div>
+  <div id="join-link-error" class="error-box mb-16" style="display:none"></div>
+  <button class="btn btn-purple" onclick="joinByLink()">Let's Go! 🚀</button>
+</div>
+
+<!-- ══ JOIN BY CODE (manual) ══ -->
+<div id="s-join-code" class="screen">
+  <div style="font-size:56px;margin-bottom:14px">🎮</div>
+  <h2 class="heading mb-8">Join a Room</h2>
+  <p class="subtext mb-24">Enter the 4-letter code from the host</p>
   <div class="card">
     <p class="label">Room code</p>
-    <input class="input" id="join-code" type="text" maxlength="4" autocomplete="off"
-      placeholder="4-letter code (e.g. ADAM)"
+    <input class="input" id="join-code" type="text" maxlength="4" autocomplete="off" placeholder="e.g. ADAM"
       style="font-size:24px;font-weight:900;letter-spacing:6px;text-align:center;text-transform:uppercase"
       oninput="this.value=this.value.toUpperCase()"
-      onkeydown="if(event.key==='Enter')document.getElementById('join-name').focus()">
+      onkeydown="if(event.key==='Enter')document.getElementById('join-name-manual').focus()">
   </div>
   <div class="card">
     <p class="label">Your name</p>
-    <input class="input" id="join-name" type="text" maxlength="20" placeholder="Your name..."
-      onkeydown="if(event.key==='Enter')joinRoom()">
+    <input class="input" id="join-name-manual" type="text" maxlength="20" placeholder="Your name..."
+      onkeydown="if(event.key==='Enter')joinManual()">
   </div>
-  <div id="join-error" class="error-box mb-16" style="display:none"></div>
-  <button class="btn btn-purple" onclick="joinRoom()">Let's Go! 🚀</button>
-  <button class="btn btn-ghost mt-12" onclick="show('s-home')">← Back</button>
+  <div id="join-manual-error" class="error-box mb-16" style="display:none"></div>
+  <button class="btn btn-purple" onclick="joinManual()">Let's Go! 🚀</button>
+  <button class="btn btn-ghost mt-12" onclick="showScreen('s-home')">← Back</button>
 </div>
 
-<!-- QUESTIONS -->
+<!-- ══ QUESTIONS ══ -->
 <div id="s-questions" class="screen">
   <div style="width:100%">
     <div class="q-topbar">
@@ -283,225 +290,136 @@ body::before{
   </div>
 </div>
 
-<!-- WAITING FOR RESULTS -->
+<!-- ══ WAITING ══ -->
 <div id="s-waiting" class="screen">
   <div class="pulse-ring"><span style="font-size:32px">⏳</span></div>
-  <h2 class="heading mb-8">Locked In!</h2>
-  <p class="subtext mb-24">Your answers are submitted. Waiting for<br>the host to reveal the rooms...</p>
+  <h2 class="heading mb-8">Answers Locked In! 🎉</h2>
+  <p class="subtext mb-24">Waiting for the host to reveal the rooms...</p>
   <div class="card" style="text-align:center">
     <p class="label">Players done</p>
     <div class="live-count" id="wait-count">0 / ?</div>
-    <p class="subtext mt-8" id="wait-hint">The host will calculate when everyone is ready</p>
   </div>
-  <div id="host-calc-area" style="display:none;width:100%">
-    <p class="subtext mb-16" style="text-align:center">You're the host 👑 — calculate when ready</p>
+  <div id="host-calc-area" style="display:none;width:100%;margin-top:16px">
+    <p class="subtext mb-12" style="text-align:center">You're the host 👑 — tap when everyone is ready</p>
     <button class="btn btn-gold calc-pulse" id="wait-calc-btn" onclick="calculateRooms()">🏨 Calculate Rooms!</button>
   </div>
-  <div class="card mt-16" id="wait-player-list-card">
+  <div class="card mt-16">
     <p class="label">Who's done</p>
     <div id="wait-player-list"></div>
   </div>
 </div>
 
-<!-- LOADING -->
+<!-- ══ LOADING ══ -->
 <div id="s-loading" class="screen">
   <div class="spinner"></div>
   <h2 class="heading mb-8">Computing Destiny...</h2>
   <p class="subtext">Running 3,000 simulations.<br>Judging your deepest secrets. 👀</p>
 </div>
 
-<!-- RESULTS -->
+<!-- ══ RESULTS ══ -->
 <div id="s-results" class="screen">
   <div style="font-size:60px;margin-bottom:14px;filter:drop-shadow(0 0 20px rgba(251,191,36,.6))">🏨</div>
   <h1 class="mega mb-8">ROOM<br>ASSIGNMENTS</h1>
   <p class="subtext mb-24">The algorithm has spoken. No arguments. No refunds.</p>
   <div class="rooms-grid" id="rooms-grid"></div>
-  <button class="btn btn-ghost mt-24" onclick="location.reload()">🔄 New Game</button>
+  <button class="btn btn-ghost mt-16" id="edit-btn" onclick="showEditScreen()" style="display:none">
+    ✏️ Edit Room Assignments
+  </button>
+  <button class="btn btn-ghost mt-12" onclick="location.reload()">🔄 New Game</button>
+</div>
+
+<!-- ══ EDIT (host only) ══ -->
+<div id="s-edit" class="screen">
+  <h2 class="heading mb-8">Edit Assignments ✏️</h2>
+  <p class="subtext mb-20">Reassign any player to a different room.</p>
+  <div class="card" style="width:100%;padding:16px 18px">
+    <div id="edit-list"></div>
+  </div>
+  <button class="btn btn-gold mt-12" onclick="saveEdits()">💾 Save & Update Results</button>
+  <button class="btn btn-ghost mt-12" onclick="showScreen('s-results')">← Back without saving</button>
 </div>
 
 <script>
-// ══════════════════════════════════════════════════
-// QUESTIONS (25 total)
-// ══════════════════════════════════════════════════
-const QS = [
-  // ── ROOM COMPATIBILITY ──
-  {id:'sleep', text:'⏰ How long do you want to sleep tonight?',
-   opts:[{l:'3 hours — sleep is for the weak 💀',v:3},
-         {l:'7 hours — I\'m a reasonable human',v:7},
-         {l:'8 hours — beauty sleep is non-negotiable 😴',v:8}]},
-
-  {id:'music', text:'🎵 Which music do you prefer?',
-   opts:[{l:'EDM 🎧',v:'EDM'},{l:'Hip Hop 🎤',v:'HIPHOP'},
-         {l:'Techno ⚡',v:'TECHNO'},{l:'Mizrahit 🎻',v:'MIZRAHIT'}]},
-
-  {id:'sleepCond', text:'🛏️ What do you need to fall asleep?',
-   opts:[{l:'Total silence and complete darkness 🌑',v:'silence'},
-         {l:'Some white noise or fan is fine',v:'noise'},
-         {l:'TV on in the background, doesn\'t matter',v:'tv'},
-         {l:'I can sleep through a concert 🎸',v:'anything'}]},
-
-  {id:'shower', text:'🚿💩 Can you shower while your roommate takes a dump... right next to you?',
-   opts:[{l:'We\'re brothers. No problem at all. 👍',v:'yes'},
-         {l:'ABSOLUTELY NOT. That\'s a crime against humanity. 🤢',v:'no'}]},
-
-  {id:'snoring', text:'😴 Your roommate snores like a dying chainsaw. You...',
-   opts:[{l:'Pop in earplugs and survive the night',v:'earplugs'},
-         {l:'Kick them until they roll over',v:'kick'},
-         {l:'I sleep through earthquakes, this is fine',v:'sleepthrough'},
-         {l:'Record it and post it. They deserve this. 📱',v:'record'}]},
-
-  {id:'wait45', text:'⏱️ You\'re ready to go out. Your roommate needs 45 more minutes. You...',
-   opts:[{l:'Wait patiently. No rush, we\'re on vacation.',v:'patient'},
-         {l:'Go start pre-drinks without them',v:'go_alone'},
-         {l:'Guilt trip them the entire 45 minutes 😤',v:'complain'},
-         {l:'Pull the fire alarm. That\'ll speed things up. 🚨',v:'fire_alarm'}]},
-
-  {id:'gadMusic', text:'🎶 Gad shows up at 3am with a speaker blasting. Do you love this?',
-   opts:[{l:'YES. LOUDER. I WAS WAITING FOR THIS. 🔊',v:'yes'},
-         {l:'I will throw that speaker off the balcony 😤',v:'no'},
-         {l:'Depends on the song. Gal Atari? Fine. Techno? No.',v:'depends'}]},
-
-  {id:'drugs', text:'💊 Do you consume recreational substances?',
-   opts:[{l:'Never touched anything. I\'m clean. 😇',v:'never'},
-         {l:'Only on special occasions... like this 🎊',v:'sometimes'},
-         {l:'We\'re at a bachelor party. Next question. 🚀',v:'yes'}]},
-
-  {id:'creature', text:'🐍 Do you plan to bring any living creature into the room?',
-   opts:[{l:'No, I\'m completely normal 😇',v:'no'},
-         {l:'Maybe a small harmless pet... 🐹',v:'maybe'},
-         {l:'Yes. It\'s large. Don\'t ask. 🐊',v:'yes'}]},
-
-  // ── KINKY / AMERICAN PIE ──
-  {id:'bodyCount', text:'🔢 Let\'s be honest... what\'s your body count?',
-   opts:[{l:'1–5. Quality over quantity. 😌',v:'low'},
-         {l:'5–15. I\'ve lived a little.',v:'medium'},
-         {l:'15–30. The golden years.',v:'high'},
-         {l:'I\'ve lost count. Don\'t judge me. 👑',v:'lost'}]},
-
-  {id:'fakedIt', text:'🎭 Have you ever... faked it?',
-   opts:[{l:'NEVER. I\'m always 100% authentic.',v:'never'},
-         {l:'Once, by accident. Long story.',v:'once'},
-         {l:'More often than I\'d like to admit.',v:'often'},
-         {l:'Every. Single. Time. It\'s easier. 🏆',v:'always'}]},
-
-  {id:'hotelHookup', text:'🌙 Would you hookup with someone in the room while your roommate is "sleeping"?',
-   opts:[{l:'Never. That\'s disrespectful.',v:'never'},
-         {l:'If they\'re actually asleep... maybe.',v:'if_asleep'},
-         {l:'The roommate can watch or leave. Their choice.',v:'watch_or_leave'},
-         {l:'This is literally my plan for this trip. 📋',v:'planned'}]},
-
-  {id:'vanilla', text:'🍦 On a scale of vanilla to absolutely unhinged — where are you?',
-   opts:[{l:'Pure vanilla. I have standards and a reputation.',v:'vanilla'},
-         {l:'Vanilla with sprinkles on special occasions',v:'sprinkles'},
-         {l:'Rocky road. Some chapters stay private.',v:'rocky'},
-         {l:'Actively unhinged and completely at peace with it. 💀',v:'unhinged'}]},
-
-  {id:'drunkEgo', text:'🕺 What\'s your drunk alter ego?',
-   opts:[{l:'The philosopher — I suddenly understand the universe',v:'philosopher'},
-         {l:'The emotional one — I love everyone so much 🥺',v:'emotional'},
-         {l:'The dancer — I will clear the entire dancefloor',v:'dancer'},
-         {l:'The one who needs a full-time babysitter 🍼',v:'babysitter'}]},
-
-  {id:'morning', text:'🌅 Morning wood is...',
-   opts:[{l:'Natural and I fully respect the process',v:'respectful'},
-         {l:'Extremely embarrassing if there\'s company',v:'embarrassing'},
-         {l:'My daily alarm clock. Consistent. Reliable.',v:'alarm'},
-         {l:'Not a problem I personally have. Moving on.',v:'none'}]},
-
-  {id:'monkey', text:'🐒 Do you plan to... choke the monkey during this trip?',
-   opts:[{l:'No comment. 😶',v:'silent'},
-         {l:'Absolutely not! I have dignity and self-control.',v:'no'},
-         {l:'The night is long and I make no promises 🌙',v:'maybe'}]},
-
-  // ── RIDDLES & DILEMMAS ──
-  {id:'towel', text:'🛁 There are 2 towels for 3 people in the room. You...',
-   opts:[{l:'Call reception immediately. This is unacceptable.',v:'reception'},
-         {l:'Share. It\'s a bonding experience, honestly.',v:'share'},
-         {l:'Take both. Survival of the fittest. 💪',v:'take_both'},
-         {l:'Air dry and fully own it. Freedom. 🦅',v:'airdry'}]},
-
-  {id:'money', text:'💰 You find 500 shekel under the hotel mattress. You...',
-   opts:[{l:'Hand it to reception. It\'s the right thing. (Liar.)',v:'reception'},
-         {l:'Split it equally with the roommates.',v:'split'},
-         {l:'Keep it. Finders keepers. God wanted me to have this.',v:'keep'},
-         {l:'Put it straight toward tonight\'s bar tab. Obviously.',v:'bar'}]},
-
-  {id:'riddle1', text:'🧩 RIDDLE: The more you take, the more you leave behind. What am I?',
-   opts:[{l:'Footsteps 👣',v:'footsteps'},
-         {l:'Regrets (too real)',v:'regrets'},
-         {l:'Beer (also too real)',v:'beer'},
-         {l:'Gad\'s dignity',v:'dignity'}]},
-
-  {id:'riddle2', text:'🗺️ RIDDLE: I have cities but no houses, mountains but no trees, water but no fish. What am I?',
-   opts:[{l:'A map',v:'map'},
-         {l:'Gad\'s life plan',v:'life_plan'},
-         {l:'Israel in 2026',v:'israel'},
-         {l:'My ex\'s heart',v:'exheart'}]},
-
-  {id:'gadPlaylist', text:'🔒 You\'re locked in the hotel room with Gad\'s playlist on loop. 3 hours in, you...',
-   opts:[{l:'Accept it. This is my life now. I am at peace.',v:'accept'},
-         {l:'Escape through the window. 4th floor? Worth it.',v:'escape'},
-         {l:'Start dancing. If you can\'t beat him, join him. 🕺',v:'dance'},
-         {l:'Just openly beg for death.',v:'death'}]},
-
-  // ── GAD SPECIFIC ──
-  {id:'gadKing', text:'👑 Do you think that Gad is your king?',
-   opts:[{l:'He is my king and I kneel before him 🙇',v:'king'},
-         {l:'He is my absolute GOD and I pray daily 🛐',v:'god'},
-         {l:'ALL HAIL KING GAD! 👑',v:'hail'}]},
-
-  {id:'falafel', text:'🧆 Does Gad look like the falafel owner from the neighborhood?',
-   opts:[{l:'They could be IDENTICAL TWINS 😂',v:'yes'},
-         {l:'Not at all, completely different people',v:'no'},
-         {l:'Only when he\'s sweating and holding tongs 🌡️',v:'sometimes'}]},
-
-  {id:'eyal', text:'🎤 Do you think Eyal Golan is innocent?',
-   opts:[{l:'100% innocent. Leave the man alone!',v:'innocent'},
-         {l:'Guilty as charged. Case closed.',v:'guilty'},
-         {l:'Who even is Eyal Golan?',v:'who'}]},
-
-  {id:'ibiza', text:'🏝️ Do we NEED to come back to Ibiza next year?',
-   opts:[{l:'IBIZA FOREVER. Someone book it RIGHT NOW. ✈️',v:'yes'},
-         {l:'Once was enough. I\'ve healed.',v:'no'},
-         {l:'Only if Gad pays for literally everything 💸',v:'if_gad'}]},
-
-  {id:'luffy', text:'🏴‍☠️ Do you acknowledge that Gad is the living incarnation of Monkey D. Luffy?',
-   opts:[{l:'He IS Luffy, reborn as an Israeli 🌊',v:'yes'},
-         {l:'Obviously. The resemblance is almost illegal.',v:'obviously'},
-         {l:'I have made peace with this undeniable truth.',v:'peace'}]},
+const QS=[
+  {id:'sleep',text:'⏰ How long do you want to sleep tonight?',
+   opts:[{l:'3 hours — sleep is for the weak 💀',v:3},{l:'7 hours — I\'m a reasonable human',v:7},{l:'8 hours — beauty sleep is non-negotiable 😴',v:8}]},
+  {id:'music',text:'🎵 Which music do you prefer?',
+   opts:[{l:'EDM 🎧',v:'EDM'},{l:'Hip Hop 🎤',v:'HIPHOP'},{l:'Techno ⚡',v:'TECHNO'},{l:'Mizrahit 🎻',v:'MIZRAHIT'}]},
+  {id:'sleepCond',text:'🛏️ What do you need to fall asleep?',
+   opts:[{l:'Total silence and complete darkness 🌑',v:'silence'},{l:'Some white noise or fan is fine',v:'noise'},{l:'TV on in the background, doesn\'t matter',v:'tv'},{l:'I can sleep through a concert 🎸',v:'anything'}]},
+  {id:'shower',text:'🚿💩 Can you shower while your roommate takes a dump right next to you?',
+   opts:[{l:'We\'re brothers. No problem at all. 👍',v:'yes'},{l:'ABSOLUTELY NOT. That\'s a crime against humanity. 🤢',v:'no'}]},
+  {id:'snoring',text:'😴 Your roommate snores like a dying chainsaw. You...',
+   opts:[{l:'Pop in earplugs and survive',v:'earplugs'},{l:'Kick them until they roll over',v:'kick'},{l:'I sleep through earthquakes, this is fine',v:'sleepthrough'},{l:'Record it and post it. They deserve this. 📱',v:'record'}]},
+  {id:'wait45',text:'⏱️ You\'re ready to go out. Your roommate needs 45 more minutes. You...',
+   opts:[{l:'Wait patiently. No rush, we\'re on vacation.',v:'patient'},{l:'Go start pre-drinks without them',v:'go_alone'},{l:'Guilt trip them the entire 45 minutes 😤',v:'complain'},{l:'Pull the fire alarm. That\'ll speed things up. 🚨',v:'fire_alarm'}]},
+  {id:'gadMusic',text:'🎶 Gad shows up at 3am with a speaker blasting. Do you love this?',
+   opts:[{l:'YES. LOUDER. I WAS WAITING FOR THIS. 🔊',v:'yes'},{l:'I will throw that speaker off the balcony 😤',v:'no'},{l:'Depends on the song. Gal Atari? Fine. Techno? No.',v:'depends'}]},
+  {id:'drugs',text:'💊 Do you consume recreational substances?',
+   opts:[{l:'Never touched anything. I\'m clean. 😇',v:'never'},{l:'Only on special occasions... like this 🎊',v:'sometimes'},{l:'We\'re at a bachelor party. Next question. 🚀',v:'yes'}]},
+  {id:'creature',text:'🐍 Do you plan to bring any living creature into the room?',
+   opts:[{l:'No, I\'m completely normal 😇',v:'no'},{l:'Maybe a small harmless pet... 🐹',v:'maybe'},{l:'Yes. It\'s large. Don\'t ask. 🐊',v:'yes'}]},
+  {id:'bodyCount',text:'🔢 Let\'s be honest... what\'s your body count?',
+   opts:[{l:'1–5. Quality over quantity. 😌',v:'low'},{l:'5–15. I\'ve lived a little.',v:'medium'},{l:'15–30. The golden years.',v:'high'},{l:'I\'ve lost count. Don\'t judge me. 👑',v:'lost'}]},
+  {id:'fakedIt',text:'🎭 Have you ever... faked it?',
+   opts:[{l:'NEVER. I\'m always 100% authentic.',v:'never'},{l:'Once, by accident. Long story.',v:'once'},{l:'More often than I\'d like to admit.',v:'often'},{l:'Every. Single. Time. It\'s easier. 🏆',v:'always'}]},
+  {id:'hotelHookup',text:'🌙 Would you hook up with someone while your roommate is "sleeping"?',
+   opts:[{l:'Never. That\'s disrespectful.',v:'never'},{l:'If they\'re actually asleep... maybe.',v:'if_asleep'},{l:'The roommate can watch or leave. Their choice.',v:'watch_or_leave'},{l:'This is literally my plan for this trip. 📋',v:'planned'}]},
+  {id:'vanilla',text:'🍦 On a scale of vanilla to absolutely unhinged — where are you?',
+   opts:[{l:'Pure vanilla. I have standards.',v:'vanilla'},{l:'Vanilla with sprinkles on special occasions',v:'sprinkles'},{l:'Rocky road. Some chapters stay private.',v:'rocky'},{l:'Actively unhinged and at peace with it. 💀',v:'unhinged'}]},
+  {id:'drunkEgo',text:'🕺 What\'s your drunk alter ego?',
+   opts:[{l:'The philosopher — I suddenly understand the universe',v:'philosopher'},{l:'The emotional one — I love everyone so much 🥺',v:'emotional'},{l:'The dancer — I will clear the entire dancefloor',v:'dancer'},{l:'The one who needs a full-time babysitter 🍼',v:'babysitter'}]},
+  {id:'morning',text:'🌅 Morning wood is...',
+   opts:[{l:'Natural and I fully respect the process',v:'respectful'},{l:'Extremely embarrassing if there\'s company',v:'embarrassing'},{l:'My daily alarm clock. Consistent. Reliable.',v:'alarm'},{l:'Not a problem I personally have. Moving on.',v:'none'}]},
+  {id:'monkey',text:'🐒 Do you plan to... choke the monkey during this trip?',
+   opts:[{l:'No comment. 😶',v:'silent'},{l:'Absolutely not! I have dignity.',v:'no'},{l:'The night is long and I make no promises 🌙',v:'maybe'}]},
+  {id:'towel',text:'🛁 There are 2 towels for 3 people in the room. You...',
+   opts:[{l:'Call reception immediately. This is unacceptable.',v:'reception'},{l:'Share. It\'s a bonding experience.',v:'share'},{l:'Take both. Survival of the fittest. 💪',v:'take_both'},{l:'Air dry and fully own it. Freedom. 🦅',v:'airdry'}]},
+  {id:'money',text:'💰 You find 500 shekel under the hotel mattress. You...',
+   opts:[{l:'Hand it to reception. It\'s the right thing. (Liar.)',v:'reception'},{l:'Split it equally with the roommates.',v:'split'},{l:'Keep it. God wanted me to have this.',v:'keep'},{l:'Put it straight toward tonight\'s bar tab. Obviously.',v:'bar'}]},
+  {id:'riddle1',text:'🧩 RIDDLE: The more you take, the more you leave behind. What am I?',
+   opts:[{l:'Footsteps 👣',v:'footsteps'},{l:'Regrets (too real)',v:'regrets'},{l:'Beer (also too real)',v:'beer'},{l:'Gad\'s dignity',v:'dignity'}]},
+  {id:'riddle2',text:'🗺️ RIDDLE: I have cities but no houses, mountains but no trees, water but no fish. What am I?',
+   opts:[{l:'A map',v:'map'},{l:'Gad\'s life plan',v:'life_plan'},{l:'Israel in 2026',v:'israel'},{l:'My ex\'s heart',v:'exheart'}]},
+  {id:'gadPlaylist',text:'🔒 Locked in the hotel room with Gad\'s playlist on loop for 3 hours. You...',
+   opts:[{l:'Accept it. I am at peace.',v:'accept'},{l:'Escape through the window. 4th floor? Worth it.',v:'escape'},{l:'Start dancing. If you can\'t beat him, join him. 🕺',v:'dance'},{l:'Openly beg for death.',v:'death'}]},
+  {id:'gadKing',text:'👑 Do you think that Gad is your king?',
+   opts:[{l:'He is my king and I kneel before him 🙇',v:'king'},{l:'He is my absolute GOD and I pray daily 🛐',v:'god'},{l:'ALL HAIL KING GAD! 👑',v:'hail'}]},
+  {id:'falafel',text:'🧆 Does Gad look like the falafel owner from the neighborhood?',
+   opts:[{l:'They could be IDENTICAL TWINS 😂',v:'yes'},{l:'Not at all, completely different people',v:'no'},{l:'Only when he\'s sweating and holding tongs 🌡️',v:'sometimes'}]},
+  {id:'eyal',text:'🎤 Do you think Eyal Golan is innocent?',
+   opts:[{l:'100% innocent. Leave the man alone!',v:'innocent'},{l:'Guilty as charged. Case closed.',v:'guilty'},{l:'Who even is Eyal Golan?',v:'who'}]},
+  {id:'ibiza',text:'🏝️ Do we NEED to come back to Ibiza next year?',
+   opts:[{l:'IBIZA FOREVER. Someone book it RIGHT NOW. ✈️',v:'yes'},{l:'Once was enough. I\'ve healed.',v:'no'},{l:'Only if Gad pays for literally everything 💸',v:'if_gad'}]},
+  {id:'luffy',text:'🏴‍☠️ Do you acknowledge that Gad is the living incarnation of Monkey D. Luffy?',
+   opts:[{l:'He IS Luffy, reborn as an Israeli 🌊',v:'yes'},{l:'Obviously. The resemblance is almost illegal.',v:'obviously'},{l:'I have made peace with this undeniable truth.',v:'peace'}]},
 ];
 
-// ══════════════════════════════════════════════════
-// STATE
-// ══════════════════════════════════════════════════
-let myName='', myPlayerId=null, myRoomCode=null, isHost=false;
-let curQIdx=0, curAnswers={};
-let eventSource=null;
+// State
+let myName='',myPlayerId=null,myRoomCode=null,isHost=false;
+let curQIdx=0,curAnswers={};
+let eventSource=null,currentResults=null;
 
-// ══════════════════════════════════════════════════
-// PARTICLES
-// ══════════════════════════════════════════════════
+// Particles
 (function(){
   const c=document.getElementById('particles');
-  const cols=['rgba(168,85,247,','rgba(244,114,182,','rgba(251,191,36,','rgba(34,211,238,'];
   const s=document.createElement('style');
   s.textContent='@keyframes floatP{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-20px) scale(1);opacity:0}}';
   document.head.appendChild(s);
+  const cols=['rgba(168,85,247,','rgba(244,114,182,','rgba(251,191,36,','rgba(34,211,238,'];
   for(let i=0;i<18;i++){
-    const el=document.createElement('div'); el.className='p';
-    const sz=Math.random()*5+2, col=cols[Math.floor(Math.random()*cols.length)], op=Math.random()*.4+.1;
-    el.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:${col}${op});box-shadow:0 0 ${sz*3}px ${col}0.6);animation:floatP ${Math.random()*15+8}s ${-Math.random()*20}s linear infinite`;
+    const el=document.createElement('div');
+    const sz=Math.random()*5+2,col=cols[Math.floor(Math.random()*cols.length)],op=Math.random()*.4+.1;
+    el.style.cssText=`position:absolute;border-radius:50%;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:${col}${op});box-shadow:0 0 ${sz*3}px ${col}0.6);animation:floatP ${Math.random()*15+8}s ${-Math.random()*20}s linear infinite`;
     c.appendChild(el);
   }
 })();
 
-// ══════════════════════════════════════════════════
-// CONFETTI
-// ══════════════════════════════════════════════════
 function confetti(){
   const cols=['#a855f7','#f472b6','#fbbf24','#34d399','#22d3ee','#ef4444'];
-  for(let i=0;i<70;i++){
-    const el=document.createElement('div'); el.className='confetti-piece';
+  for(let i=0;i<80;i++){
+    const el=document.createElement('div');
+    el.className='confetti-piece';
     const sz=Math.random()*10+4;
     el.style.cssText=`left:${Math.random()*100}vw;top:-20px;width:${sz}px;height:${sz}px;background:${cols[Math.floor(Math.random()*cols.length)]};border-radius:${Math.random()>.5?'50%':'2px'};animation-duration:${Math.random()*2+1.5}s;animation-delay:${Math.random()*.8}s`;
     document.body.appendChild(el);
@@ -509,64 +427,55 @@ function confetti(){
   }
 }
 
-// ══════════════════════════════════════════════════
-// SCREEN MANAGEMENT
-// ══════════════════════════════════════════════════
-function show(id){
+function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
 }
 
-// ══════════════════════════════════════════════════
-// API CALLS
-// ══════════════════════════════════════════════════
-async function api(method, path, body){
+function shake(id){
+  const el=document.getElementById(id);
+  el.classList.add('err');
+  setTimeout(()=>el.classList.remove('err'),600);
+}
+
+async function api(method,path,body){
   const r=await fetch(path,{method,headers:{'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});
   const data=await r.json();
   if(!r.ok) throw new Error(data.error||'Something went wrong');
   return data;
 }
 
-// ══════════════════════════════════════════════════
-// ROOM SSE
-// ══════════════════════════════════════════════════
+// SSE
 function connectSSE(code){
   if(eventSource) eventSource.close();
   eventSource=new EventSource(`/api/rooms/${code}/events`);
   eventSource.onmessage=e=>handleRoomUpdate(JSON.parse(e.data));
-  eventSource.onerror=()=>{ /* silent reconnect handled by browser */ };
 }
 
 function handleRoomUpdate(room){
   const done=room.players.filter(p=>p.done).length;
   const total=room.players.length;
-
-  // Update host waiting room
   if(document.getElementById('s-host-wait').classList.contains('active')){
     renderPlayerList('host-player-list',room.players,'host-player-label');
     document.getElementById('calc-btn').disabled=done<3;
   }
-
-  // Update waiting screen
   if(document.getElementById('s-waiting').classList.contains('active')){
     document.getElementById('wait-count').textContent=`${done} / ${total}`;
     renderPlayerList('wait-player-list',room.players);
-    const calcArea=document.getElementById('host-calc-area');
-    if(isHost){ calcArea.style.display='block'; document.getElementById('wait-calc-btn').disabled=done<3; }
+    if(isHost){
+      document.getElementById('host-calc-area').style.display='block';
+      document.getElementById('wait-calc-btn').disabled=done<3;
+    }
   }
-
-  // Show results when done
-  if(room.status==='done'&&room.results){
-    showResults(room.results);
-  }
+  if(room.status==='done'&&room.results) showResults(room.results);
 }
 
-function renderPlayerList(containerId, players, labelId){
-  const el=document.getElementById(containerId);
+function renderPlayerList(id,players,labelId){
+  const el=document.getElementById(id);
   if(!el) return;
   if(labelId) document.getElementById(labelId).textContent=`Players (${players.length})`;
-  if(players.length===0){ el.innerHTML='<p class="subtext">Waiting for players to join...</p>'; return; }
+  if(!players.length){el.innerHTML='<p class="subtext">Waiting for players to join...</p>';return;}
   el.innerHTML=players.map(p=>`
     <div class="player-row ${p.done?'done':''}">
       <span class="player-name-row">${p.name}${p.id===myPlayerId?' (you)':''}</span>
@@ -574,81 +483,75 @@ function renderPlayerList(containerId, players, labelId){
     </div>`).join('');
 }
 
-// ══════════════════════════════════════════════════
-// CREATE ROOM
-// ══════════════════════════════════════════════════
+// Create room
 async function createRoom(){
   const name=document.getElementById('host-name').value.trim();
   const errEl=document.getElementById('create-error');
   errEl.style.display='none';
-  if(!name){document.getElementById('host-name').classList.add('err');setTimeout(()=>document.getElementById('host-name').classList.remove('err'),600);return;}
+  if(!name){shake('host-name');return;}
   try{
     const {code}=await api('POST','/api/rooms',{hostName:name});
     const {playerId}=await api('POST',`/api/rooms/${code}/join`,{name});
-    myName=name; myPlayerId=playerId; myRoomCode=code; isHost=true;
+    myName=name;myPlayerId=playerId;myRoomCode=code;isHost=true;
     document.getElementById('host-code').textContent=code;
-    connectSSE(code);
-    show('s-host-wait');
-    // Push URL so it's shareable
     history.pushState(null,'',`?room=${code}`);
-  }catch(e){
-    errEl.textContent=e.message; errEl.style.display='block';
-  }
+    connectSSE(code);
+    showScreen('s-host-wait');
+  }catch(e){errEl.textContent=e.message;errEl.style.display='block';}
 }
 
 function shareRoomWA(){
   const url=`${location.origin}${location.pathname}?room=${myRoomCode}`;
-  const msg=`🎉 Bachelor Party Room Splitter!\n\nOpen this link and join room *${myRoomCode}*:\n${url}\n\nJust enter your name and answer the questions 🔥`;
+  const msg=`🎉 *Bachelor Party Room Splitter!*\n\nClick the link, enter your name and answer 25 questions 🔥\n\n👉 ${url}`;
   window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
-// ══════════════════════════════════════════════════
-// JOIN ROOM
-// ══════════════════════════════════════════════════
-function checkUrlRoom(){
-  const params=new URLSearchParams(location.search);
-  const code=params.get('room');
-  if(code){
-    document.getElementById('join-code').value=code.toUpperCase();
-  }
-  show('s-join');
-  setTimeout(()=>document.getElementById(code?'join-name':'join-code').focus(),300);
+// Join by link (auto when ?room=CODE in URL)
+async function joinByLink(){
+  const name=document.getElementById('join-name-auto').value.trim();
+  const errEl=document.getElementById('join-link-error');
+  errEl.style.display='none';
+  if(!name){shake('join-name-auto');return;}
+  try{
+    const res=await api('POST',`/api/rooms/${myRoomCode}/join`,{name});
+    myName=name;myPlayerId=res.playerId;isHost=res.isHost;
+    connectSSE(myRoomCode);
+    document.getElementById('q-player-chip').textContent=name;
+    renderQ(0);
+    showScreen('s-questions');
+  }catch(e){errEl.textContent=e.message;errEl.style.display='block';}
 }
 
-async function joinRoom(){
+// Join manually (code + name)
+async function joinManual(){
   const code=document.getElementById('join-code').value.trim().toUpperCase();
-  const name=document.getElementById('join-name').value.trim();
-  const errEl=document.getElementById('join-error');
+  const name=document.getElementById('join-name-manual').value.trim();
+  const errEl=document.getElementById('join-manual-error');
   errEl.style.display='none';
-  if(!code||code.length!==4){document.getElementById('join-code').classList.add('err');setTimeout(()=>document.getElementById('join-code').classList.remove('err'),600);return;}
-  if(!name){document.getElementById('join-name').classList.add('err');setTimeout(()=>document.getElementById('join-name').classList.remove('err'),600);return;}
+  if(!code||code.length!==4){shake('join-code');return;}
+  if(!name){shake('join-name-manual');return;}
   try{
     const res=await api('POST',`/api/rooms/${code}/join`,{name});
-    myName=name; myPlayerId=res.playerId; myRoomCode=code; isHost=res.isHost;
+    myName=name;myPlayerId=res.playerId;myRoomCode=code;isHost=res.isHost;
     connectSSE(code);
     document.getElementById('q-player-chip').textContent=name;
     renderQ(0);
-    show('s-questions');
-  }catch(e){
-    errEl.textContent=e.message; errEl.style.display='block';
-  }
+    showScreen('s-questions');
+  }catch(e){errEl.textContent=e.message;errEl.style.display='block';}
 }
 
-// ══════════════════════════════════════════════════
-// QUESTIONS
-// ══════════════════════════════════════════════════
+// Questions
 function renderQ(idx){
-  const q=QS[idx]; curQIdx=idx;
-  const isLast=idx===QS.length-1;
+  const q=QS[idx];curQIdx=idx;
   document.getElementById('q-num').textContent=`${idx+1} / ${QS.length}`;
   document.getElementById('prog-bar').style.width=`${(idx/QS.length)*100}%`;
   document.getElementById('q-text').textContent=q.text;
-  document.getElementById('q-opts').innerHTML=q.opts.map((o,i)=>
-    `<button class="opt${curAnswers[q.id]===o.v?' sel':''}" onclick="pickOpt(this,'${String(o.v).replace(/'/g,"\\'")}')">${o.l}</button>`
+  document.getElementById('q-opts').innerHTML=q.opts.map(o=>
+    `<button class="opt${curAnswers[q.id]===o.v?' sel':''}" onclick="pickOpt(this,'${String(o.v).replace(/\\/g,'\\\\').replace(/'/g,"\\'")}')">${o.l}</button>`
   ).join('');
   const btn=document.getElementById('q-next');
   btn.disabled=curAnswers[q.id]===undefined;
-  btn.textContent=isLast?'Submit Answers! 🎉':'Next →';
+  btn.textContent=idx===QS.length-1?'Submit Answers! 🎉':'Next →';
 }
 
 function pickOpt(btn,val){
@@ -661,10 +564,8 @@ function pickOpt(btn,val){
 
 async function nextQ(){
   if(curAnswers[QS[curQIdx].id]===undefined) return;
-  if(curQIdx<QS.length-1){
-    renderQ(curQIdx+1);
-  } else {
-    // Submit answers
+  if(curQIdx<QS.length-1){renderQ(curQIdx+1);}
+  else{
     try{
       await api('POST',`/api/rooms/${myRoomCode}/players/${myPlayerId}/answers`,{answers:curAnswers});
       const room=await api('GET',`/api/rooms/${myRoomCode}`);
@@ -675,65 +576,88 @@ async function nextQ(){
         document.getElementById('host-calc-area').style.display='block';
         document.getElementById('wait-calc-btn').disabled=done<3;
       }
-      show('s-waiting');
+      showScreen('s-waiting');
       confetti();
-    }catch(e){
-      alert('Error submitting: '+e.message);
-    }
+    }catch(e){alert('Error: '+e.message);}
   }
 }
 
-// ══════════════════════════════════════════════════
-// CALCULATE
-// ══════════════════════════════════════════════════
 async function calculateRooms(){
-  show('s-loading');
+  showScreen('s-loading');
   try{
     await api('POST',`/api/rooms/${myRoomCode}/calculate`);
-    // Results come via SSE
-  }catch(e){
-    alert(e.message);
-    show('s-waiting');
-  }
+  }catch(e){alert(e.message);showScreen('s-waiting');}
 }
 
-// ══════════════════════════════════════════════════
-// RESULTS
-// ══════════════════════════════════════════════════
-const MA=['🎯','🌟','💎','🔮'];
+// Results
+const ICONS=['🎯','🌟','💎','🔮','🏆','⚡'];
 
 function showResults(rooms){
+  currentResults=rooms;
   document.getElementById('rooms-grid').innerHTML=rooms.map((room,ri)=>{
     const bc=room.pct>=70?'pct-great':room.pct>=45?'pct-ok':'pct-low';
     const members=room.members.map((name,j)=>`
       <div class="member">
-        <div class="m-icon">${MA[j]||'😎'}</div>
-        <span class="m-name">${name}</span>
+        <div class="m-icon">${ICONS[j]||'😎'}</div>
+        <span class="m-name">${name}${name===myName?'<span class="m-you">YOU</span>':''}</span>
       </div>`).join('');
-    return `
-      <div class="room-card">
-        <div class="room-head">
-          <span class="room-name">${room.name}${ri===0?'<span class="vip-label" style="margin-left:8px">BEST MATCH</span>':''}</span>
-          <span class="pct-badge ${bc}">${room.pct}% match</span>
-        </div>
-        <div class="members">${members}</div>
-        <div class="tagline">${room.tagline}</div>
-      </div>`;
+    return `<div class="room-card">
+      <div class="room-head">
+        <span class="room-name">${room.name}</span>
+        <span class="pct-badge ${bc}">${room.pct}% match</span>
+      </div>
+      <div class="members">${members}</div>
+      <div class="tagline">${room.tagline||''}</div>
+    </div>`;
   }).join('');
-  show('s-results');
+  document.getElementById('edit-btn').style.display=isHost?'block':'none';
+  showScreen('s-results');
   setTimeout(confetti,200);
 }
 
-// ══════════════════════════════════════════════════
-// INIT — check URL for room code
-// ══════════════════════════════════════════════════
+// Edit assignments
+function showEditScreen(){
+  if(!currentResults) return;
+  const allPlayers=[];
+  currentResults.forEach((room,ri)=>room.members.forEach(name=>allPlayers.push({name,ri})));
+  const roomNames=currentResults.map(r=>r.name);
+  document.getElementById('edit-list').innerHTML=allPlayers.map((p,i)=>`
+    <div class="edit-row">
+      <span class="edit-name">${p.name}${p.name===myName?' 👑':''}</span>
+      <select class="select" id="esel-${i}" style="width:auto;min-width:155px;flex-shrink:0">
+        ${roomNames.map((rn,ri)=>`<option value="${ri}"${ri===p.ri?' selected':''}>${rn}</option>`).join('')}
+      </select>
+    </div>`).join('');
+  document.getElementById('edit-list').dataset.count=allPlayers.length;
+  document.getElementById('edit-list').dataset.players=JSON.stringify(allPlayers);
+  showScreen('s-edit');
+}
+
+async function saveEdits(){
+  const allPlayers=JSON.parse(document.getElementById('edit-list').dataset.players);
+  const newRooms=currentResults.map((r,ri)=>({name:r.name,tagline:r.tagline||'',members:[],pct:r.pct}));
+  allPlayers.forEach((p,i)=>{
+    const ri=parseInt(document.getElementById(`esel-${i}`).value);
+    newRooms[ri].members.push(p.name);
+  });
+  const filled=newRooms.filter(r=>r.members.length>0);
+  try{
+    await api('PUT',`/api/rooms/${myRoomCode}/results`,{results:filled});
+    currentResults=filled;
+    showResults(filled);
+    confetti();
+  }catch(e){alert('Save failed: '+e.message);}
+}
+
+// Init — auto-join from URL param
 (function(){
   const params=new URLSearchParams(location.search);
   const code=params.get('room');
   if(code){
-    document.getElementById('join-code').value=code.toUpperCase();
-    show('s-join');
-    setTimeout(()=>document.getElementById('join-name').focus(),300);
+    myRoomCode=code.toUpperCase();
+    document.getElementById('join-room-display').textContent=code.toUpperCase();
+    showScreen('s-join-name');
+    setTimeout(()=>document.getElementById('join-name-auto').focus(),300);
   }
 })();
 </script>
