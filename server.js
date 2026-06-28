@@ -135,10 +135,16 @@ function pairScore(x, y) {
   // איביזה (4)
   s += x.ibiza === y.ibiza ? 4 : 0;
 
+  // סוג נשים (6)
+  s += x.womenType === y.womenType ? 6 : 0;
+
+  // אנימה (4)
+  s += x.anime === y.anime ? 4 : 0;
+
   return Math.max(0, s);
 }
 
-const MAX_PAIR = 230;
+const MAX_PAIR = 240;
 
 function groupScore(grp, mat) {
   let t = 0;
