@@ -1,18 +1,33 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const HOST_KEY = process.env.HOST_KEY || 'GAD2025';
+const STATE_FILE = path.join(__dirname, 'game-state.json');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-let game = freshGame();
-let sseClients = [];
-
 function freshGame() {
   return { players: {}, status: 'waiting', results: null };
 }
+
+function loadGame() {
+  try {
+    if (fs.existsSync(STATE_FILE)) {
+      return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
+    }
+  } catch (e) {}
+  return freshGame();
+}
+
+function saveGame() {
+  try { fs.writeFileSync(STATE_FILE, JSON.stringify(game)); } catch (e) {}
+}
+
+let game = loadGame();
+let sseClients = [];
 
 function genId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
@@ -231,6 +246,7 @@ app.post('/api/join', (req, res) => {
   if (taken) return res.status(400).json({ error: 'הכינוי הזה כבר תפוס!' });
   const id = genId();
   game.players[id] = { name, answers: null, joinedAt: Date.now() };
+  saveGame();
   broadcast();
   res.json({ playerId: id });
 });
@@ -240,6 +256,7 @@ app.post('/api/answers/:id', (req, res) => {
   const p = game.players[req.params.id];
   if (!p) return res.status(404).json({ error: 'שחקן לא נמצא' });
   p.answers = req.body.answers;
+  saveGame();
   broadcast();
   res.json({ ok: true });
 });
@@ -281,6 +298,7 @@ app.post('/api/admin/calculate', (req, res) => {
   if (done.length < 3) return res.status(400).json({ error: 'נדרשים לפחות 3 שחקנים עם תשובות' });
   game.results = runCalculation(done);
   game.status = 'done';
+  saveGame();
   broadcast();
   res.json({ ok: true });
 });
@@ -290,6 +308,7 @@ app.put('/api/admin/results', (req, res) => {
   if (!checkKey(req, res)) return;
   if (!req.body.results) return res.status(400).json({ error: 'נדרשות תוצאות' });
   game.results = req.body.results;
+  saveGame();
   broadcast();
   res.json({ ok: true });
 });
@@ -299,6 +318,7 @@ app.delete('/api/admin/player/:id', (req, res) => {
   if (!checkKey(req, res)) return;
   if (!game.players[req.params.id]) return res.status(404).json({ error: 'שחקן לא נמצא' });
   delete game.players[req.params.id];
+  saveGame();
   broadcast();
   res.json({ ok: true });
 });
@@ -307,6 +327,7 @@ app.delete('/api/admin/player/:id', (req, res) => {
 app.post('/api/admin/reset', (req, res) => {
   if (!checkKey(req, res)) return;
   game = freshGame();
+  saveGame();
   sseClients.forEach(c => { try { c.write(`data: ${JSON.stringify(publicGame())}\n\n`); } catch (e) { } });
   res.json({ ok: true });
 });
