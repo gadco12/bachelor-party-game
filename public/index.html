@@ -169,6 +169,15 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .host-link{position:fixed;bottom:16px;left:16px;z-index:10;font-size:12px;color:rgba(255,255,255,.2);
   cursor:pointer;padding:6px 10px;border-radius:8px;transition:all .2s;}
 .host-link:hover{color:rgba(255,255,255,.6);background:rgba(255,255,255,.05)}
+/* Name grid */
+.names-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}
+.name-btn{padding:18px 8px;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);
+  border-radius:14px;color:var(--text);font-size:17px;font-weight:900;cursor:pointer;
+  transition:all .2s;font-family:inherit;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:5px;line-height:1.2;}
+.name-btn:not(:disabled):hover{border-color:var(--primary);background:rgba(168,85,247,.18);transform:scale(1.04);box-shadow:0 0 20px rgba(168,85,247,.3)}
+.name-btn:disabled{opacity:.35;cursor:not-allowed}
+.name-taken{font-size:10px;color:var(--green);font-weight:700}
 </style>
 </head>
 <body>
@@ -176,16 +185,11 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 
 <!-- ══ בית ══ -->
 <div id="s-home" class="screen active">
-  <div class="bounce" style="font-size:60px;margin-bottom:14px">🎊</div>
+  <div class="bounce" style="font-size:56px;margin-bottom:12px">🎊</div>
   <h1 class="mega mb8">חלוקת<br>חדרים לרווקים</h1>
-  <p class="sub mb20">ענה על השאלות. האלגוריתם יחליט על החדר שלך.<br>אין רחמים. אין החזרות.</p>
-  <div class="card">
-    <p class="lbl">הכנס כינוי</p>
-    <input class="inp" id="home-name" type="text" maxlength="20" placeholder="השם שלך..."
-      onkeydown="if(event.key==='Enter')startPlaying()">
-  </div>
-  <div id="home-err" class="err-box mb12" style="display:none"></div>
-  <button class="btn btn-purple" onclick="startPlaying()">בוא נשחק 🚀</button>
+  <p class="sub mb16">בחר את השם שלך כדי להתחיל</p>
+  <div class="names-grid" id="names-grid"></div>
+  <div id="home-err" class="err-box mt12" style="display:none"></div>
 </div>
 
 <!-- ══ שאלות ══ -->
@@ -401,6 +405,8 @@ const QS = [
    o:[{l:'הוא לופי, נולד מחדש כישראלי 🌊',v:'yes'},{l:'ברור. הדמיון כמעט בלתי חוקי.',v:'obviously'},{l:'השלמתי עם האמת הבלתי ניתנת לערעור הזו.',v:'peace'}]},
 ];
 
+const PLAYER_NAMES = ['תמיר','בר','רחמן','איתי','אור','גינגי',"ג'וני",'גד','מתן','דור','אילן','טלניב'];
+
 let myName='', myPlayerId=null, isHostUnlocked=false, hostKey='';
 let curQIdx=0, curAnswers={};
 let eventSource=null, currentResults=null;
@@ -457,6 +463,11 @@ function connectSSE(){
 }
 
 function handleUpdate(g){
+  // עדכון גריד שמות בדף הבית
+  if(document.getElementById('s-home').classList.contains('active')){
+    renderNamesGrid(g.players.map(p=>p.name));
+  }
+
   // זיהוי מחיקת שחקן
   if(myPlayerId){
     const stillIn=g.players.some(p=>p.id===myPlayerId);
@@ -515,17 +526,32 @@ function renderHostPanel(g){
   document.getElementById('host-calc-btn').disabled=done<3;
 }
 
-// ── התחלה ──
-async function startPlaying(){
-  const name=document.getElementById('home-name').value.trim();
+// ── גריד שמות ──
+function renderNamesGrid(takenNames){
+  const grid=document.getElementById('names-grid');
+  if(!grid) return;
+  const takenLower=takenNames.map(n=>n.toLowerCase());
+  grid.innerHTML=PLAYER_NAMES.map(name=>{
+    const taken=takenLower.includes(name.toLowerCase());
+    return `<button class="name-btn" data-name="${name}" ${taken?'disabled':''}>
+      ${name}
+      ${taken?'<span class="name-taken">✓ הצטרף</span>':''}
+    </button>`;
+  }).join('');
+  grid.onclick=(e)=>{
+    const btn=e.target.closest('.name-btn');
+    if(!btn||btn.disabled) return;
+    selectName(btn.dataset.name);
+  };
+}
+
+async function selectName(name){
   const errEl=document.getElementById('home-err');
   errEl.style.display='none';
-  if(!name){shake('home-name');return;}
   try{
     const {playerId}=await api('POST','/api/join',{name});
     myName=name;myPlayerId=playerId;
     knownPlayerIds.add(playerId);
-    connectSSE();
     document.getElementById('q-chip').textContent=name;
     renderQ(0);
     showScreen('s-questions');
@@ -698,6 +724,10 @@ function shareGameWA(){
 }
 
 (function(){
+  connectSSE();
+  api('GET','/api/state').then(g=>{
+    renderNamesGrid(g.players.map(p=>p.name));
+  }).catch(()=>renderNamesGrid([]));
   const params=new URLSearchParams(location.search);
   if(params.get('host')==='1') showScreen('s-host-login');
 })();
